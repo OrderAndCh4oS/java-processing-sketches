@@ -14,8 +14,12 @@ public class Colours {
         }
     }
 
-    public ArrayList<Integer> get() {
+    public ArrayList<Integer> getAll() {
         return _colours;
+    }
+
+    public Integer get(int i) {
+        return _colours.get(i % this._colours.size());
     }
 
     public int rand() {
@@ -24,5 +28,9 @@ public class Colours {
 
     public int bg() {
         return _bg;
+    }
+
+    public int size() {
+        return _colours.size();
     }
 }

@@ -4,11 +4,18 @@ import processing.core.PApplet;
 import static utilities.RandomString.uuid;
 
 abstract public class Sketch extends PApplet {
-    float width = 1500;
-    float height = 1500;
+    protected float _width = 1500;
+    protected float _height = 1500;
+    protected boolean _save = false;
+
+    public void settings(int width, int height) {
+        _width = width;
+        _height = height;
+        size((int) width, (int) height);
+    }
 
     public void settings() {
-        size((int) width, (int) height);
+        size((int) _width, (int) _height);
     }
 
     public void setup() {
@@ -20,10 +27,25 @@ abstract public class Sketch extends PApplet {
     }
 
     public void keyPressed() {
-        if(keyCode == 32) {
-            String filename = uuid() + ".tif";
-            saveFrame("/Users/seancooper/Processing Stills/images/" + filename);
-        }
+        if(keyCode == 32) saveImage();
+    }
+
+    public void save() {
+        if(_save) saveImage();
+    }
+
+    public void saveImage() {
+        String filename = uuid() + ".tif";
+        saveFrame("/Users/seancooper/Processing Stills/images/" + filename);
+    }
+
+    public void save(String prefix) {
+        if(_save) saveImage(prefix);
+    }
+
+    public void saveImage(String prefix) {
+        String filename = uuid() + ".tif";
+        saveFrame("/Users/seancooper/Processing Stills/images/" + prefix + "-" + filename);
     }
 
     abstract public void sketch();
