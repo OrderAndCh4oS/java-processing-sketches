@@ -1,4 +1,4 @@
-package utilities;
+package utilities.colour;
 
 /**
  * https://stackoverflow.com/a/4801433/2562137
@@ -23,4 +23,11 @@ public class Rgb {
     public static int[] get(int rgb) {
         return new int[]{Rgb.getRed(rgb), Rgb.getGreen(rgb), Rgb.getBlue(rgb)};
     };
+
+    public static float[] getNormalisedRgb(int rgb) {
+        float r = (float) getRed(rgb) / 255;
+        float g = (float) getGreen(rgb) / 255;
+        float b = (float) getBlue(rgb) / 255;
+        return new float[]{r, g, b};
+    }
 }

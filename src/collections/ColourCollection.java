@@ -1,6 +1,6 @@
 package collections;
 
-import utilities.Colours;
+import utilities.colour.Colours;
 
 import java.util.HashMap;
 

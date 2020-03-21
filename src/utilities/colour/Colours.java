@@ -1,4 +1,4 @@
-package utilities;
+package utilities.colour;
 
 import java.util.ArrayList;
 import java.util.Random;

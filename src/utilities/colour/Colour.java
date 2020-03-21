@@ -1,4 +1,4 @@
-package utilities;
+package utilities.colour;
 
 public class Colour {
     int _colour;
