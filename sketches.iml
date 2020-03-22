@@ -17,5 +17,7 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="jogl-all" level="project" />
+    <orderEntry type="library" name="gluegen-rt" level="project" />
   </component>
 </module>

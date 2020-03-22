@@ -17,6 +17,12 @@ abstract public class Sketch extends PApplet {
         size(width, height);
     }
 
+    public void settings(int width, int height, String renderer) {
+        _width = width;
+        _height = height;
+        size(width, height, renderer);
+    }
+
     public void settings() {
         size((int) _width, (int) _height);
     }
