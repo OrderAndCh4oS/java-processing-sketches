@@ -1,4 +1,5 @@
 package sketch;
+
 import collections.ColourCollection;
 import processing.core.PApplet;
 
@@ -13,7 +14,7 @@ abstract public class Sketch extends PApplet {
     public void settings(int width, int height) {
         _width = width;
         _height = height;
-        size((int) width, (int) height);
+        size(width, height);
     }
 
     public void settings() {
@@ -22,6 +23,7 @@ abstract public class Sketch extends PApplet {
 
     public void setup() {
         sketch();
+        println("~~Fin~~");
     }
 
     public void draw() {
@@ -29,11 +31,11 @@ abstract public class Sketch extends PApplet {
     }
 
     public void keyPressed() {
-        if(keyCode == 32) saveImage();
+        if (keyCode == 32) saveImage();
     }
 
     public void save() {
-        if(_save) saveImage();
+        if (_save) saveImage();
     }
 
     public void saveImage() {
@@ -42,12 +44,21 @@ abstract public class Sketch extends PApplet {
     }
 
     public void save(String prefix) {
-        if(_save) saveImage(prefix);
+        if (_save) saveImage(prefix);
+    }
+
+    public void save(String dir, String prefix) {
+        if (_save) saveImage(dir, prefix);
     }
 
     public void saveImage(String prefix) {
         String filename = uuid() + ".png";
         saveFrame("/Users/seancooper/Processing Stills/images/" + prefix + "-" + filename);
+    }
+
+    public void saveImage(String dir, String prefix) {
+        String filename = uuid() + ".png";
+        saveFrame("/Users/seancooper/Processing Stills/images/" + dir + "/" + prefix + "-" + filename);
     }
 
     abstract public void sketch();
