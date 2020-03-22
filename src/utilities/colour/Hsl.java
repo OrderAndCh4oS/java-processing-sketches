@@ -20,9 +20,9 @@ public class Hsl {
     }
 
     Hsl(int r, int g, int b) {
-        _r = (float) r / 255;
-        _g = (float) g / 255;
-        _b = (float) b / 255;
+        _r = r / 255f;
+        _g = g / 255f;
+        _b = b / 255f;
         float[] rgbNormalised = {_r, _g, _b};
         Arrays.sort(rgbNormalised);
         _min = rgbNormalised[0];
@@ -38,9 +38,9 @@ public class Hsl {
         if (_max == _r) {
             _h = round(((_g - _b) / (_max - _min)) * 60);
         } else if (_max == _g) {
-            _h = round(((float) 2.0 + (_b - _r) / (_max - _min)) * 60);
+            _h = round((2.0f + (_b - _r) / (_max - _min)) * 60);
         } else if (_max == _b) {
-            _h = round(((float) 4.0 + (_r - _g) / (_max - _min)) * 60);
+            _h = round((4.0f + (_r - _g) / (_max - _min)) * 60);
         }
         if (_h < 0) _h += 360;
         return _h;
@@ -57,7 +57,7 @@ public class Hsl {
         if (_l < 50) {
             _s = round(((_max - _min) / (_max + _min)) * 100);
         } else {
-            _s = round(((_max - _min) / ((float) 2.0 - _max - _min)) * 100);
+            _s = round(((_max - _min) / (2.0f - _max - _min)) * 100);
         }
         return _s;
     }
@@ -101,8 +101,8 @@ public class Hsl {
     }
 
     public int getRgb() {
-        float l = _l / (float) 100;
-        float s = _s / (float) 100;
+        float l = _l / 100f;
+        float s = _s / 100f;
         if (s == 0) {
             int grey = round(l * 255);
             return Rgb.toRgb(grey, grey, grey);
@@ -110,7 +110,7 @@ public class Hsl {
         float x1, x2, x3, tr, tg, tb;
 
         if (l < 50) {
-            x1 =  l * ((float) 1.0 + s);
+            x1 =  l * (1.0f + s);
         } else {
             x1 = l + s - (l * s);
         }
@@ -118,12 +118,12 @@ public class Hsl {
         System.out.println(x1);
 
         x2 = 2 * l - x1;
-        x3 = _h / (float) 360;
+        x3 = _h / 360f;
 
-        tr = x3 + (float) 0.333;
+        tr = x3 + 0.333f;
         if (tr > 1) tr = tr - 1;
         tg = x3;
-        tb = x3 - (float) 0.333;
+        tb = x3 - 0.333f;
         if (tb < 0) tb = tb - 1;
 
         _r = toRgb(x1, x2, tr);
@@ -136,7 +136,7 @@ public class Hsl {
     private float toRgb(float x1, float x2, float tc) {
         if ((6 * tc) < 1) return x2 + (x1 - x2) * 6 * tc;
         else if ((2 * tc) < 1) return x1;
-        else if ((3 * tc) < 2) return (x2 + (x1 - x2) * ((float) 0.666 - tc) * 6);
+        else if ((3 * tc) < 2) return (x2 + (x1 - x2) * (0.666f - tc) * 6);
         else return x2;
     }
 }

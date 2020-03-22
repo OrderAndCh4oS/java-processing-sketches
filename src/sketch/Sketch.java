@@ -1,4 +1,5 @@
 package sketch;
+import collections.ColourCollection;
 import processing.core.PApplet;
 
 import static utilities.RandomString.uuid;
@@ -7,6 +8,7 @@ abstract public class Sketch extends PApplet {
     protected float _width = 1500;
     protected float _height = 1500;
     protected boolean _save = false;
+    protected ColourCollection _colours = new ColourCollection();
 
     public void settings(int width, int height) {
         _width = width;
@@ -35,7 +37,7 @@ abstract public class Sketch extends PApplet {
     }
 
     public void saveImage() {
-        String filename = uuid() + ".tif";
+        String filename = uuid() + ".png";
         saveFrame("/Users/seancooper/Processing Stills/images/" + filename);
     }
 
@@ -44,7 +46,7 @@ abstract public class Sketch extends PApplet {
     }
 
     public void saveImage(String prefix) {
-        String filename = uuid() + ".tif";
+        String filename = uuid() + ".png";
         saveFrame("/Users/seancooper/Processing Stills/images/" + prefix + "-" + filename);
     }
 

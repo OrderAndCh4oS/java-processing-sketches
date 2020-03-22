@@ -5,8 +5,6 @@ import processing.core.PApplet;
 import sketch.Sketch;
 
 public class FauxAirbrush extends Sketch {
-    public ColourCollection _colours = new ColourCollection();
-
     public static void main(String... args) {
         PApplet.main("drawings.FauxAirbrush");
     }
@@ -25,10 +23,10 @@ public class FauxAirbrush extends Sketch {
                 for (int i = 0; i < 28; i++) {
                     int f = (int) random(4);
                     int c = (int) random(colour.size()) + 1;
-                    float d = (float) (random((float) 0.15) + 0.05);
+                    float d = (random(0.15f) + 0.05f);
                     float l = random(1024);
                     float r1 = random(1);
-                    float r2 = (float) (random((float) 0.4) + 0.2);
+                    float r2 = (random(0.4f) + 0.2f);
                     for (int j = 0; j < 1024; j++) {
                         stroke(colour.get(c));
                         switch (f) {
