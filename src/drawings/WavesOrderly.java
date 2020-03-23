@@ -21,18 +21,21 @@ public class WavesOrderly extends Sketch {
     public void sketch() {
         _colours.get_colours().forEach((name, colour) -> {
             background(colour.bg());
-            for (int j = 0; j < 110; j++) {
+            float left = -20;
+            for (int j = 0; j < 460; j++) {
                 int c1 = colour.rand();
-                float x = (j * 10) - 20;
+                float strokeWidth = 1 + random(4);
+                left += strokeWidth;
+                float x = left - 2;
                 Point point = new Point(x, -150);
-                Wave wave = new Wave(x, point, PI / 40, 2, 3 + random(3));
+                Wave wave = new Wave(x, point, PI / 110, 2, strokeWidth);
                 for (int i = 0; i < 1000; i++) {
                     stroke(c1);
                     wave.update();
                     wave.draw();
                 }
             }
-            save("wavesOrderly", name);
+            save("wavesOrderlyTwo", name);
         });
     }
 
@@ -64,7 +67,7 @@ public class WavesOrderly extends Sketch {
             float dX = sin(_a) * _waveHeight;
             _p.setX(_startX + dX - dX / 2);
             _p.setY(_p.y() + _s);
-            _v += 0.0001;
+            _v += 0.0002;
         }
 
         void draw() {

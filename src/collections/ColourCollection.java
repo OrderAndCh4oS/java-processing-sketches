@@ -34,6 +34,9 @@ public class ColourCollection {
         _colours.put("dragons", new Colours(0xff33012B, 0xffD93D66, 0xff8C0375, 0xff03A6A6, 0xffF2E1AC, 0xffF25C5C));
         _colours.put("constructivist", new Colours(0xff010D00, 0xffF2E0C9, 0xffF21905, 0xffBF0404, 0xffF2E1AC, 0xff590202));
         _colours.put("lemon", new Colours(0xff010326, 0xffF2E205, 0xffD9D6B0, 0xffA6A48A, 0xffF2CB05));
+        _colours.put("plum", new Colours(0xff011C1F, 0xff8C1C5A, 0xff591541, 0xff260B22, 0xff025E73, 0xff026873));
+        _colours.put("spy", new Colours(0xff0F1413, 0xff77A69D, 0xff3E4A2D, 0xffD8D9D0, 0xffA67F38, 0xffD99748));
+        _colours.put("happy-time", new Colours(0xff1F0F19, 0xffD93D76, 0xffD96CB3, 0xff202840, 0xff50BFAB, 0xffF2B544));
     }
 
     public Colours get(String name) {
