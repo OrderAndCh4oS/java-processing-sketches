@@ -32,14 +32,14 @@ public class Foliage extends Sketch {
             ArrayList<Line> collisionLines = new ArrayList<Line>();
             background(colour.bg());
             noStroke();
-            initStems(drawLines, collisionLines, colour, _colours.get("mocha"), 1);
+            initStems(drawLines, collisionLines, colour, _colours.get("warm-bw"), 1);
             saveFrame("f###.png");
             int drawnCount = 0;
-            while (drawnCount < 15000) {
+            while (drawnCount < 12500) {
                 Line nextLineBase = getRandomLine(drawLines);
                 float nextLength = nextLineBase.getLength() * scale;
                 Point nextPoint = nextLineBase.q();
-                float angleRange = PI / 9;
+                float angleRange = PI / 10;
                 float angleRand = PI * angleRange - random(PI * angleRange * nextLineBase.getLeanAngle());
                 float angle = nextLineBase.getAngle() + angleRand;
                 Lean newLean = nextLineBase.getLean();
@@ -62,7 +62,7 @@ public class Foliage extends Sketch {
                     totalCount++;
                 }
             }
-            save("foliage", name);
+            save("foliage-warm-bw", name);
         });
     }
 
@@ -229,7 +229,7 @@ public class Foliage extends Sketch {
             moveTwo.setAngle(getAngle() + PI * 1.5f);
             baseTwo.addTo(moveTwo);
 
-            if (_length < 65) {
+            if (_length <  65) {
                 fill(_foliageColours.rand());
             } else {
                 fill(_stemColours.rand());
