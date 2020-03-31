@@ -9,13 +9,13 @@ import utilities.colour.Colours;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Foliage extends Sketch {
+public class FoliageRandPoint extends Sketch {
 
     int totalCount = 0;
     float scale = 0.95f;
 
     public static void main(String... args) {
-        PApplet.main("drawings.Foliage");
+        PApplet.main("drawings.FoliageRandPoint");
     }
 
     @Override
@@ -28,61 +28,45 @@ public class Foliage extends Sketch {
     @Override
     public void sketch() {
         _colours.get_colours().forEach((name, colour) -> {
-            for(int i = 0; i < 5; i++) {
-                ArrayList<Line> drawLines = new ArrayList<Line>();
-                ArrayList<Line> collisionLines = new ArrayList<Line>();
-                background(colour.bg());
-                noStroke();
-                String colourName = "warm-grey";
-                int lineCount = round(random(1) * 7500) + 7500;
-                initStems(drawLines, collisionLines, colour, _colours.get(colourName), 1);
-                int drawnCount = 0;
-                while (drawnCount < lineCount) {
-                    float leanLimit = 0.75f;
-                    float angleRange = PI / 9;
-                    float minSize = 15;
-                    drawnCount = drawLines(drawLines, collisionLines, drawnCount, leanLimit, angleRange, minSize);
+            ArrayList<Line> drawLines = new ArrayList<Line>();
+            ArrayList<Line> collisionLines = new ArrayList<Line>();
+            background(colour.bg());
+            noStroke();
+            initStems(drawLines, collisionLines, colour, _colours.get("warm-bw"), 1);
+            int drawnCount = 0;
+            while (drawnCount < 10000) {
+                Line nextLineBase = getRandomLine(drawLines);
+                float nextLength = nextLineBase.getLength() * scale;
+                Point nextPoint = nextLineBase.getRandomPoint();
+                float angleRange = PI / 9;
+                float angleRand = PI * angleRange - random(PI * angleRange * nextLineBase.getLeanAngle());
+                float angle = nextLineBase.getAngle() + angleRand;
+                Lean newLean = nextLineBase.getLean();
+                if (random(1) > 0.75) {
+                    if(newLean == Lean.LEFT) {
+                        newLean = Lean.RIGHT;
+                    } else {
+                        newLean = Lean.LEFT;
+                    }
                 }
-                save("foliage-" + colourName, lineCount + "-" + name);
+                Line nextLine = new Line(nextPoint, nextLength, angle, nextLineBase.getFoliageColours(), nextLineBase.getStemColours(), newLean);
+                boolean doesIntersect = false;
+                for (Line l : collisionLines) {
+                    if (nextLine.isIntersect(l)) {
+                        doesIntersect = true;
+                        break;
+                    }
+                }
+                if (!doesIntersect && nextLength > 15 && (isInBounds(nextLine.p()) || isInBounds(nextLine.q()))) {
+                    nextLine.draw();
+                    drawLines.add(nextLine);
+                    collisionLines.add(nextLine);
+                    drawnCount++;
+                    totalCount++;
+                }
             }
+            save("foliage-rand-point-warm-bw", "10000-" + name);
         });
-    }
-
-    private int drawLines(ArrayList<Line> drawLines, ArrayList<Line> collisionLines, int drawnCount, float leanLimit, float angleRange, float minSize) {
-        Line nextLineBase = getRandomLine(drawLines);
-        float nextLength = nextLineBase.getLength() * scale;
-        Point nextPoint = nextLineBase.q();
-        float angleRand = PI * angleRange - random(PI * angleRange * nextLineBase.getLeanAngle());
-        float angle = nextLineBase.getAngle() + angleRand;
-        Lean nextLean = getNextLean(leanLimit, nextLineBase);
-        Line nextLine = new Line(nextPoint, nextLength, angle, nextLineBase.getFoliageColours(), nextLineBase.getStemColours(), nextLean);
-        boolean doesIntersect = false;
-        for (Line l : collisionLines) {
-            if (nextLine.isIntersect(l)) {
-                doesIntersect = true;
-                break;
-            }
-        }
-        if (!doesIntersect && nextLength > minSize && (isInBounds(nextLine.p()) || isInBounds(nextLine.q()))) {
-            nextLine.draw();
-            drawLines.add(nextLine);
-            collisionLines.add(nextLine);
-            drawnCount++;
-            totalCount++;
-        }
-        return drawnCount;
-    }
-
-    private Lean getNextLean(float leanLimit, Line nextLineBase) {
-        Lean newLean = nextLineBase.getLean();
-        if (random(1) > leanLimit) {
-            if(newLean == Lean.LEFT) {
-                newLean = Lean.RIGHT;
-            } else {
-                newLean = Lean.LEFT;
-            }
-        }
-        return newLean;
     }
 
     void initStems(ArrayList<Line> drawLines, ArrayList<Line> collisionLines, Colours foliageColours, Colours stemColours, int stemCount) {
@@ -196,8 +180,8 @@ public class Foliage extends Sketch {
         }
 
         private Point drawTo() {
-            float dX = _p.x() + 0.95f * (_q.x() - _p.x());
-            float dY = _p.y() + 0.95f * (_q.y() - _p.y());
+            float dX = _p.x() + 0.88f * (_q.x() - _p.x());
+            float dY = _p.y() + 0.88f * (_q.y() - _p.y());
             return new Point(dX, dY);
         }
 
@@ -235,9 +219,9 @@ public class Foliage extends Sketch {
         float getLeanAngle() {
             switch (_lean) {
                 case LEFT:
-                    return 0.5f + random(0.5f);
+                    return random(1);
                 case RIGHT:
-                    return 1 + random(0.5f);
+                    return 1 + random(1);
                 default:
                     return 0;
             }
@@ -246,13 +230,13 @@ public class Foliage extends Sketch {
         void draw() {
             Vector base = new Vector(_p);
             Vector move = new Vector(0, 0);
-            move.setLength(1);
+            move.setLength(0.75f);
             move.setAngle(getAngle() + PI * 0.5f);
             base.addTo(move);
 
             Vector baseTwo = new Vector(_p);
             Vector moveTwo = new Vector(0, 0);
-            moveTwo.setLength(1);
+            moveTwo.setLength(0.75f);
             moveTwo.setAngle(getAngle() + PI * 1.5f);
             baseTwo.addTo(moveTwo);
 
