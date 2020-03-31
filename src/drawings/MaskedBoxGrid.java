@@ -42,13 +42,31 @@ public class MaskedBoxGrid extends Sketch {
                                 sourceImage.line(minimum, random(maximum), maximum, random(maximum));
                                 break;
                             case 1:
-                                sourceImage.line(random(maximum), minimum, minimum, random(maximum));
+                                sourceImage.line(random(maximum), minimum, maximum, random(maximum));
                                 break;
                             case 2:
                                 sourceImage.line(random(maximum), minimum, random(maximum), maximum);
                                 break;
                             case 3:
-                                sourceImage.line(minimum, random(maximum), random(maximum), minimum);
+                                sourceImage.line(minimum, random(maximum), random(maximum), maximum);
+                                break;
+                            case 4:
+                                sourceImage.line(random(maximum), maximum, maximum, random(maximum));
+                                break;
+                            case 5:
+                                sourceImage.line(maximum, random(maximum), random(maximum), maximum);
+                                break;
+                            case 6:
+                                sourceImage.line(maximum, random(maximum), random(maximum), minimum);
+                                break;
+                            case 7:
+                                sourceImage.line(random(maximum), maximum, random(maximum), minimum);
+                                break;
+                            case 8:
+                                sourceImage.line(random(maximum), maximum, minimum, random(maximum));
+                                break;
+                            case 9:
+                                sourceImage.line(maximum, random(maximum), minimum, random(maximum));
                                 break;
                         }
                     }
@@ -67,7 +85,7 @@ public class MaskedBoxGrid extends Sketch {
                     popMatrix();
                 }
             }
-            save("hashed-box-grid", name);
+            save("hashed-box-grid-two", name);
         });
     }
 }
