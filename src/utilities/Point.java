@@ -1,5 +1,7 @@
 package utilities;
 
+import java.util.Objects;
+
 public class Point implements Cloneable {
     private float _x;
     private float _y;
@@ -13,6 +15,19 @@ public class Point implements Cloneable {
         _x = x;
         _y = y;
         _isNull = false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Point point = (Point) o;
+        return Float.compare(point._x, _x) == 0 && Float.compare(point._y, _y) == 0;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_x, _y);
     }
 
     public void setX(float x) {

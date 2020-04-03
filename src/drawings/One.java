@@ -10,7 +10,16 @@ public class One extends Sketch {
     }
 
     @Override
+    public void settings() {
+        _save = true;
+        super.settings(1024, 1024, P3D);
+        smooth(8);
+    }
+
+    @Override
     public void sketch() {
-        background(0, 255, 0);
+        _colours.get_colours().forEach((name, colour) -> {
+            background(colour.bg());
+        });
     }
 }

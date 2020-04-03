@@ -1,5 +1,7 @@
 package utilities;
 
+import java.util.Objects;
+
 import static utilities.Random.random;
 import static processing.core.PApplet.max;
 import static processing.core.PApplet.min;
@@ -11,6 +13,19 @@ public class Line {
     public Line(Point p, Point q) {
         this._p = p;
         this._q = q;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Line line = (Line) o;
+        return _p.equals(line._p) && _q.equals(line._q);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(_p, _q);
     }
 
     public Line(Point p, float len, float angle) {

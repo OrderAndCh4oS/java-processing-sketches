@@ -24,7 +24,7 @@ public class WavesDisc extends Sketch {
         _colours.get_colours().forEach((name, colour) -> {
             ArrayList<Line> lines = new ArrayList<Line>();
             for (int i = 0; i < 128; i++) {
-                lines.add(new Line(200, 0));
+                lines.add(new Line(150, 50));
                 for (int j = 0; j < 200; j++ ) {
                     lines.get(i).update();
                 }
@@ -35,13 +35,13 @@ public class WavesDisc extends Sketch {
             for (int i = 0; i < 128; i++) {
                 fill(colour.rand());
                 noStroke();
-                stroke(colour.bg());
-                strokeWeight(0.5f);
+//                stroke(colour.bg());
+//                strokeWeight(0.5f);
                 rotate(map(i, 0, 128, 0, PI*2));
                 lines.get(i).draw();
             }
             popMatrix();
-            save("waves-disc-two", name);
+            save("hole", name);
         });
     }
 
