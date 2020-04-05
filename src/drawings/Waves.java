@@ -63,7 +63,6 @@ public class Waves extends Sketch {
         float _strokeWidth;
         float _waveHeight = 40;
 
-
         Wave(float startX, Point point, float value, float speed, float strokeWidth) {
             _startX = startX;
             _p = point;

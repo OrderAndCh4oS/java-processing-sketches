@@ -2,7 +2,10 @@ package collections;
 
 import utilities.colour.Colours;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Random;
 
 public class ColourCollection {
     private HashMap<String, Colours> _colours = new HashMap<>();
@@ -41,6 +44,12 @@ public class ColourCollection {
 
     public Colours get(String name) {
         return _colours.get(name);
+    }
+
+    public Colours rand() {
+        List<Colours> valuesList = new ArrayList<Colours>(_colours.values());
+        int randomIndex = new Random().nextInt(valuesList.size());
+        return valuesList.get(randomIndex);
     }
 
     public void add(String name, Colours set) {
