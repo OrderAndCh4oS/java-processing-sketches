@@ -20,6 +20,7 @@ public class One extends Sketch {
     public void sketch() {
         _colours.get_colours().forEach((name, colour) -> {
             background(colour.bg());
+            save("one", name);
         });
     }
 }
