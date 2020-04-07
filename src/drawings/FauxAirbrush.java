@@ -1,6 +1,5 @@
 package drawings;
 
-import collections.ColourCollection;
 import processing.core.PApplet;
 import sketch.Sketch;
 
@@ -17,7 +16,7 @@ public class FauxAirbrush extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             for (int image = 0; image < 5; image++) {
                 background(colour.bg());
                 for (int i = 0; i < 28; i++) {

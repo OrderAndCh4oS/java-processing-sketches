@@ -27,7 +27,7 @@ public class Foliage extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             for(int i = 0; i < 5; i++) {
                 ArrayList<Line> drawLines = new ArrayList<Line>();
                 ArrayList<Line> collisionLines = new ArrayList<Line>();

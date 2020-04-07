@@ -16,7 +16,7 @@ public class Alien extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             Colours otherColour = _colours.rand();
             for (int i = 0; i < random(20000, 30000); i++) {

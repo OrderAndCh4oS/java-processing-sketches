@@ -2,7 +2,6 @@ package drawings;
 
 import processing.core.PApplet;
 import sketch.Sketch;
-import utilities.Random;
 
 import static utilities.Random.random;
 
@@ -22,7 +21,7 @@ public class Weave extends Sketch {
         WeaveF w2 = new WeaveF(_width / 2 , _height / 2, 12.5f, false, false);
         WeaveF w3 = new WeaveF(_width / 2 , _height / 2, 12.5f, true, false);
         WeaveF w4 = new WeaveF(_width / 2 , _height / 2, 12.5f, false, true);
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             int c1 = colour.get(1);
             int c2 = colour.get(2);

@@ -21,7 +21,7 @@ public class WavesDisc extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             ArrayList<Line> lines = new ArrayList<Line>();
             for (int i = 0; i < 128; i++) {
                 lines.add(new Line(150, 50));

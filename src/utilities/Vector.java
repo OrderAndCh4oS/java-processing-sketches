@@ -2,7 +2,7 @@ package utilities;
 
 import static processing.core.PApplet.*;
 
-public class Vector {
+public class Vector implements Cloneable {
     private Point _point;
 
     public Vector(float x, float y) {
@@ -111,5 +111,9 @@ public class Vector {
         float dX = _point.x() - v2.x();
         float dY = _point.y() - v2.y();
         return sqrt((dX * dX) + (dY * dY));
+    }
+
+    public Vector clone() throws CloneNotSupportedException {
+        return (Vector) super.clone();
     }
 }

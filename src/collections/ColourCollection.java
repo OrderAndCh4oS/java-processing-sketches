@@ -56,7 +56,16 @@ public class ColourCollection {
         _colours.put(name, set);
     }
 
-    public HashMap<String, Colours> get_colours() {
+    public HashMap<String, Colours> getColours() {
         return _colours;
+    }
+
+    public HashMap<String, Colours> getColours(String... names) {
+        HashMap<String, Colours> newColourGroup = new HashMap<>();
+        for(String name : names) {
+            newColourGroup.put(name, _colours.get(name));
+        }
+
+        return newColourGroup;
     }
 }

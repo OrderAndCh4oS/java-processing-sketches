@@ -3,7 +3,6 @@ package drawings;
 import processing.core.PApplet;
 import processing.core.PFont;
 import sketch.Sketch;
-import utilities.colour.Colours;
 
 public class Fire extends Sketch {
     public static void main(String... args) {
@@ -19,7 +18,7 @@ public class Fire extends Sketch {
     public void sketch() {
         PFont notoSC = createFont("NotoSerifSC-Bold", 1000);
         textFont(notoSC);
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             blendMode(NORMAL);
             background(colour.bg());
             for (int i = 0; i < random(20000, 30000); i++) {

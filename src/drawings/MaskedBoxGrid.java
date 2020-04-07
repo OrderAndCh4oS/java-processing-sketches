@@ -19,7 +19,7 @@ public class MaskedBoxGrid extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             smooth(8);
             background(colour.bg());
             strokeCap(SQUARE);

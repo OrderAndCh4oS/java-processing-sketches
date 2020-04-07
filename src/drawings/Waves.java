@@ -3,7 +3,6 @@ package drawings;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Point;
-import utilities.Random;
 
 public class Waves extends Sketch {
 
@@ -20,7 +19,7 @@ public class Waves extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             for (int j = 0; j < 108; j++) {
                 int c1 = colour.rand();

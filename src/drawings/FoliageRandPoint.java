@@ -27,7 +27,7 @@ public class FoliageRandPoint extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             ArrayList<Line> drawLines = new ArrayList<Line>();
             ArrayList<Line> collisionLines = new ArrayList<Line>();
             background(colour.bg());

@@ -3,7 +3,6 @@ package drawings;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Random;
-import utilities.colour.Colour;
 import utilities.colour.Colours;
 
 import java.util.ArrayList;
@@ -24,7 +23,7 @@ public class Audience extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             Colours otherColour = _colours.rand();
             int x = 0;

@@ -27,7 +27,7 @@ public class DeadEnd extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             ArrayList<ArrayList<Line>> paths = new ArrayList<>();
             HashMap<Integer, Vector> pathTracers = new HashMap<>();

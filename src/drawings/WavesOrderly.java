@@ -19,7 +19,7 @@ public class WavesOrderly extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             float left = -20;
             for (int j = 0; j < 460; j++) {

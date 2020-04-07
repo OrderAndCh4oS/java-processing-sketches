@@ -27,7 +27,7 @@ public class Woods extends Sketch {
     public void sketch() {
         PFont notoSC = createFont("NotoSerifSC-Bold", 1000);
         textFont(notoSC);
-        _colours.get_colours().forEach((name, colour) -> {
+        _colours.getColours().forEach((name, colour) -> {
             float minScale;
             float maxScale;
             float count;
@@ -109,5 +109,6 @@ public class Woods extends Sketch {
                 }
             }
         }
+        blendMode(NORMAL);
     }
 }

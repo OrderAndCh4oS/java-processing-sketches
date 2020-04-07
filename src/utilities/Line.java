@@ -2,9 +2,8 @@ package utilities;
 
 import java.util.Objects;
 
+import static processing.core.PApplet.*;
 import static utilities.Random.random;
-import static processing.core.PApplet.max;
-import static processing.core.PApplet.min;
 
 public class Line {
     private Point _p, _q;
@@ -13,6 +12,16 @@ public class Line {
     public Line(Point p, Point q) {
         this._p = p;
         this._q = q;
+    }
+
+    public Line(Point p, float len, float angle) {
+        _p = p;
+        _length = len;
+        Vector temp = new Vector(0, 0);
+        temp.setLength(_length);
+        temp.setAngle(angle);
+        temp.addTo(new Vector(_p));
+        _q = temp.getPoint();
     }
 
     @Override
@@ -26,16 +35,6 @@ public class Line {
     @Override
     public int hashCode() {
         return Objects.hash(_p, _q);
-    }
-
-    public Line(Point p, float len, float angle) {
-        _p = p;
-        _length = len;
-        Vector temp = new Vector(0, 0);
-        temp.setLength(_length);
-        temp.setAngle(angle);
-        temp.addTo(new Vector(_p));
-        _q = temp.getPoint();
     }
 
     public Point getIntersect(Line l2) {
@@ -58,7 +57,7 @@ public class Line {
 
     public boolean onSegment(Point r) {
         return r.x() <= max(p().x(), q().x()) && r.x() >= min(p().x(), q().x()) &&
-            r.y() <= max(p().y(), q().y()) && r.y() >= min(p().y(), q().y());
+                r.y() <= max(p().y(), q().y()) && r.y() >= min(p().y(), q().y());
     }
 
     public Point getMidPoint() {
@@ -81,7 +80,7 @@ public class Line {
     }
 
     public float getLength() {
-        return _length;
+        return sqrt(_p.x() * _q.x() + _p.y() * _q.y());
     }
 
     public float maxX() {
