@@ -40,6 +40,11 @@ public class ColourCollection {
         _colours.put("plum", new Colours(0xff011C1F, 0xff8C1C5A, 0xff591541, 0xff260B22, 0xff025E73, 0xff026873));
         _colours.put("spy", new Colours(0xff0F1413, 0xff77A69D, 0xff3E4A2D, 0xffD8D9D0, 0xffA67F38, 0xffD99748));
         _colours.put("happy-time", new Colours(0xff1F0F19, 0xffD93D76, 0xffD96CB3, 0xff202840, 0xff50BFAB, 0xffF2B544));
+        _colours.put("sci-fi", new Colours(0xff1D2426, 0xff2C3840, 0xff7794A6, 0xffB4CBD9, 0xffD8E8F2));
+        _colours.put("copper", new Colours(0xff1D2426, 0xffD7D7D9, 0xffF2DCC2, 0xffBF947A, 0xff8C7264));
+        _colours.put("orange", new Colours(0xff000000, 0xff2E3138, 0xffFFFFFF, 0xffD99A9A, 0xffFF6D05));
+        _colours.put("salmon-lemon", new Colours(0xff0D0D0D, 0xffF0F0F2, 0xffF2E63D, 0xffF2AB6D, 0xffF26D6D));
+
     }
 
     public Colours get(String name) {
@@ -62,7 +67,7 @@ public class ColourCollection {
 
     public HashMap<String, Colours> getColours(String... names) {
         HashMap<String, Colours> newColourGroup = new HashMap<>();
-        for(String name : names) {
+        for (String name : names) {
             newColourGroup.put(name, _colours.get(name));
         }
 

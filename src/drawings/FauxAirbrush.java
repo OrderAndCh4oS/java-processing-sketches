@@ -16,7 +16,7 @@ public class FauxAirbrush extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
+        _colours.getColours("sci-fi", "copper", "orange", "salmon-lemon").forEach((name, colour) -> {
             for (int image = 0; image < 5; image++) {
                 background(colour.bg());
                 for (int i = 0; i < 28; i++) {
@@ -30,16 +30,16 @@ public class FauxAirbrush extends Sketch {
                         stroke(colour.get(c));
                         switch (f) {
                             case 0:
-                                f1(j, l, d, r1, r2);
+                                triangleFromLeft(j, l, d, r1, r2);
                                 break;
                             case 1:
-                                f2(j, l, d, r1, r2);
+                                triangleFromRight(j, l, d, r1, r2);
                                 break;
                             case 2:
-                                f3(j, l, d, r1, r2);
+                                traingleFromTop(j, l, d, r1, r2);
                                 break;
                             case 3:
-                                f4(j, l, d, r1, r2);
+                                triangleFromBottom(j, l, d, r1, r2);
                                 break;
                         }
                     }
@@ -50,31 +50,33 @@ public class FauxAirbrush extends Sketch {
         println("~~Fin~~");
     }
 
-    void f1(float x, float y, float density, float ratioOne, float ratioTwo) {
+
+
+    void triangleFromLeft(float x, float y, float density, float ratioOne, float ratioTwo) {
         for (int i = 0; i < x * density + 1; i++) {
             float wave = (random(x) * ratioOne) - ((x * ratioTwo) / 2);
-            point(x, y + wave);
+            point(x + i, y + wave);
         }
     }
 
-    void f2(float x, float y, float density, float ratioOne, float ratioTwo) {
+    void triangleFromRight(float x, float y, float density, float ratioOne, float ratioTwo) {
         for (int i = 0; i < 1024 * density - (x * 0.1 + 1); i++) {
             float wave = (1024 * ratioOne) - (random(1024 - x) * ratioOne) - ((x * ratioTwo) / 2);
-            point(x, y + wave);
+            point(x + i, y + wave);
         }
     }
 
-    void f3(float y, float x, float density, float ratioOne, float ratioTwo) {
+    void traingleFromTop(float y, float x, float density, float ratioOne, float ratioTwo) {
         for (int i = 0; i < y * density + 1; i++) {
             float wave = (random(y) * ratioOne) - ((y * ratioTwo) / 2);
-            point(x + wave, y);
+            point(x + wave, y + i);
         }
     }
 
-    void f4(float y, float x, float density, float ratioOne, float ratioTwo) {
+    void triangleFromBottom(float y, float x, float density, float ratioOne, float ratioTwo) {
         for (int i = 0; i < 1024 * density - (y * 0.1 + 1); i++) {
             float wave = (1024 * ratioOne) - (random(1024 - y) * ratioOne) - ((y * ratioTwo) / 2);
-            point(x + wave, y);
+            point(x + wave, y + i);
         }
     }
 }
