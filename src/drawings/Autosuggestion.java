@@ -29,7 +29,7 @@ public class Autosuggestion extends Sketch {
             while (angle <= TWO_PI) {
                 float sectionAngle = PI * random(0.05f, 0.085f);
                 ThickAngleWave wave = new ThickAngleWave(new Point(0, 0), PI / 110, 2, sectionAngle);
-                for (int x = 0; x < 256; x++) {
+                for (int x = 0; x < 512; x++) {
                     wave.update();
                 }
                 PGraphics mask = wave.getMask(angle);
