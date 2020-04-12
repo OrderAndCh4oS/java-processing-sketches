@@ -26,7 +26,7 @@ public class Number extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             PFont font = createFont("ModernTwoSxtnITCStd-Bold", 1200);
             textFont(font);
-            String[] numbers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+            String[] numbers = {"1", "2", "3", "4", "5"};
             for (String n : numbers) {
                 background(0xff000000);
                 fill(0xffffffff);
@@ -35,7 +35,7 @@ public class Number extends Sketch {
                 PImage img = get(0, 0, (int) _width, (int) _height);
                 int dotSize = 18;
                 background(colour.rand());
-                drawDepth(colour.bg(), 0.5f, 0.4f);
+                drawDepth(colour.bg(), 0.75f, 0.25f);
                 strokeWeight(1);
                 strokeCap(ROUND);
                 for (int x = 0; x < _width; x += dotSize) {

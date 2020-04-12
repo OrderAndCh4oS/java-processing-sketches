@@ -26,7 +26,7 @@ public class Autosuggestion extends Sketch {
             background(colour.bg());
             float angle = 0;
             int count = 0;
-            while (angle <= TWO_PI) {
+            while (angle <= TAU) {
                 float sectionAngle = PI * random(0.05f, 0.085f);
                 ThickAngleWave wave = new ThickAngleWave(new Point(0, 0), PI / 110, 2, sectionAngle);
                 for (int x = 0; x < 512; x++) {

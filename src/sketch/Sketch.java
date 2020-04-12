@@ -2,6 +2,7 @@ package sketch;
 
 import collections.ColourCollection;
 import processing.core.PApplet;
+import utilities.Point;
 
 import static utilities.RandomString.uuid;
 
@@ -10,16 +11,19 @@ abstract public class Sketch extends PApplet {
     protected float _height = 1500;
     protected boolean _save = false;
     protected ColourCollection _colours = new ColourCollection();
+    protected Point _midPoint = new Point(_width/2, _height/2);
 
     public void settings(int width, int height) {
         _width = width;
         _height = height;
+        _midPoint = new Point(_width/2, _height/2);
         size(width, height);
     }
 
     public void settings(int width, int height, String renderer) {
         _width = width;
         _height = height;
+        _midPoint = new Point(_width/2, _height/2);
         size(width, height, renderer);
     }
 
