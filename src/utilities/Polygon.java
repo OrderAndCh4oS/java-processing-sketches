@@ -1,11 +1,8 @@
 package utilities;
 
-import com.sun.javafx.geom.Edge;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.TreeMap;
 
 public class Polygon {
     ArrayList<Point> _points = new ArrayList<>();
@@ -68,5 +65,28 @@ public class Polygon {
         }
 
         return intersects;
+    }
+
+    public Point getClosestIntersect(Point p, Point q) {
+        Point closestIntersect = null;
+        float minDistance = -1;
+        Line line = new Line(p, q);
+        Vector source = new Vector(p);
+        for (Line l : this.getLines()) {
+            if (l.isIntersect(line)) {
+                Vector intersect = new Vector(l.getIntersect(line));
+                float distance = source.distanceTo(intersect);
+                if (distance < minDistance || minDistance == -1) {
+                    closestIntersect = intersect.getPoint();
+                    minDistance = distance;
+                }
+            }
+        }
+
+        if (closestIntersect == null) {
+            return q;
+        }
+
+        return closestIntersect;
     }
 }

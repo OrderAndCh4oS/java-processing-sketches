@@ -74,7 +74,7 @@ public class Boids extends Sketch {
     }
 
     private Vector tendTowardCenter(Boid b) {
-        Vector v4 = new Vector(_width / 2, _height / 3);
+        Vector v4 = new Vector(_width / 2, _height / 2);
         v4.subtractFrom(b.getPosition());
         v4.divideBy(100);
         return v4;

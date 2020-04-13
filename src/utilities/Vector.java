@@ -107,6 +107,15 @@ public class Vector implements Cloneable {
         );
     }
 
+    public void setAngleTo(Vector v2) {
+        this.setAngle(this.angleTo(v2));
+    }
+
+
+    public void setLengthTo(Vector v2) {
+        this.setLength(this.distanceTo(v2));
+    }
+
     public float distanceTo(Vector v2) {
         float dX = _point.x() - v2.x();
         float dY = _point.y() - v2.y();
