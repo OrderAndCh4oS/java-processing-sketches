@@ -14,7 +14,6 @@ import java.util.TreeMap;
 import static utilities.Map.*;
 
 public class NeonLights extends Sketch {
-
     public static void main(String... args) {
         PApplet.main("drawings.NeonLights");
     }
