@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * http://www.vergenet.net/~conrad/boids/pseudocode.html
  */
 public class Boids extends Sketch {
-    private ArrayList<Boid> _boids = new ArrayList<>();
+    private ArrayList<Boid> _boids;
 
     public static void main(String... args) {
         PApplet.main("drawings.Boids");
@@ -27,38 +27,50 @@ public class Boids extends Sketch {
 
     @Override
     public void sketch() {
-
-        for (int i = 0; i < 25; i++) {
-            _boids.add(new Boid(random(_width), random(_height)));
-        }
-        for (int i = 0; i < 75; i++) {
-            for (Boid b : _boids) {
-                Vector v1 = getV1(b);
-                Vector v2 = getV2(b);
-                Vector v3 = getV3(b);
-                Vector v4 = tendTowardCenter(b);
-                b.update(v1, v2, v3, v4);
+        _colours.getColours().forEach((name, colour) -> {
+            background(colour.bg());
+            _boids = new ArrayList<>();
+            for (int i = 0; i < 16; i++) {
+                _boids.add(new Boid(random(_width), _height + random(25) + 50));
+                _boids.add(new Boid(random(_width), -(random(25) + 50)));
             }
-        }
-
-        for(Boid b : _boids) {
-            stroke(0xffff0000);
-            noFill();
-            beginShape();
-            for( Point p : b.getPoints()) {
-                curveVertex(p.x(), p.y());
+            for (int i = 0; i < 75; i++) {
+                for (Boid b : _boids) {
+                    Vector v1 = getV1(b);
+                    Vector v2 = getV2(b);
+                    Vector v3 = getV3(b);
+                    Vector v4 = tendTowardCenter(b);
+                    b.update(v1, v2, v3, v4);
+                }
             }
-            curveVertex(b.getPosition().x(), b.getPosition().y());
-            endShape();
-            noStroke();
-            fill(0xff000000);
-            ellipse(b.getPosition().x(), b.getPosition().y(), 5, 5);
-        }
 
-//        _colours.getColours().forEach((name, colour) -> {
-//            background(colour.bg());
-//            save("one", name);
-//        });
+            for(Boid b : _boids) {
+                int c1 = colour.rand();
+                stroke(c1);
+                strokeWeight(0.75f);
+                strokeCap(ROUND);
+                noFill();
+                beginShape();
+                for( Point p : b.getPoints()) {
+                    curveVertex(p.x(), p.y());
+                }
+                curveVertex(b.getPosition().x(), b.getPosition().y());
+                endShape();
+                noStroke();
+                fill(c1);
+                int tail = 15;
+                int minScale = 1;
+                int maxScale = 25;
+                int start = b.getPoints().size() - tail;
+                for (int i = start; i < b.getPoints().size(); i++) {
+                    float scale = map(i, start, start + tail, minScale, maxScale);
+                    ellipse(b.getPoints().get(i).x(), b.getPoints().get(i).y(), scale, scale);
+
+                }
+                ellipse(b.getPosition().x(), b.getPosition().y(), 15, 15);
+            }
+            save("boids", name);
+        });
     }
 
     private Vector tendTowardCenter(Boid b) {
