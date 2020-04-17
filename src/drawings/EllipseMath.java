@@ -37,7 +37,7 @@ public class EllipseMath extends Sketch {
                 for (float t = TAU / 60; t <= TAU + TAU / 60; t += TAU / 60) {
                     Point p = ellipsePoint(x, y, a, b, t);
                     stroke(colour.rand());
-                    line(0, 0, p.x(), p.y());
+                    line(x, y, p.x(), p.y());
                 }
                 popMatrix();
             }

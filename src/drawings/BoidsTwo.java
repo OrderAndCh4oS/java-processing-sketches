@@ -13,11 +13,11 @@ import static utilities.Map.*;
 /**
  * http://www.vergenet.net/~conrad/boids/pseudocode.html
  */
-public class Boids extends Sketch {
+public class BoidsTwo extends Sketch {
     private ArrayList<Boid> _boids;
 
     public static void main(String... args) {
-        PApplet.main("drawings.Boids");
+        PApplet.main("drawings.BoidsTwo");
     }
 
     @Override
@@ -32,12 +32,13 @@ public class Boids extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             drawDepth(colour.rand(), 0.9f, 0.1f);
+            drawDepth(colour.rand(), 0.8f, 0.05f, 480f);
             _boids = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 16; i++) {
                 _boids.add(new Boid(random(_width), _height + random(25) + 50));
                 _boids.add(new Boid(random(_width), -(random(25) + 50)));
             }
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 100; i++) {
                 for (Boid b : _boids) {
                     Vector v1 = moveTowardCentreOfMass(b);
                     Vector v2 = moveAwayFromOtherBoids(b);
@@ -54,6 +55,7 @@ public class Boids extends Sketch {
                 strokeCap(ROUND);
                 noFill();
                 beginShape();
+
                 for(Point p : b.getPoints()) {
                     curveVertex(p.x(), p.y());
                 }
@@ -61,7 +63,7 @@ public class Boids extends Sketch {
                 endShape();
                 noStroke();
                 fill(c1);
-                int tail = 25;
+                int tail = 32;
                 int minScale = 1;
                 int maxScale = 15;
                 int start = b.getPoints().size() - tail;
@@ -70,16 +72,16 @@ public class Boids extends Sketch {
                     ellipse(b.getPoints().get(i).x(), b.getPoints().get(i).y(), scale, scale);
 
                 }
-                ellipse(b.getPosition().x(), b.getPosition().y(), maxScale, maxScale);
+                ellipse(b.getPosition().x(), b.getPosition().y(), 15, 15);
             }
-            save("boids", name);
+            save("boids-two", name);
         });
     }
 
     private Vector tendTowardCenter(Boid b) {
         Vector v4 = new Vector(_width / 2, _height / 2);
         v4.subtractFrom(b.getPosition());
-        v4.divideBy(100);
+        v4.divideBy(80);
         return v4;
     }
 
@@ -94,7 +96,7 @@ public class Boids extends Sketch {
         }
         v3.divideBy(_boids.size() - 1);
         v3.subtractFrom(b.getVelocity());
-        v3.divideBy(8);
+        v3.divideBy(6);
 
         return v3;
     }
@@ -110,7 +112,7 @@ public class Boids extends Sketch {
         }
         v1.divideBy(_boids.size() - 1);
         v1.subtractFrom(b.getPosition());
-        v1.divideBy(100);
+        v1.divideBy(160);
         return v1;
     }
 
@@ -135,7 +137,7 @@ public class Boids extends Sketch {
 
         Boid(float x, float y) {
             _position = new Vector(x, y);
-            _velocity = new Vector(random(2) - 1, random(2) - 1);
+            _velocity = new Vector((random(2) - 1) * 0.1f, (random(2) - 1) * 0.1f);
         }
 
         void update(Vector v1, Vector v2, Vector v3, Vector v4) {
