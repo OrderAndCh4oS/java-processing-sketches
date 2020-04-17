@@ -94,34 +94,4 @@ public class NumberWaveLineTwo extends Sketch {
             }
         });
     }
-
-    private void drawDepth(int colour, float density, float alpha) {
-        blendMode(MULTIPLY);
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
-                if (random(1) > density) {
-                    point(i, j);
-                }
-            }
-        }
-        blendMode(NORMAL);
-    }
-
-    private void drawDepthToSource(PGraphics source, int colour, float density, float alpha) {
-        source.blendMode(MULTIPLY);
-        source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-        source.strokeCap(ROUND);
-        source.strokeWeight(1);
-        for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
-                if (random(1) > density) {
-                    source.point(i, j);
-                }
-            }
-        }
-        source.blendMode(NORMAL);
-    }
 }

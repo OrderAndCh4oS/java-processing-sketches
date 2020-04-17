@@ -96,19 +96,4 @@ public class Woods extends Sketch {
             line(-100, random(-5, -40), ray.x(), ray.y());
         }
     }
-
-    private void drawDepth(int colour, float density, float alpha) {
-        blendMode(MULTIPLY);
-        stroke(colour, 255 * alpha);
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
-                if (random(1) > density) {
-                    point(i, j);
-                }
-            }
-        }
-        blendMode(NORMAL);
-    }
 }

@@ -90,20 +90,5 @@ public class Madness extends Sketch {
             ellipse(_x, _y, _radius * 2, _radius * 2);
         }
     }
-
-    private void drawDepth(int colour, float density, float alpha) {
-        blendMode(MULTIPLY);
-        stroke(colour, 255 * alpha);
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
-                if (random(1) > density) {
-                    point(i, j);
-                }
-            }
-        }
-        blendMode(NORMAL);
-    }
 }
 

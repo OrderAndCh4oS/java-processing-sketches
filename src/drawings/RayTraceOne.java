@@ -48,10 +48,5 @@ public class RayTraceOne extends Sketch {
         for (Point point : light.rayTracer()) {
             line(light.getPoint().x(), light.getPoint().y(), point.x(), point.y());
         }
-
-//        _colours.get_colours().forEach((name, colour) -> {
-//            background(colour.bg());
-//            save("black", name);
-//        });
     }
 }

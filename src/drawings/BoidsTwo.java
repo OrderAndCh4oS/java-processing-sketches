@@ -161,38 +161,4 @@ public class BoidsTwo extends Sketch {
             return _velocity;
         }
     }
-
-    private void drawDepth(int colour, float density, float alpha) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int x = 0; x < _width; x++) {
-            for (int y = 0; y < _height; y++) {
-                if (random(1) > density) {
-                    point(x, y);
-                }
-            }
-        }
-    }
-
-    private void drawDepth(int colour, float density, float alpha, float radius) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int x = 0; x < _width; x++) {
-            for (int y = 0; y < _height; y++) {
-                float distance = getDistance(_midPoint, new Point(x, y));
-                if (random(1) > map2(distance, 0, radius, 0, density, QUADRATIC, EASE_IN)) {
-                    point(x, y);
-                }
-            }
-        }
-    }
-
-    private float getDistance(Point p, Point q) {
-        float dX = p.x() - q.x();
-        float dY = p.y() - q.y();
-
-        return sqrt((dX * dX) + (dY * dY));
-    }
 }

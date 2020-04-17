@@ -4,12 +4,11 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.colour.Colours;
 
-import static utilities.Random.randomInt;
-
 public class Ellipse extends Sketch {
     public static void main(String... args) {
         PApplet.main("drawings.Ellipse");
     }
+
     @Override
     public void settings() {
         _save = true;
@@ -41,21 +40,6 @@ public class Ellipse extends Sketch {
         ellipse(0, 0, scale, scale);
         popMatrix();
 
-    }
-
-    private void drawDepth(int colour, float density, float alpha) {
-        blendMode(MULTIPLY);
-        stroke(colour, 255 * alpha);
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
-                if (random(1) > density) {
-                    point(i, j);
-                }
-            }
-        }
-        blendMode(NORMAL);
     }
 }
 

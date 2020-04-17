@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.TreeMap;
 
 import static utilities.Map.*;
+import static utilities.Trigonometry.getDistance;
 
 public class Black extends Sketch {
 
@@ -103,12 +104,5 @@ public class Black extends Sketch {
                 save("black", name);
             });
         }
-    }
-
-    private float getDistance(Point p, Point q) {
-        float dX = p.x() - q.x();
-        float dY = p.y() - q.y();
-
-        return sqrt((dX * dX) + (dY * dY));
     }
 }

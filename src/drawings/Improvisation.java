@@ -7,8 +7,6 @@ import utilities.Point;
 
 import java.util.ArrayList;
 
-import static utilities.Map.*;
-
 public class Improvisation extends Sketch {
 
     public static void main(String... args) {
@@ -83,45 +81,11 @@ public class Improvisation extends Sketch {
         }
     }
 
-    private void drawDepth(int colour, float density, float alpha) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int x = 0; x < _width; x++) {
-            for (int y = 0; y < _height; y++) {
-                if (random(1) > density) {
-                    point(x, y);
-                }
-            }
-        }
-    }
-
-    private void drawDepth(int colour, float density, float alpha, float radius) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int x = 0; x < _width; x++) {
-            for (int y = 0; y < _height; y++) {
-                float distance = getDistance(_midPoint, new Point(x, y));
-                if (random(1) > map2(distance, 0, radius, 0, density, QUADRATIC, EASE_IN)) {
-                    point(x, y);
-                }
-            }
-        }
-    }
-
-    private float getDistance(Point p, Point q) {
-        float dX = p.x() - q.x();
-        float dY = p.y() - q.y();
-
-        return sqrt((dX * dX) + (dY * dY));
-    }
-
     static class Harmonograph {
-        private float _frequency;
-        private float _phase;
-        private float _amplitude;
-        private float _damping;
+        private final float _frequency;
+        private final float _phase;
+        private final float _amplitude;
+        private final float _damping;
 
         public Harmonograph(float _frequency, float _phase, float _amplitude, float _damping) {
             this._frequency = _frequency;
@@ -136,6 +100,4 @@ public class Improvisation extends Sketch {
             return x1 * pow(exp(1.0f), -_damping * t);
         }
     }
-
-
 }
