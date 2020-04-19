@@ -144,4 +144,19 @@ abstract public class Sketch extends PApplet {
         }
         source.blendMode(NORMAL);
     }
+
+    public void drawDepthToSourceArea(Point p, Point q, PGraphics source, int colour, float density, float alpha) {
+        source.blendMode(MULTIPLY);
+        source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+        source.strokeCap(ROUND);
+        source.strokeWeight(1);
+        for (int x = (int) p.x(); x <= (int) q.x(); x++) {
+            for (int y = (int) p.y(); y <= (int) q.y(); y++) {
+                if (random(1) > density) {
+                    source.point(x, y);
+                }
+            }
+        }
+        source.blendMode(NORMAL);
+    }
 }
