@@ -1,5 +1,6 @@
 package collections;
 
+import drawings.Blizzard;
 import utilities.colour.Colours;
 
 import java.util.ArrayList;
@@ -46,6 +47,8 @@ public class ColourCollection {
         _colours.put("salmon-lemon", new Colours(0xff0D0D0D, 0xffF0F0F2, 0xffF2E63D, 0xffF2AB6D, 0xffF26D6D));
         _colours.put("hot-dusk", new Colours(0xff1A0F26, 0xffD94883, 0xffF35B6B, 0xffD5469E, 0xff381C4F));
         _colours.put("cool-dusk", new Colours(0xff151329, 0xffEC68F0, 0xffA055E9, 0xff9EB0F4, 0xff151329));
+        _colours.put("contructivist-real", new Colours(0xffE8E5D7, 0xffFF4100,  0xff16130C));
+        _colours.put("blizzard", new Colours(0xffBBE3F9, 0xffB6EEFC,  0xffE9FFFF, 0xffC3F5FF, 0xffEBF6F5));
     }
 
     public Colours get(String name) {

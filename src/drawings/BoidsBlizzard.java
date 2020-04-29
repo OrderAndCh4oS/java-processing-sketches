@@ -1,5 +1,6 @@
 package drawings;
 
+import enums.Direction;
 import org.jetbrains.annotations.NotNull;
 import processing.core.PApplet;
 import sketch.Sketch;
@@ -8,16 +9,17 @@ import utilities.Vector;
 
 import java.util.ArrayList;
 
-import static utilities.Map.*;
+import static utilities.Map.CUBIC;
+import static utilities.Map.EASE_IN;
 
 /**
  * http://www.vergenet.net/~conrad/boids/pseudocode.html
  */
-public class Boids extends Sketch {
+public class BoidsBlizzard extends Sketch {
     private ArrayList<Boid> _boids;
 
     public static void main(String... args) {
-        PApplet.main("drawings.Boids");
+        PApplet.main("drawings.BoidsBlizzard");
     }
 
     @Override
@@ -30,19 +32,24 @@ public class Boids extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours("blizzard").forEach((name, colour) -> {
-            background(colour.bg());
-            drawDepth(colour.rand(), 0.9f, 0.1f);
+            background(colour.rand());
+            drawDepth(colour.bg(), 0.8f, Direction.TOP, CUBIC, EASE_IN);
             _boids = new ArrayList<>();
-            for (int i = 0; i < 5; i++) {
-                _boids.add(new Boid(random(_width), _height + random(25) + 50));
-                _boids.add(new Boid(random(_width), -(random(25) + 50)));
+            for (int i = 0; i < 10; i++) {
+                _boids.add(new Boid(random(_width/2), -random(100)));
             }
-            for (int i = 0; i < 50; i++) {
+            for (int i = 0; i < 5; i++) {
+                _boids.add(new Boid(random(_width/3), _height + random(30)));
+            }
+            for (int i = 0; i < 40; i++) {
+                _boids.add(new Boid(-random(30), random(_height)));
+            }
+            for (int i = 0; i < 100; i++) {
                 for (Boid b : _boids) {
                     Vector v1 = moveTowardCentreOfMass(b);
                     Vector v2 = moveAwayFromOtherBoids(b);
                     Vector v3 = matchVelocityOfNearBoids(b);
-                    Vector v4 = tendTowardCenter(b);
+                    Vector v4 = tendTowardRight(b);
                     b.update(v1, v2, v3, v4);
                 }
             }
@@ -61,7 +68,7 @@ public class Boids extends Sketch {
                 endShape();
                 noStroke();
                 fill(c1);
-                int tail = 25;
+                int tail = 100;
                 int minScale = 1;
                 int maxScale = 15;
                 int start = b.getPoints().size() - tail;
@@ -72,12 +79,19 @@ public class Boids extends Sketch {
                 }
                 ellipse(b.getPosition().x(), b.getPosition().y(), maxScale, maxScale);
             }
-            save("boids", name);
+            save("boids-blizzard", name);
         });
     }
 
     private Vector tendTowardCenter(Boid b) {
         Vector v4 = new Vector(_width / 2, _height / 2);
+        v4.subtractFrom(b.getPosition());
+        v4.divideBy(100);
+        return v4;
+    }
+
+    private Vector tendTowardRight(Boid b) {
+        Vector v4 = new Vector(_width, random(_height));
         v4.subtractFrom(b.getPosition());
         v4.divideBy(100);
         return v4;

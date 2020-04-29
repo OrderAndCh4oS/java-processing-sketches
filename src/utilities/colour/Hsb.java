@@ -10,11 +10,11 @@ public class Hsb {
     int _s;
     int _b;
 
-    Hsb(int rgb) {
+    public Hsb(int rgb) {
         this(getRed(rgb), getGreen(rgb), getBlue(rgb));
     }
 
-    Hsb(int r, int g, int b) {
+    public Hsb(int r, int g, int b) {
         float[] hsb = Color.RGBtoHSB(r, g, b, null);
         _h = round(hsb[0] * 360);
         _s = round(hsb[2] * 100);

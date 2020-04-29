@@ -3,6 +3,7 @@ package utilities.colour;
 import java.util.Arrays;
 
 import static java.lang.Math.round;
+import static processing.core.PApplet.println;
 import static utilities.colour.Rgb.*;
 
 public class Hsl {
@@ -15,11 +16,11 @@ public class Hsl {
     int _s = 0;
     int _l = 0;
 
-    Hsl(int rgb) {
+    public Hsl(int rgb) {
         this(getRed(rgb), getGreen(rgb), getBlue(rgb));
     }
 
-    Hsl(int r, int g, int b) {
+    public Hsl(int r, int g, int b) {
         _r = r / 255f;
         _g = g / 255f;
         _b = b / 255f;
@@ -27,8 +28,6 @@ public class Hsl {
         Arrays.sort(rgbNormalised);
         _min = rgbNormalised[0];
         _max = rgbNormalised[2];
-        System.out.println(_min);
-        System.out.println(_max);
         _h = calcH();
         _l = calcL();
         _s = calcS();
@@ -43,6 +42,7 @@ public class Hsl {
             _h = round((4.0f + (_r - _g) / (_max - _min)) * 60);
         }
         if (_h < 0) _h += 360;
+
         return _h;
     }
 
@@ -52,13 +52,12 @@ public class Hsl {
 
     private int calcS() {
         if (_min == _max) return 0;
-        System.out.println("l");
-        System.out.println(_l);
         if (_l < 50) {
             _s = round(((_max - _min) / (_max + _min)) * 100);
         } else {
             _s = round(((_max - _min) / (2.0f - _max - _min)) * 100);
         }
+
         return _s;
     }
 
@@ -100,6 +99,36 @@ public class Hsl {
         }
     }
 
+    public void setH(int value) {
+        if (_h > 360) {
+            _h = 360;
+        } else if (_h < 0) {
+            _h = 0;
+        } else {
+            _h = value;
+        }
+    }
+
+    public void setS(int value) {
+        if (_s > 100) {
+            _s = 100;
+        } else if (_s < 0) {
+            _s = 0;
+        } else {
+            _s = value;
+        }
+    }
+
+    public void setL(int value) {
+        if (_l > 100) {
+            _l = 100;
+        } else if (_l < 0) {
+            _l = 0;
+        } else {
+            _l = value;
+        }
+    }
+
     public int getRgb() {
         float l = _l / 100f;
         float s = _s / 100f;
@@ -110,12 +139,10 @@ public class Hsl {
         float x1, x2, x3, tr, tg, tb;
 
         if (l < 50) {
-            x1 =  l * (1.0f + s);
+            x1 = l * (1.0f + s);
         } else {
             x1 = l + s - (l * s);
         }
-
-        System.out.println(x1);
 
         x2 = 2 * l - x1;
         x3 = _h / 360f;
