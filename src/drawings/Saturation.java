@@ -16,7 +16,7 @@ public class Saturation extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024, P3D);
+        super.settings(2400, 1600, P3D);
         smooth(8);
     }
 
@@ -25,11 +25,11 @@ public class Saturation extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.bg());
             noFill();
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 240; i++) {
                 float x1 = -20;
-                float y1 = random(_height + 100) - 50;
+                float y1 = random(_height + 200) - 10;
                 float x2 = _width + 10;
-                float y2 = random(_height + 100) - 50;
+                float y2 = random(_height + 200) - 10;
                 float x1h = x1 + random(225);
                 float y1h = y1 + random(225);
                 float x2h = x2 - random(225);
@@ -40,13 +40,13 @@ public class Saturation extends Sketch {
                 Point b = new Point(x2h, y2h);
                 noStroke();
                 Hsl c1 = new Hsl(colour.rand());
-                for (float t = 0; t < 1; t += 0.001) {
+                for (float t = 0; t < 1; t += 0.0001) {
                     Point p = cubicBezier(a, b, c, d, t);
                     c1.setS((int) map(t, 0, 1, 0, 100));
                     fill(c1.getRgb() * 255);
                     pushMatrix();
                     translate(p.x(), p.y());
-                    float size = 50;
+                    float size = 80;
                     rect(0, 0, size, size);
                     popMatrix();
                 }

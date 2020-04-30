@@ -3,10 +3,10 @@ package utilities.colour;
 import java.util.Arrays;
 
 import static java.lang.Math.round;
-import static processing.core.PApplet.println;
 import static utilities.colour.Rgb.*;
 
 public class Hsl {
+    int _a;
     float _r;
     float _g;
     float _b;
@@ -18,6 +18,7 @@ public class Hsl {
 
     public Hsl(int rgb) {
         this(getRed(rgb), getGreen(rgb), getBlue(rgb));
+        _a = getAlpha(rgb);
     }
 
     public Hsl(int r, int g, int b) {
@@ -153,11 +154,15 @@ public class Hsl {
         tb = x3 - 0.333f;
         if (tb < 0) tb = tb - 1;
 
-        _r = toRgb(x1, x2, tr);
-        _g = toRgb(x1, x2, tg);
-        _b = toRgb(x1, x2, tb);
+        float r = this.toRgb(x1, x2, tr);
+        float g = this.toRgb(x1, x2, tg);
+        float b = this.toRgb(x1, x2, tb);
 
-        return Rgb.toRgb(round(_r * 255), round(_g * 255), round(_b * 255));
+        return Rgb.toRgb(round(r * 255), round(g * 255), round(b * 255));
+    }
+
+    public int getRgba() {
+        return toRgba(_a, this.getRgb());
     }
 
     private float toRgb(float x1, float x2, float tc) {
@@ -170,7 +175,11 @@ public class Hsl {
 
 class Main {
     public static void main(String[] args) {
-        Hsl hsl = new Hsl(0x186277);
+        Hsl hsl = new Hsl(0xff186277);
+        System.out.println(0xff186277);
+        System.out.println(0x186277);
+        System.out.println(hsl.getRgb());
+        System.out.println(hsl.getRgba());
         System.out.println(hsl.h());
         System.out.println(hsl.s());
         System.out.println(hsl.l());
@@ -178,5 +187,6 @@ class Main {
         System.out.println(hsl.g() * 255);
         System.out.println(hsl.b() * 255);
         System.out.println(hsl.getRgb());
+        System.out.println(hsl.getRgba());
     }
 }
