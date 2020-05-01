@@ -5,6 +5,9 @@ import java.util.Arrays;
 import static java.lang.Math.round;
 import static utilities.colour.Rgb.*;
 
+/**
+ * http://www.niwa.nu/2013/05/math-behind-colorspace-conversions-rgb-hsl/
+ */
 public class Hsl {
     int _a;
     float _r;
@@ -42,7 +45,10 @@ public class Hsl {
         } else if (_max == _b) {
             _h = round((4.0f + (_r - _g) / (_max - _min)) * 60);
         }
-        if (_h < 0) _h += 360;
+
+        if (_h < 0) {
+            _h += 360;
+        }
 
         return _h;
     }
@@ -133,30 +139,38 @@ public class Hsl {
     public int getRgb() {
         float l = _l / 100f;
         float s = _s / 100f;
+        float h = _h / 360f;
+
         if (s == 0) {
             int grey = round(l * 255);
             return Rgb.toRgb(grey, grey, grey);
         }
-        float x1, x2, x3, tr, tg, tb;
 
-        if (l < 50) {
-            x1 = l * (1.0f + s);
+        float t1, t2, tr, tg, tb;
+
+        if (l < 0.5f) {
+            t1 = l * (1.0f + s);
         } else {
-            x1 = l + s - (l * s);
+            t1 = l + s - (l * s);
         }
 
-        x2 = 2 * l - x1;
-        x3 = _h / 360f;
+        t2 = (2 * l) - t1;
 
-        tr = x3 + 0.333f;
+        tr = h + 0.333f;
+        tg = h;
+        tb = h - 0.333f;
+
         if (tr > 1) tr = tr - 1;
-        tg = x3;
-        tb = x3 - 0.333f;
-        if (tb < 0) tb = tb - 1;
+        if (tg > 1) tg = tg - 1;
+        if (tb > 1) tb = tb - 1;
 
-        float r = this.toRgb(x1, x2, tr);
-        float g = this.toRgb(x1, x2, tg);
-        float b = this.toRgb(x1, x2, tb);
+        if (tr < 0) tr = tr + 1;
+        if (tg < 0) tg = tg + 1;
+        if (tb < 0) tb = tb + 1;
+
+        float r = this.toRgb(t1, t2, tr);
+        float g = this.toRgb(t1, t2, tg);
+        float b = this.toRgb(t1, t2, tb);
 
         return Rgb.toRgb(round(r * 255), round(g * 255), round(b * 255));
     }
@@ -166,10 +180,15 @@ public class Hsl {
     }
 
     private float toRgb(float x1, float x2, float tc) {
-        if ((6 * tc) < 1) return x2 + (x1 - x2) * 6 * tc;
-        else if ((2 * tc) < 1) return x1;
-        else if ((3 * tc) < 2) return (x2 + (x1 - x2) * (0.666f - tc) * 6);
-        else return x2;
+        if ((6 * tc) < 1) {
+            return x2 + (x1 - x2) * 6 * tc;
+        } else if ((2 * tc) < 1) {
+            return x1;
+        } else if ((3 * tc) < 2) {
+            return (x2 + (x1 - x2) * (0.666f - tc) * 6);
+        } else {
+            return x2;
+        }
     }
 }
 
@@ -188,5 +207,24 @@ class Main {
         System.out.println(hsl.b() * 255);
         System.out.println(hsl.getRgb());
         System.out.println(hsl.getRgba());
+        System.out.println("=============");
+        Hsl hsl2 = new Hsl(0xffEFFF45);
+        System.out.println(0xffEFFF45);
+        System.out.println(0xEFFF45);
+        System.out.println(hsl2.getRgb());
+        System.out.println(hsl2.getRgba());
+        System.out.println("=============");
+        Hsl hsl3 = new Hsl(0xffA83BFF);
+        System.out.println(0xffA83BFF);
+        System.out.println(0xA83BFF);
+        System.out.println(hsl3.getRgb());
+        System.out.println(hsl3.getRgba());
+        System.out.println("=============");
+        Hsl hsl4 = new Hsl(0xff52FFD1);
+        System.out.println(0xff52FFD1);
+        System.out.println(0x52FFD1);
+        System.out.println(hsl4.getRgb());
+        System.out.println(hsl4.getRgba());
+        System.out.println("=============");
     }
 }

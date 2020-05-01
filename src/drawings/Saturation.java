@@ -16,7 +16,7 @@ public class Saturation extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(2400, 1600, P3D);
+        super.settings(1024, 1024, P3D);
         smooth(8);
     }
 
@@ -40,7 +40,7 @@ public class Saturation extends Sketch {
                 Point b = new Point(x2h, y2h);
                 noStroke();
                 Hsl c1 = new Hsl(colour.rand());
-                for (float t = 0; t < 1; t += 0.0001) {
+                for (float t = 0; t < 1; t += 0.001) {
                     Point p = cubicBezier(a, b, c, d, t);
                     c1.setS((int) map(t, 0, 1, 0, 100));
                     fill(c1.getRgb() * 255);
