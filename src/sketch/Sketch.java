@@ -100,6 +100,20 @@ abstract public class Sketch extends PApplet {
         }
     }
 
+    public void drawDepth(int colour, float density, float alpha, float radius, int type, int ease) {
+        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+        strokeCap(ROUND);
+        strokeWeight(1);
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                float distance = getDistance(_midPoint, new Point(x, y));
+                if (random(1) > map2(distance, 0, radius, 0, density, type, ease)) {
+                    point(x, y);
+                }
+            }
+        }
+    }
+
     public void drawDepth(int colour, float alpha, Direction direction, int type, int ease) {
         stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
         strokeCap(ROUND);
@@ -158,5 +172,19 @@ abstract public class Sketch extends PApplet {
             }
         }
         source.blendMode(NORMAL);
+    }
+
+    public void drawRadialDepthToSource(PGraphics source, int colour, float density, float alpha, float radius, int type, int ease) {
+        source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+        source.strokeCap(ROUND);
+        source.strokeWeight(1);
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                float distance = getDistance(_midPoint, new Point(x, y));
+                if (random(1) > map2(distance, 0, radius, 0, density, type, ease)) {
+                    source.point(x, y);
+                }
+            }
+        }
     }
 }
