@@ -23,7 +23,7 @@ public class Salamander extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             float left = -100;
             for (int j = 0; j < 30; j++) {
                 float strokeWidth = 25 + random(30);
@@ -40,12 +40,12 @@ public class Salamander extends Sketch {
                 PGraphics source = createGraphics((int) _width, (int) _height);
                 source.beginDraw();
                 source.noStroke();
-                int stripeColour = j % 2 == 0 ? colour.rand() : colour.bg();
+                int stripeColour = j % 2 == 0 ? colour.rand() : colour.black();
                 source.fill(stripeColour);
                 source.rect(0, 0, _width, _height);
                 int fillColour = colour.rand();
                 if (fillColour == stripeColour) {
-                    fillColour = colour.bg();
+                    fillColour = colour.black();
                 }
                 source.fill(fillColour);
                 wave.drawDots(source);

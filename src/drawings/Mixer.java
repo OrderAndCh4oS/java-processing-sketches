@@ -1,11 +1,8 @@
 package drawings;
 
 import processing.core.PApplet;
-import processing.core.PFont;
-import processing.core.PImage;
 import sketch.Sketch;
 
-import static utilities.Image.extractShadeFromImage;
 import static utilities.Random.randomInt;
 
 public class Mixer extends Sketch {
@@ -35,7 +32,7 @@ public class Mixer extends Sketch {
                 c2 = colour.rand();
             }
             background(c1);
-            drawDepth(colour.bg(), 0.4f, 0.6f);
+            drawDepth(colour.black(), 0.4f, 0.6f);
             for (int x = -30; x < _width; x += lineWidth - padding) {
                 float a = 0;
                 int offsetY = (x % step);

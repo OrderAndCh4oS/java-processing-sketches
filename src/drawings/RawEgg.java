@@ -5,7 +5,8 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Point;
 
-import static utilities.Map.*;
+import static utilities.Map.EASE_IN_OUT;
+import static utilities.Map.SINUSOIDAL;
 
 public class RawEgg extends Sketch {
     public static void main(String... args) {

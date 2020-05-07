@@ -4,8 +4,6 @@ import processing.core.PApplet;
 import processing.core.PGraphics;
 import sketch.Sketch;
 
-import static utilities.Random.randomInt;
-
 public class Remainder extends Sketch {
 
     public static void main(String... args) {
@@ -22,7 +20,7 @@ public class Remainder extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
 
             int step;
             PGraphics one = createGraphics((int) _width, (int) _height);

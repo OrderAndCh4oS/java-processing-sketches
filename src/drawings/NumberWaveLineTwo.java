@@ -44,17 +44,17 @@ public class NumberWaveLineTwo extends Sketch {
                     c2 = colour.rand();
                 }
                 background(c1);
-                drawDepth(colour.bg(), 0.8f, 0.2f);
+                drawDepth(colour.black(), 0.8f, 0.2f);
                 PGraphics source = createGraphics((int) _width, (int) _height);
                 PGraphics mask = createGraphics((int) _width, (int) _height);
                 source.beginDraw();
                 source.noStroke();
                 source.fill(c2);
                 source.rect(0, 0, _width, _height);
-                drawDepthToSource(source, colour.bg(), 0.9f, 0.1f);
+                drawDepthToSource(source, colour.black(), 0.9f, 0.1f);
                 source.strokeWeight(1);
                 source.strokeCap(ROUND);
-                source.stroke(colour.bg());
+                source.stroke(colour.black());
                 for (int x = -30; x < _width; x += lineWidth - padding) {
                     float a = 0;
                     int offsetY = (x % step);
@@ -84,7 +84,7 @@ public class NumberWaveLineTwo extends Sketch {
                 mask.noStroke();
                 mask.fill(0xff000000);
                 mask.rect(0, 0, _width, _height);
-                mask.translate(_width/2, _height/2);
+                mask.translate(_width / 2, _height / 2);
                 mask.fill(0xffffffff);
                 mask.ellipse(0, 0, 980, 980);
                 mask.endDraw();

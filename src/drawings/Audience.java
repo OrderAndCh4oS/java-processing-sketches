@@ -24,7 +24,7 @@ public class Audience extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             Colours otherColour = _colours.rand();
             int x = 0;
             int y = 0;
@@ -45,7 +45,7 @@ public class Audience extends Sketch {
                 noStroke();
                 fill(0xFFF9F6EE);
                 ellipse(x * (radius * 2) + 20, y * (radius * 2) + 20, radius * 2, radius * 2);
-                fill(c.bg());
+                fill(c.black());
                 ellipse(x * (radius * 2) + 20, y * (radius * 2) + 20, radius, radius);
                 pushMatrix();
                 translate(x * (radius * 2) + 20, y * (radius * 2) + 20);
@@ -73,7 +73,7 @@ public class Audience extends Sketch {
         private float _a = 0;
         private float _sz = 4;
         private float _sp = 0.5f;
-        private float _c = 4f;
+        private final float _c = 4f;
 
         Point(float x, float y) {
             _x = x;

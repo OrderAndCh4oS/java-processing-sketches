@@ -53,8 +53,8 @@ public class Vector implements Cloneable {
 
     public float getLength() {
         return sqrt(
-            _point.x() * _point.x() +
-                _point.y() * _point.y()
+                _point.x() * _point.x() +
+                        _point.y() * _point.y()
         );
     }
 
@@ -102,8 +102,8 @@ public class Vector implements Cloneable {
 
     public float angleTo(Vector v2) {
         return atan2(
-            v2.y() - _point.y(),
-            v2.x() - _point.x()
+                v2.y() - _point.y(),
+                v2.x() - _point.x()
         );
     }
 

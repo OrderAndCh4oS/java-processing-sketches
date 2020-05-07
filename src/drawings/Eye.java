@@ -6,7 +6,8 @@ import sketch.Sketch;
 import utilities.Point;
 
 import static utilities.Bezier.quadraticBezier;
-import static utilities.Map.*;
+import static utilities.Map.EASE_IN;
+import static utilities.Map.QUINTIC;
 
 public class Eye extends Sketch {
     public static void main(String... args) {
@@ -22,12 +23,12 @@ public class Eye extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             drawDepth(colour.rand(), 0.8f, 0.2f);
             drawDepth(colour.rand(), 0.6f, 0.4f, 580f);
             pushMatrix();
             translate(_width / 2, _height / 2);
-            fill(colour.bg());
+            fill(colour.black());
             ellipse(0, 0, 240, 240);
             noFill();
             strokeWeight(1);

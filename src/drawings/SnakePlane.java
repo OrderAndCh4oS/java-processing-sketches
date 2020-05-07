@@ -22,17 +22,17 @@ public class SnakePlane extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             noFill();
             for (int i = 0; i < 18; i++) {
                 float x1 = -20;
                 float y1 = random(_height + 100) - 50;
                 float x2 = _width + 10;
                 float y2 = random(_height + 100) - 50;
-                float x1h = x1 + random( 225);
-                float y1h = y1 + random( 225);
-                float x2h = x2 - random( 225);
-                float y2h = y2 - random( 225);
+                float x1h = x1 + random(225);
+                float y1h = y1 + random(225);
+                float x2h = x2 - random(225);
+                float y2h = y2 - random(225);
                 Point a = new Point(x1, y1);
                 Point d = new Point(x2, y2);
                 Point c = new Point(x1h, y1h);
@@ -45,8 +45,8 @@ public class SnakePlane extends Sketch {
                     stroke(colour.rand());
                     pushMatrix();
                     translate(p.x(), p.y());
-                    rotateY(map(p.x(), 0, _width/2, 0, PI));
-                    float size = map(p.x(), 0, _width/2, 0, 50);
+                    rotateY(map(p.x(), 0, _width / 2, 0, PI));
+                    float size = map(p.x(), 0, _width / 2, 0, 50);
                     rect(0, 0, size, size);
                     popMatrix();
                 }

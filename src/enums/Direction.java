@@ -12,7 +12,7 @@ public enum Direction {
     private static final int SIZE = VALUES.length;
     private static final Random RANDOM = new Random();
 
-    public static Direction rand()  {
+    public static Direction rand() {
         return VALUES[RANDOM.nextInt(SIZE)];
     }
 }

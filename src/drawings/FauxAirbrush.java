@@ -18,7 +18,7 @@ public class FauxAirbrush extends Sketch {
     public void sketch() {
         _colours.getColours("sci-fi", "copper", "orange", "salmon-lemon").forEach((name, colour) -> {
             for (int image = 0; image < 5; image++) {
-                background(colour.bg());
+                background(colour.black());
                 for (int i = 0; i < 28; i++) {
                     int f = (int) random(4);
                     int c = (int) random(colour.size()) + 1;
@@ -49,7 +49,6 @@ public class FauxAirbrush extends Sketch {
         });
         println("~~Fin~~");
     }
-
 
 
     void triangleFromLeft(float x, float y, float density, float ratioOne, float ratioTwo) {

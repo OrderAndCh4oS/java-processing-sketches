@@ -6,7 +6,6 @@ import utilities.Light;
 import utilities.Point;
 import utilities.Polygon;
 import utilities.Vector;
-import utilities.colour.Colours;
 
 import java.util.ArrayList;
 import java.util.TreeMap;
@@ -31,7 +30,7 @@ public class NeonLights extends Sketch {
     public void sketch() {
         for (int iter = 0; iter < 5; iter++) {
             _colours.getColours().forEach((name, colour) -> {
-                background(colour.bg());
+                background(colour.black());
                 stroke(colour.rand(), 255 * 0.4f);
                 for (int i = 0; i < _width; i++) {
                     for (int j = 0; j < _height; j++) {

@@ -31,17 +31,17 @@ public class NumberWaveLine extends Sketch {
                 background(0xff000000);
                 fill(0xffffffff);
                 textAlign(CENTER);
-                text(n, _width/2, 908);
+                text(n, _width / 2, 908);
                 PImage img = get(0, 0, (int) _width, (int) _height);
                 int step = 6;
                 float lineWidth = random(20, 30);
                 float padding = random(15, 20);
                 float wave = 0.12f;
                 background(colour.rand());
-                drawDepth(colour.bg(), 0.8f, 0.2f);
+                drawDepth(colour.black(), 0.8f, 0.2f);
                 strokeWeight(1);
                 strokeCap(ROUND);
-                stroke(colour.bg());
+                stroke(colour.black());
                 for (int x = -30; x < _width; x += lineWidth - padding) {
                     float a = 0;
                     int offsetY = (x % step);
@@ -56,10 +56,10 @@ public class NumberWaveLine extends Sketch {
                             strokeWeight(1);
                         }
                         line(
-                                x + newX + step/2f,
-                                y + step/2f + offsetY,
-                                x + newX + step/2f + lineWidth + padding,
-                                y + step/2f + offsetY
+                                x + newX + step / 2f,
+                                y + step / 2f + offsetY,
+                                x + newX + step / 2f + lineWidth + padding,
+                                y + step / 2f + offsetY
                         );
                         a += wave;
                     }

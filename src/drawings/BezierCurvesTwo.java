@@ -22,16 +22,16 @@ public class BezierCurvesTwo extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             for (int i = 0; i < 18; i++) {
                 float x1 = -10;
                 float y1 = random(_height);
                 float x2 = _width + 10;
                 float y2 = random(_height);
-                float x1h = x1 + random( 250);
-                float y1h = y1 + random( 250);
-                float x2h = x2 - random( 250);
-                float y2h = y2 - random( 250);
+                float x1h = x1 + random(250);
+                float y1h = y1 + random(250);
+                float x2h = x2 - random(250);
+                float y2h = y2 - random(250);
                 Point a = new Point(x1, y1);
                 Point d = new Point(x2, y2);
                 Point c = new Point(x1h, y1h);

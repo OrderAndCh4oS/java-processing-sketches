@@ -32,7 +32,7 @@ public class Black extends Sketch {
     public void sketch() {
         for (int iter = 0; iter < 15; iter++) {
             _colours.getColours("plum", "lemon", "warm-grey", "warm-bw", "cool-bw").forEach((name, colour) -> {
-                background(colour.bg());
+                background(colour.black());
                 stroke(colour.rand(), 255 * 0.4f);
                 for (int i = 0; i < _width; i++) {
                     for (int j = 0; j < _height; j++) {
@@ -73,14 +73,14 @@ public class Black extends Sketch {
                 maskImage.endDraw();
 
                 sourceImage.beginDraw();
-                sourceImage.fill(colour.bg());
+                sourceImage.fill(colour.black());
                 sourceImage.rect(0, 0, _width, _height);
                 sourceImage.strokeCap(ROUND);
                 sourceImage.strokeWeight(1);
                 for (int i = 0; i < _width; i++) {
                     for (int j = 0; j < _height; j++) {
                         float distance = getDistance(light.getPoint(), new Point(i, j));
-                        float density = map2(distance,0, _width / 1.5f,  0.1f, 1, CUBIC, EASE_IN);
+                        float density = map2(distance, 0, _width / 1.5f, 0.1f, 1, CUBIC, EASE_IN);
                         sourceImage.stroke(colour.rand(), 255);
                         if (random(1) > density) {
                             sourceImage.point(i, j);

@@ -3,12 +3,11 @@ package drawings;
 import processing.core.PApplet;
 import sketch.Sketch;
 
-import static utilities.Random.random;
-
 public class Weave extends Sketch {
     public static void main(String... args) {
         PApplet.main("drawings.Weave");
     }
+
     @Override
     public void settings() {
         _save = true;
@@ -17,17 +16,17 @@ public class Weave extends Sketch {
 
     @Override
     public void sketch() {
-        WeaveF w1 = new WeaveF(_width / 2 , _height / 2, 12.5f, true, true);
-        WeaveF w2 = new WeaveF(_width / 2 , _height / 2, 12.5f, false, false);
-        WeaveF w3 = new WeaveF(_width / 2 , _height / 2, 12.5f, true, false);
-        WeaveF w4 = new WeaveF(_width / 2 , _height / 2, 12.5f, false, true);
+        WeaveF w1 = new WeaveF(_width / 2, _height / 2, 12.5f, true, true);
+        WeaveF w2 = new WeaveF(_width / 2, _height / 2, 12.5f, false, false);
+        WeaveF w3 = new WeaveF(_width / 2, _height / 2, 12.5f, true, false);
+        WeaveF w4 = new WeaveF(_width / 2, _height / 2, 12.5f, false, true);
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             int c1 = colour.get(1);
             int c2 = colour.get(2);
             int c3 = colour.get(3);
             int c4 = colour.get(4);
-            fill(colour.bg());
+            fill(colour.black());
             for (int i = 0; i < 20000; i++) {
                 stroke(c1);
                 w1.f();

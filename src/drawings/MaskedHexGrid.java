@@ -21,7 +21,7 @@ public class MaskedHexGrid extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             smooth(8);
-            background(colour.bg());
+            background(colour.black());
             strokeCap(SQUARE);
             int boxSize = 60;
             int minimum = -2;
@@ -32,7 +32,7 @@ public class MaskedHexGrid extends Sketch {
                     PGraphics sourceImage;
                     pushMatrix();
                     float offset = 0;
-                    if(j % 2 == 0) offset = boxSize - (boxSize * 0.25f);
+                    if (j % 2 == 0) offset = boxSize - (boxSize * 0.25f);
                     translate(boxSize * i * 1.5f - offset, boxSize * j * 0.4f - 60);
                     sourceImage = createGraphics(boxSize, boxSize);
                     sourceImage.beginDraw();
@@ -81,7 +81,7 @@ public class MaskedHexGrid extends Sketch {
                     maskImage.fill(0xff000000);
                     maskImage.rect(0, 0, boxSize, boxSize);
                     maskImage.fill(0xffffffff);
-                    polygonMask(maskImage, boxSize/2f, boxSize/2f, boxSize/2f, 6);
+                    polygonMask(maskImage, boxSize / 2f, boxSize / 2f, boxSize / 2f, 6);
                     maskImage.endDraw();
                     sourceImage.mask(maskImage);
                     image(sourceImage, 0, 0);

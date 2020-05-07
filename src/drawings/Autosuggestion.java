@@ -23,7 +23,7 @@ public class Autosuggestion extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.white());
             float angle = 0;
             int count = 0;
             while (angle <= TAU) {
@@ -36,7 +36,7 @@ public class Autosuggestion extends Sketch {
                 PGraphics source = createGraphics((int) _width, (int) _height);
                 source.beginDraw();
                 source.noStroke();
-                int stripeColour = count % 2 == 0 ? colour.bg() : colour.rand();
+                int stripeColour = count % 2 == 0 ? colour.white() : colour.rand();
                 source.fill(stripeColour);
                 source.rect(0, 0, _width, _height);
                 source.endDraw();
@@ -44,7 +44,7 @@ public class Autosuggestion extends Sketch {
                 image(source, 0, 0);
                 int fillColour = colour.rand();
                 if (fillColour == stripeColour) {
-                    fillColour = colour.bg();
+                    fillColour = colour.white();
                 }
                 fill(fillColour);
                 noStroke();

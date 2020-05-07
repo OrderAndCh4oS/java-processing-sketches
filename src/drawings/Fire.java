@@ -8,6 +8,7 @@ public class Fire extends Sketch {
     public static void main(String... args) {
         PApplet.main("drawings.Fire");
     }
+
     @Override
     public void settings() {
         _save = true;
@@ -20,11 +21,11 @@ public class Fire extends Sketch {
         textFont(notoSC);
         _colours.getColours().forEach((name, colour) -> {
             blendMode(NORMAL);
-            background(colour.bg());
+            background(colour.black());
             for (int i = 0; i < random(20000, 30000); i++) {
                 point(random(_width), random(_height));
             }
-            fill(colour.bg());
+            fill(colour.black());
             for (int i = 0; i < 300; i++) {
                 float waveHeight = random(5, 24);
                 float modV = random(0.0002f, 0.001f);

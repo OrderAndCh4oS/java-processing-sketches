@@ -8,8 +8,6 @@ import utilities.Vector;
 
 import java.util.ArrayList;
 
-import static utilities.Map.*;
-
 /**
  * http://www.vergenet.net/~conrad/boids/pseudocode.html
  */
@@ -30,7 +28,7 @@ public class Boids extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours("blizzard").forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             drawDepth(colour.rand(), 0.9f, 0.1f);
             _boids = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
@@ -47,14 +45,14 @@ public class Boids extends Sketch {
                 }
             }
 
-            for(Boid b : _boids) {
+            for (Boid b : _boids) {
                 int c1 = colour.rand();
                 stroke(c1);
                 strokeWeight(0.75f);
                 strokeCap(ROUND);
                 noFill();
                 beginShape();
-                for(Point p : b.getPoints()) {
+                for (Point p : b.getPoints()) {
                     curveVertex(p.x(), p.y());
                 }
                 curveVertex(b.getPosition().x(), b.getPosition().y());
@@ -129,9 +127,9 @@ public class Boids extends Sketch {
     }
 
     class Boid {
-        private Vector _velocity;
-        private Vector _position;
-        private ArrayList<Point> _points = new ArrayList<>();
+        private final Vector _velocity;
+        private final Vector _position;
+        private final ArrayList<Point> _points = new ArrayList<>();
 
         Boid(float x, float y) {
             _position = new Vector(x, y);

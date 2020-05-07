@@ -10,7 +10,7 @@ import utilities.Polygon;
 import java.util.ArrayList;
 
 public class RayTraceOne extends Sketch {
-    
+
     public static void main(String... args) {
         PApplet.main("drawings.RayTraceOne");
     }
@@ -37,7 +37,7 @@ public class RayTraceOne extends Sketch {
             light.addPolygon(new Polygon(points.toArray(new Point[0])));
         }
 
-        for(Polygon polygon : light.getPolygons()) {
+        for (Polygon polygon : light.getPolygons()) {
             for (Line line : polygon.getLines()) {
                 line(line.p().x(), line.p().y(), line.q().x(), line.q().y());
             }

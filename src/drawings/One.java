@@ -4,7 +4,7 @@ import processing.core.PApplet;
 import sketch.Sketch;
 
 public class One extends Sketch {
-    
+
     public static void main(String... args) {
         PApplet.main("drawings.One");
     }
@@ -19,7 +19,7 @@ public class One extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             save("one", name);
         });
     }

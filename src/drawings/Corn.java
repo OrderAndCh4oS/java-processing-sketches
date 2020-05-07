@@ -24,7 +24,7 @@ public class Corn extends Sketch {
             int c2 = colour.rand();
             while (c2 == c1) c2 = colour.rand();
             background(c1);
-            drawDepth(colour.bg(), 0.9f, 0.1f);
+            drawDepth(colour.black(), 0.9f, 0.1f);
             drawWaveTexture(colour, 0.25f, 10, 4, 1);
             blendMode(NORMAL);
             fill(c2);
@@ -44,7 +44,7 @@ public class Corn extends Sketch {
     }
 
     private void drawWaveTexture(Colours colour, float wave, float waveHeight, float stepY, float stepX) {
-        stroke(colour.bg());
+        stroke(colour.black());
         strokeWeight(0.75f);
         noFill();
         for (int y = -10; y < _height + 10; y += stepY) {

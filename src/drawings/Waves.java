@@ -20,7 +20,7 @@ public class Waves extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             for (int j = 0; j < 108; j++) {
                 int c1 = colour.rand();
                 int c2 = colour.rand();

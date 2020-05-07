@@ -4,12 +4,12 @@ import enums.Direction;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Line;
-import utilities.Point;
 import utilities.Vector;
 
 import java.util.ArrayList;
 
-import static utilities.Map.*;
+import static utilities.Map.CUBIC;
+import static utilities.Map.EASE_IN;
 
 public class WildCard extends Sketch {
     ArrayList<Line> lines;
@@ -30,14 +30,14 @@ public class WildCard extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             lines = new ArrayList<>();
             Vector midV = new Vector(_midPoint);
-            background(colour.bg());
+            background(colour.black());
             drawDepth(colour.rand(), 0.18f, Direction.TOP, CUBIC, EASE_IN);
             strokeCap(ROUND);
             for (int i = 0; i < random(800, 100000); i++) {
-                strokeWeight(random(1,3));
+                strokeWeight(random(1, 3));
                 stroke(colour.rand());
                 Vector v = new Vector(random(_width), random(_height));
-                Line l = new Line(v.getPoint(), 2048, v.angleTo(midV) + random(PI/2) - PI/4);
+                Line l = new Line(v.getPoint(), 2048, v.angleTo(midV) + random(PI / 2) - PI / 4);
                 for (Line l2 : lines) {
                     if (l.isIntersect(l2)) {
                         l = new Line(l.p(), l.getIntersect(l2));

@@ -29,7 +29,7 @@ public class Buzzing extends Sketch {
             pushMatrix();
             translate(_width / 2, _height / 2);
             int iterations = 124;
-            int c1 = colour.bg();
+            int c1 = colour.black();
             for (int i = 0; i < iterations; i++) {
                 ArrayList<Point> points = new ArrayList<>();
                 float radius = ((_width * 0.75f) / iterations) * i;

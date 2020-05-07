@@ -8,6 +8,7 @@ public class Alien extends Sketch {
     public static void main(String... args) {
         PApplet.main("drawings.Alien");
     }
+
     @Override
     public void settings() {
         _save = true;
@@ -17,19 +18,19 @@ public class Alien extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.white());
             Colours otherColour = _colours.rand();
             for (int i = 0; i < random(20000, 30000); i++) {
                 stroke(otherColour.rand(), 255 * 0.45f);
                 point(random(_width), random(_height));
             }
-            fill(colour.bg());
+            fill(colour.white());
             for (int i = 0; i < 50; i++) {
                 Wave w = new Wave(_width, random(_height), PI, 4, 50f, random(20, 48), random(0.0002f, 0.001f));
                 Colours c = colour;
-                if(random(1) > 0.5f) c = otherColour;
+                if (random(1) > 0.5f) c = otherColour;
                 fill(c.rand());
-                stroke(c.bg());
+                stroke(c.black());
                 for (int j = 0; j < random(180, 260); j++) {
                     w.update();
                     w.draw();

@@ -21,7 +21,7 @@ public class MaskedHexGridCircles extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             smooth(8);
-            background(colour.bg());
+            background(colour.black());
             strokeCap(SQUARE);
             int boxSize = 60;
             for (int i = 0; i < 1024 / (boxSize * 0.75f); i++) {
@@ -30,7 +30,7 @@ public class MaskedHexGridCircles extends Sketch {
                     PGraphics sourceImage;
                     pushMatrix();
                     float offset = 0;
-                    if(j % 2 == 0) offset = boxSize - (boxSize * 0.25f);
+                    if (j % 2 == 0) offset = boxSize - (boxSize * 0.25f);
                     translate(boxSize * i * 1.5f - offset, boxSize * j * 0.4f - 60);
                     sourceImage = createGraphics(boxSize, boxSize);
                     sourceImage.beginDraw();
@@ -38,7 +38,7 @@ public class MaskedHexGridCircles extends Sketch {
                     sourceImage.noFill();
                     for (int k = 1; k < 18; k++) {
                         sourceImage.stroke(colour.rand());
-                        sourceImage.ellipse(5, 5, 10*k, 10*k);
+                        sourceImage.ellipse(5, 5, 10 * k, 10 * k);
                     }
                     sourceImage.noStroke();
                     sourceImage.rect(0, 0, boxSize, boxSize);
@@ -49,7 +49,7 @@ public class MaskedHexGridCircles extends Sketch {
                     maskImage.fill(0xff000000);
                     maskImage.rect(0, 0, boxSize, boxSize);
                     maskImage.fill(0xffffffff);
-                    polygonMask(maskImage, boxSize/2f, boxSize/2f, boxSize/2f, 6);
+                    polygonMask(maskImage, boxSize / 2f, boxSize / 2f, boxSize / 2f, 6);
                     maskImage.endDraw();
                     sourceImage.mask(maskImage);
                     image(sourceImage, 0, 0);

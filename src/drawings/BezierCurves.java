@@ -22,7 +22,7 @@ public class BezierCurves extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             for (int i = 0; i < 1000; i++) {
                 Point a = new Point(random(_width), random(_height));
                 Point b = new Point(random(_width), random(_height));

@@ -4,11 +4,10 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Vector;
 
-public class PointlessResistance extends Sketch {
-    Vector gravity = new Vector(0, 0.01f);
+public class Margin extends Sketch {
 
     public static void main(String... args) {
-        PApplet.main("drawings.PointlessResistance");
+        PApplet.main("drawings.Margin");
     }
 
     @Override
@@ -21,17 +20,17 @@ public class PointlessResistance extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.black());
+            background(colour.white());
             for (int i = 0; i < 12; i++) {
                 stroke(colour.rand());
                 fill(colour.rand());
-                Particle p = new Particle(0, 5 * i, random(3, 8));
-                for (int j = 0; j < 3000; j++) {
+                Particle p = new Particle(random(120, _height - 120), random(120, _height - 120), 6, random(TAU));
+                for (int j = 0; j < 500; j++) {
                     p.update();
                     p.draw();
                 }
             }
-            save("pointless-resistance", name);
+            save("margin", name);
         });
     }
 
@@ -39,28 +38,24 @@ public class PointlessResistance extends Sketch {
         Vector _position;
         Vector _v1;
         float _velocity;
-        float _angle = 0;
+        float _margin = 120;
 
-
-        Particle(float x, float y, float v) {
+        Particle(float x, float y, float v, float a) {
             _position = new Vector(x, y);
             _velocity = v;
             _v1 = new Vector(1, 1);
-            _v1.setAngle(_angle);
+            _v1.setAngle(a);
             _v1.setLength(_velocity);
         }
 
         void update() {
-            _v1.addTo(gravity);
-            _v1.multiplyBy(0.996f);
             try {
                 Vector _p = _position.clone();
                 _p.addTo(_v1);
-                _p.addTo(gravity);
-                if (_p.x() < 5 || _p.x() > _width - 5) {
+                if (_p.x() < _margin + 5 || _p.x() > _width - _margin - 5) {
                     _v1.setX(-_v1.x());
                 }
-                if (_p.y() < 5 || _p.y() > _height - 5) {
+                if (_p.y() < _margin + 5 || _p.y() > _height - _margin - 5) {
                     _v1.setY(-_v1.y());
                 }
             } catch (CloneNotSupportedException e) {
@@ -68,11 +63,10 @@ public class PointlessResistance extends Sketch {
             }
 
             _position.addTo(_v1);
-            _position.addTo(gravity);
         }
 
         void draw() {
-            ellipse(_position.x(), _position.y(), 5, 5);
+            ellipse(_position.x(), _position.y(), 4, 4);
         }
     }
 }

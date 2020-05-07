@@ -30,7 +30,7 @@ public class DeadSpace extends Sketch {
                 c2 = colour.rand();
             }
             background(colour.rand());
-            drawDepth(colour.bg(), 0.9f, 0.1f);
+            drawDepth(colour.black(), 0.9f, 0.1f);
             stroke(0xffffffff);
             strokeWeight(1);
             noFill();
@@ -39,7 +39,7 @@ public class DeadSpace extends Sketch {
                 beginShape();
                 for (int x = 0; x < _width; x += stepX) {
                     float newY = 0;
-                    if(distanceToMidpoint(x, y) < diameter / 2){
+                    if (distanceToMidpoint(x, y) < diameter / 2) {
                         float dY = sin(a) * 80;
                         newY = dY - dY / 2;
                     }
@@ -54,17 +54,17 @@ public class DeadSpace extends Sketch {
             source.noStroke();
             source.fill(c2);
             source.rect(0, 0, _width, _height);
-            drawDepthToSource(source, colour.bg(), 0.9f, 0.1f);
+            drawDepthToSource(source, colour.black(), 0.9f, 0.1f);
             source.strokeWeight(1);
             source.strokeCap(ROUND);
-            source.stroke(colour.bg());
+            source.stroke(colour.black());
             source.noFill();
             for (int y = -10; y < _height; y += stepY) {
                 float a = 0;
                 source.beginShape();
                 for (int x = 0; x < _width; x += stepX) {
                     float newY = 0;
-                    if(distanceToMidpoint(x, y) < diameter / 2){
+                    if (distanceToMidpoint(x, y) < diameter / 2) {
                         float dY = sin(a) * 40;
                         newY = dY - dY / 2;
                     }

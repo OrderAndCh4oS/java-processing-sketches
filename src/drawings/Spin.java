@@ -3,7 +3,6 @@ package drawings;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Point;
-import utilities.colour.Colours;
 
 import static utilities.Bezier.quadraticBezier;
 
@@ -21,7 +20,7 @@ public class Spin extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.white());
             drawDepth(colour.rand(), 0.9f, 0.1f);
             drawDepth(colour.rand(), 0.8f, 0.2f, 512f);
             noFill();
@@ -53,7 +52,7 @@ public class Spin extends Sketch {
             Point p1 = ellipsePoint(x, y, r1, r1, t + (step * mag));
             Point p2 = ellipsePoint(x, y, r2, r2, t + (step * mag1));
             beginShape();
-            for(float t2 = 0; t2 < 1; t2 += 0.01) {
+            for (float t2 = 0; t2 < 1; t2 += 0.01) {
                 Point p3 = quadraticBezier(p, p1, p2, t2);
                 curveVertex(p3.x(), p3.y());
             }

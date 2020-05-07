@@ -6,7 +6,8 @@ import static processing.core.PApplet.*;
 import static utilities.Random.random;
 
 public class Line {
-    private Point _p, _q;
+    private final Point _p;
+    private final Point _q;
     private float _length;
 
     public Line(Point p, Point q) {
@@ -81,6 +82,13 @@ public class Line {
 
     public float getLength() {
         return sqrt(_p.x() * _q.x() + _p.y() * _q.y());
+    }
+
+    public float getAngle() {
+        float dX = _p.x() - _q.x();
+        float dY = _p.y() - _q.y();
+        float theta = atan2(dY, dX);
+        return theta + PI;
     }
 
     public float maxX() {

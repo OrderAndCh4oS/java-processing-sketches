@@ -25,19 +25,19 @@ public class WavesDisc extends Sketch {
             ArrayList<Line> lines = new ArrayList<Line>();
             for (int i = 0; i < 128; i++) {
                 lines.add(new Line(150, 50));
-                for (int j = 0; j < 200; j++ ) {
+                for (int j = 0; j < 200; j++) {
                     lines.get(i).update();
                 }
             }
-            background(colour.bg());
+            background(colour.black());
             pushMatrix();
-            translate(_width/2, _height/2);
+            translate(_width / 2, _height / 2);
             for (int i = 0; i < 128; i++) {
                 fill(colour.rand());
                 noStroke();
 //                stroke(colour.bg());
 //                strokeWeight(0.5f);
-                rotate(map(i, 0, 128, 0, PI*2));
+                rotate(map(i, 0, 128, 0, PI * 2));
                 lines.get(i).draw();
             }
             popMatrix();
@@ -51,7 +51,7 @@ public class WavesDisc extends Sketch {
         private float _a = 0;
         private float _sz = 5;
         private float _sp = 3.5f;
-        private float _c = 7f;
+        private final float _c = 7f;
 
         Point(float x, float y) {
             _x = x;
@@ -78,7 +78,8 @@ public class WavesDisc extends Sketch {
         int delay = 0;
         ArrayList<Point> points = new ArrayList<>();
 
-        Line() {}
+        Line() {
+        }
 
         Line(int maxTail) {
             this.maxTail = maxTail;
@@ -104,7 +105,7 @@ public class WavesDisc extends Sketch {
 
         void draw() {
             ListIterator<Point> listIterator = points.listIterator(points.size());
-            while(listIterator.hasPrevious()){
+            while (listIterator.hasPrevious()) {
                 Point p = listIterator.previous();
                 p.draw();
             }

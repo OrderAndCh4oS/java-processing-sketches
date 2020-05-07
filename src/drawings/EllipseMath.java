@@ -4,8 +4,6 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Point;
 
-import static utilities.Map.*;
-
 public class EllipseMath extends Sketch {
     public static void main(String... args) {
         PApplet.main("drawings.EllipseMath");
@@ -20,7 +18,7 @@ public class EllipseMath extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             drawDepth(colour.rand(), 0.9f, 0.1f);
             drawDepth(colour.rand(), 0.8f, 0.2f, 512f);
             noFill();
@@ -30,8 +28,8 @@ public class EllipseMath extends Sketch {
                 pushMatrix();
                 translate(_width / 2, _height / 2);
                 rotate(random(TAU));
-                float x = map(random(_width), 0, _width, 128, _width/2 - 128);
-                float y = map(random(_height), 0, _height, 128, _height/2 - 128);
+                float x = map(random(_width), 0, _width, 128, _width / 2 - 128);
+                float y = map(random(_height), 0, _height, 128, _height / 2 - 128);
                 float a = random(35, 65);
                 float b = a - random(10, 25);
                 for (float t = TAU / 60; t <= TAU + TAU / 60; t += TAU / 60) {

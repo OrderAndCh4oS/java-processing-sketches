@@ -1,7 +1,5 @@
 package utilities;
 
-import processing.core.PImage;
-
 public class Image {
 
     public static int extractColorFromImage(int[] pixels) {

@@ -21,7 +21,7 @@ public class MaskedBoxGrid extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             smooth(8);
-            background(colour.bg());
+            background(colour.black());
             strokeCap(SQUARE);
             int boxSize = 60;
             int minimum = -2;

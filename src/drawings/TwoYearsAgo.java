@@ -4,7 +4,6 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import sketch.Sketch;
 
-import static utilities.Map.*;
 import static utilities.Random.randomInt;
 
 public class TwoYearsAgo extends Sketch {
@@ -31,7 +30,7 @@ public class TwoYearsAgo extends Sketch {
             int rowHeight = randomInt(8, 14);
             float frequency = random(20, 50);
             float amplitude = random(6, 30);
-            stroke(colour.bg());
+            stroke(colour.black());
             for (int i = 0; i < _height / rowHeight; i++) {
                 float minX = random(24, 100);
                 float y = i * rowHeight;
@@ -39,7 +38,7 @@ public class TwoYearsAgo extends Sketch {
                 beginShape();
                 for (int x = (int) _width; x > minX; x--) {
                     float d = distanceToMidpoint(x, y);
-                    float currentAmplitude = map(d, 0, _width/2, amplitude, 0);
+                    float currentAmplitude = map(d, 0, _width / 2, amplitude, 0);
                     float newY = 0;
                     if (d < 750f / 2f) {
                         float dY = sin(frequency * angle) * currentAmplitude;
@@ -60,7 +59,7 @@ public class TwoYearsAgo extends Sketch {
             PFont font = createFont("ModernTwoSxtnITCStd-Bold", 800);
             textFont(font);
             textAlign(CENTER);
-            text("2", _width/2, 758);
+            text("2", _width / 2, 758);
             save("two-years-ago", name);
         });
     }

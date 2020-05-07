@@ -30,7 +30,7 @@ public class FoliageRandPoint extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             ArrayList<Line> drawLines = new ArrayList<Line>();
             ArrayList<Line> collisionLines = new ArrayList<Line>();
-            background(colour.bg());
+            background(colour.black());
             noStroke();
             initStems(drawLines, collisionLines, colour, _colours.get("warm-bw"), 1);
             int drawnCount = 0;
@@ -43,7 +43,7 @@ public class FoliageRandPoint extends Sketch {
                 float angle = nextLineBase.getAngle() + angleRand;
                 Lean newLean = nextLineBase.getLean();
                 if (random(1) > 0.75) {
-                    if(newLean == Lean.LEFT) {
+                    if (newLean == Lean.LEFT) {
                         newLean = Lean.RIGHT;
                     } else {
                         newLean = Lean.LEFT;
@@ -100,11 +100,12 @@ public class FoliageRandPoint extends Sketch {
     }
 
     class Line {
-        private Point _p, _q;
+        private final Point _p;
+        private final Point _q;
         private float _length;
         private Colours _foliageColours;
         private Colours _stemColours;
-        private Lean _lean;
+        private final Lean _lean;
 
         public Line(Point p, Point q) {
             this._p = p;
@@ -240,7 +241,7 @@ public class FoliageRandPoint extends Sketch {
             moveTwo.setAngle(getAngle() + PI * 1.5f);
             baseTwo.addTo(moveTwo);
 
-            if (_length <  65) {
+            if (_length < 65) {
                 fill(_foliageColours.rand());
             } else {
                 fill(_stemColours.rand());

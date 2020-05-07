@@ -9,7 +9,8 @@ import utilities.Vector;
 
 import java.util.ArrayList;
 
-import static utilities.Map.*;
+import static utilities.Map.CUBIC;
+import static utilities.Map.EASE_OUT;
 
 /**
  * http://www.vergenet.net/~conrad/boids/pseudocode.html
@@ -39,7 +40,7 @@ public class BoidsFrames extends Sketch {
                 _boids.add(new Boid(random(_width), -(random(25) + 150), colour.rand()));
             }
             for (int i = 0; i < 900; i++) {
-                background(colour.bg());
+                background(colour.black());
                 drawDepth(c1, 0.9f, 0.1f);
                 drawDepth(c2, 1f, Direction.TOP, CUBIC, EASE_OUT);
                 for (Boid b : _boids) {
@@ -52,7 +53,7 @@ public class BoidsFrames extends Sketch {
                     float minScale = 0.5f;
                     float maxScale = 6;
                     float scale;
-                    if(b.getPoints().size() >= 5) {
+                    if (b.getPoints().size() >= 5) {
                         for (int j = b.getPoints().size() - 5; j < b.getPoints().size(); j++) {
                             scale = map(j, b.getPoints().size() - 5, b.getPoints().size(), minScale, maxScale);
                             ellipse(b.getPoints().get(j).x(), b.getPoints().get(j).y(), scale, scale);
@@ -63,7 +64,7 @@ public class BoidsFrames extends Sketch {
                 while (iStr.length() < 5) {
                     iStr.insert(0, "0");
                 }
-                save("boids-frames/"+name, iStr.toString());
+                save("boids-frames/" + name, iStr.toString());
             }
 
         });
@@ -122,10 +123,10 @@ public class BoidsFrames extends Sketch {
     }
 
     class Boid {
-        private Vector _velocity;
-        private Vector _position;
-        private ArrayList<Point> _points = new ArrayList<>();
-        private int _colour;
+        private final Vector _velocity;
+        private final Vector _position;
+        private final ArrayList<Point> _points = new ArrayList<>();
+        private final int _colour;
 
         Boid(float x, float y, int colour) {
             _position = new Vector(x, y);

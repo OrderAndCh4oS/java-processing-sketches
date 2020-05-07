@@ -23,17 +23,17 @@ public class Saturation extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             noFill();
             for (int i = 0; i < 60; i++) {
                 float x1 = -20;
                 float y1 = random(_height + 200) - 10;
                 float x2 = _width + 10;
                 float y2 = random(_height + 200) - 10;
-                float x1h = x1 + random(40,100);
-                float y1h = y1 + random(40,100);
-                float x2h = x2 - random(40,100);
-                float y2h = y2 - random(40,100);
+                float x1h = x1 + random(40, 100);
+                float y1h = y1 + random(40, 100);
+                float x2h = x2 - random(40, 100);
+                float y2h = y2 - random(40, 100);
                 Point a = new Point(x1, y1);
                 Point d = new Point(x2, y2);
                 Point c = new Point(x1h, y1h);

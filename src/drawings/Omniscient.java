@@ -19,7 +19,7 @@ public class Omniscient extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.white());
             noFill();
             drawDepth(colour.rand(), 0.9f, 0.1f);
             drawDepth(colour.rand(), 0.9f, 0.2f, 512f);

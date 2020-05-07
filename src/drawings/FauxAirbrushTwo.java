@@ -20,7 +20,7 @@ public class FauxAirbrushTwo extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            background(colour.bg());
+            background(colour.black());
             for (int i = 0; i < 12; i++) {
                 for (int j = 0; j < 12; j++) {
                     square(_width / 12 * i, _height / 12 * j, _width / 12, _height / 12, Direction.rand(), QUARTIC, EASE_IN, colour.rand());

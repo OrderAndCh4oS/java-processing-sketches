@@ -31,11 +31,11 @@ public class Number extends Sketch {
                 background(0xff000000);
                 fill(0xffffffff);
                 textAlign(CENTER);
-                text(n, _width/2, 908);
+                text(n, _width / 2, 908);
                 PImage img = get(0, 0, (int) _width, (int) _height);
                 int dotSize = 18;
                 background(colour.rand());
-                drawDepth(colour.bg(), 0.75f, 0.25f);
+                drawDepth(colour.black(), 0.75f, 0.25f);
                 strokeWeight(1);
                 strokeCap(ROUND);
                 for (int x = 0; x < _width; x += dotSize) {
@@ -43,11 +43,11 @@ public class Number extends Sketch {
                         PImage section = img.get(x, y, dotSize, dotSize);
                         float shade = extractShadeFromImage(section.pixels);
                         if (shade > 0.5) {
-                            for (int i = 0; i < random(4, 8); i ++) {
+                            for (int i = 0; i < random(4, 8); i++) {
                                 stroke(colour.rand());
                                 line(
-                                        x + dotSize/2f,
-                                        y + dotSize/2f,
+                                        x + dotSize / 2f,
+                                        y + dotSize / 2f,
                                         x + random(dotSize, dotSize * 12) - dotSize * 6,
                                         y + random(dotSize, dotSize * 12) - dotSize * 6
                                 );

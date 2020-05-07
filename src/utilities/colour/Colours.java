@@ -3,12 +3,16 @@ package utilities.colour;
 import java.util.ArrayList;
 import java.util.Random;
 
+import static utilities.Random.random;
+
 public class Colours {
     ArrayList<Integer> _colours = new ArrayList<Integer>();
-    int _bg;
+    int _black;
+    int _white;
 
-    public Colours(int bg, int... colours) {
-        _bg = bg;
+    public Colours(int black, int white, int... colours) {
+        _black = black;
+        _white = white;
         for (int colour : colours) {
             _colours.add(colour);
         }
@@ -26,8 +30,16 @@ public class Colours {
         return _colours.get(new Random().nextInt(_colours.size()));
     }
 
+    public int black() {
+        return _black;
+    }
+
+    public int white() {
+        return _white;
+    }
+
     public int bg() {
-        return _bg;
+        return random(1) > 0.5f ? _white : _black;
     }
 
     public int size() {

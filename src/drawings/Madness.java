@@ -21,15 +21,15 @@ public class Madness extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             blendMode(NORMAL);
-            background(colour.bg());
+            background(colour.white());
             for (int i = 0; i < random(20000, 30000); i++) {
                 point(random(_width), random(_height));
             }
-            fill(colour.bg());
+            fill(colour.white());
             for (int i = 0; i < 10; i++) {
                 int count = randomInt(5, 10);
                 drawLayer(colour, count);
-                drawDepth(colour.bg(), 0.4f, 0.3f);
+                drawDepth(colour.white(), 0.4f, 0.3f);
             }
             save("madness", name);
         });

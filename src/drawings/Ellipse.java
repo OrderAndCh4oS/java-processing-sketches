@@ -21,11 +21,11 @@ public class Ellipse extends Sketch {
             print('.');
             float scale = 2048;
             blendMode(NORMAL);
-            background(colour.bg());
-            fill(colour.bg());
+            background(colour.black());
+            fill(colour.black());
             for (int i = 0; i < 15; i++) {
                 drawLayer(colour, scale);
-                drawDepth(colour.bg(), 0.4f, 0.3f);
+                drawDepth(colour.black(), 0.4f, 0.3f);
                 scale *= 0.90f;
             }
             save("ellipse", name);

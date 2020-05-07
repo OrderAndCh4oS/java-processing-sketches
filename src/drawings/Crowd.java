@@ -31,12 +31,12 @@ public class Crowd extends Sketch {
             PImage img = get(0, 0, (int) _width, (int) _height);
             int dotSize = 14;
             int dotPadding = 1;
-            background(colour.bg());
-            for(int x = 0; x < _width; x += dotSize) {
-                for(int y = 0; y < _width; y += dotSize) {
+            background(colour.black());
+            for (int x = 0; x < _width; x += dotSize) {
+                for (int y = 0; y < _width; y += dotSize) {
                     PImage section = img.get(x, y, dotSize, dotSize);
                     float shade = extractShadeFromImage(section.pixels);
-                    if(shade > 0.5) {
+                    if (shade > 0.5) {
                         fill(colour.rand());
                         ellipse(x + dotPadding, y + dotPadding, dotSize - dotPadding * 2, dotSize - dotPadding * 2);
                     } else {
