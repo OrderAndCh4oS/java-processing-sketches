@@ -5,6 +5,7 @@ import enums.Direction;
 import processing.core.PApplet;
 import processing.core.PGraphics;
 import utilities.Point;
+import utilities.colour.Colours;
 
 import static utilities.Map.*;
 import static utilities.RandomString.uuid;
@@ -111,6 +112,44 @@ abstract public class Sketch extends PApplet {
                     point(x, y);
                 }
             }
+        }
+    }
+
+    public void drawWaveTexture(Colours colour, float wave, float waveHeight, float stepY, float stepX) {
+        stroke(colour.black());
+        strokeWeight(0.75f);
+        noFill();
+        for (int y = -10; y < _height + 10; y += stepY) {
+            float a = 0;
+            beginShape();
+            for (int x = 0; x < _width; x += stepX) {
+                float dY = sin(a) * waveHeight;
+                float newY = dY - dY / 2;
+                curveVertex(x, y + newY);
+                a += wave;
+            }
+            endShape();
+        }
+    }
+
+    public void drawLineTexture(int colour, float step, float strokeWidth, Direction direction) {
+        stroke(colour);
+        strokeWeight(strokeWidth);
+        switch (direction) {
+            case TOP:
+            case BOTTOM:
+                for (int i = 0; i < _height; i++) {
+                    float y = i * step;
+                    line(0, y, _width, y);
+                }
+                break;
+            case LEFT:
+            case RIGHT:
+                for (int i = 0; i < _width; i++) {
+                    float x = i * step;
+                    line(x, 0, x, _height);
+                }
+                break;
         }
     }
 

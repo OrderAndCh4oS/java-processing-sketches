@@ -1,7 +1,9 @@
 package drawings;
 
+import enums.Direction;
 import processing.core.PApplet;
 import sketch.Sketch;
+import utilities.colour.Colours;
 
 import static utilities.Random.randomInt;
 
@@ -34,12 +36,7 @@ public class Missing extends Sketch {
             float size = 8;
             float backgroundStep = 1.5f;
             float strokeWidth = 0.75f;
-            stroke(colour.black());
-            strokeWeight(strokeWidth);
-            for (int i = 0; i < _height; i++) {
-                float y = i * backgroundStep;
-                line(0, y, _width, y);
-            }
+            drawLineTexture(colour.black(), backgroundStep, strokeWidth, Direction.TOP);
             noStroke();
             fill(c2);
             float mX = (float) randomInt((int) margin / 10, (int) w / 10) * 10;

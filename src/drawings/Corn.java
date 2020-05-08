@@ -42,21 +42,4 @@ public class Corn extends Sketch {
             save("corn", name);
         });
     }
-
-    private void drawWaveTexture(Colours colour, float wave, float waveHeight, float stepY, float stepX) {
-        stroke(colour.black());
-        strokeWeight(0.75f);
-        noFill();
-        for (int y = -10; y < _height + 10; y += stepY) {
-            float a = 0;
-            beginShape();
-            for (int x = 0; x < _width; x += stepX) {
-                float dY = sin(a) * waveHeight;
-                float newY = dY - dY / 2;
-                curveVertex(x, y + newY);
-                a += wave;
-            }
-            endShape();
-        }
-    }
 }
