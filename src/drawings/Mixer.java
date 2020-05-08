@@ -32,7 +32,7 @@ public class Mixer extends Sketch {
                 c2 = colour.rand();
             }
             background(c1);
-            drawTexture(colour.black(), 0.4f, 0.6f);
+            drawTexture(colour.black(), 0.6f, 0.6f);
             for (int x = -30; x < _width; x += lineWidth - padding) {
                 float a = 0;
                 int offsetY = (x % step);

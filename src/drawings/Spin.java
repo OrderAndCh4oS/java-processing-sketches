@@ -21,7 +21,7 @@ public class Spin extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.white());
-            drawTexture(colour.rand(), 0.9f, 0.1f);
+            drawTexture(colour.rand(), 0.1f, 0.1f);
             drawTexture(colour.rand(), 0.8f, 0.2f, 512f);
             noFill();
             strokeWeight(1);

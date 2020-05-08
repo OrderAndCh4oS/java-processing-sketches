@@ -29,7 +29,7 @@ public class BoidsTwo extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            drawTexture(colour.rand(), 0.9f, 0.1f);
+            drawTexture(colour.rand(), 0.1f, 0.1f);
             drawTexture(colour.rand(), 0.8f, 0.05f, 480f);
             _boids = new ArrayList<>();
             for (int i = 0; i < 16; i++) {

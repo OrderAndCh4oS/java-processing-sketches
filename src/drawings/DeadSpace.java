@@ -30,7 +30,7 @@ public class DeadSpace extends Sketch {
                 c2 = colour.rand();
             }
             background(colour.rand());
-            drawTexture(colour.black(), 0.9f, 0.1f);
+            drawTexture(colour.black(), 0.1f, 0.1f);
             stroke(0xffffffff);
             strokeWeight(1);
             noFill();

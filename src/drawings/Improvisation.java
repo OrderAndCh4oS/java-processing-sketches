@@ -25,7 +25,7 @@ public class Improvisation extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.white());
             noFill();
-            drawTexture(colour.rand(), 0.9f, 0.1f);
+            drawTexture(colour.rand(), 0.1f, 0.1f);
             drawTexture(colour.rand(), 0.9f, 0.2f, 512f);
             strokeCap(ROUND);
             int c1 = colour.rand();

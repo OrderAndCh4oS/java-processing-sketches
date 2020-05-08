@@ -24,7 +24,7 @@ public class Corn extends Sketch {
             int c2 = colour.rand();
             while (c2 == c1) c2 = colour.rand();
             background(c1);
-            drawTexture(colour.black(), 0.9f, 0.1f);
+            drawTexture(colour.black(), 0.1f, 0.1f);
             drawWaveTexture(colour, 0.25f, 10, 4, 1);
             blendMode(NORMAL);
             fill(c2);

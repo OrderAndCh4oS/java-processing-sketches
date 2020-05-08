@@ -36,7 +36,7 @@ public class WoodsTwo extends Sketch {
             blendMode(NORMAL);
             noFill();
             background(colour.rand());
-            drawTexture(colour.black(), 0.4f, 0.6f);
+            drawTexture(colour.black(), 0.6f, 0.6f);
             minScale = 2;
             maxScale = 5;
             count = random(_width / 2);
@@ -51,7 +51,7 @@ public class WoodsTwo extends Sketch {
             minY = _height * 0.68f;
             maxY = _height * 0.78f;
             drawLayer(colour, count, minScale, maxScale, minY, maxY);
-            drawTexture(colour.black(), 0.6f, 0.4f);
+            drawTexture(colour.black(), 0.4f, 0.4f);
             drawRays(randomInt(10, 100));
             minScale = 11;
             maxScale = 20;
@@ -59,7 +59,7 @@ public class WoodsTwo extends Sketch {
             minY = _height * 0.80f;
             maxY = _height * 0.90f;
             drawLayer(colour, count, minScale, maxScale, minY, maxY);
-            drawTexture(colour.black(), 0.7f, 0.3f);
+            drawTexture(colour.black(), 0.3f, 0.3f);
             drawRays(randomInt(10, 100));
             minScale = 22;
             maxScale = 60;
@@ -67,7 +67,7 @@ public class WoodsTwo extends Sketch {
             minY = _height * 0.90f;
             maxY = _height * 1f;
             drawLayer(colour, count, minScale, maxScale, minY, maxY);
-            drawTexture(colour.black(), 0.8f, 0.2f);
+            drawTexture(colour.black(), 0.2f, 0.1f);
             fill(0xffffffff);
             blendMode(DIFFERENCE);
             text("森", 24, 908);

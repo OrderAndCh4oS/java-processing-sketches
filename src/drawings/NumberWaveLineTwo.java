@@ -44,7 +44,7 @@ public class NumberWaveLineTwo extends Sketch {
                     c2 = colour.rand();
                 }
                 background(c1);
-                drawTexture(colour.black(), 0.8f, 0.2f);
+                drawTexture(colour.black(), 0.2f, 0.1f);
                 PGraphics source = createGraphics((int) _width, (int) _height);
                 PGraphics mask = createGraphics((int) _width, (int) _height);
                 source.beginDraw();
