@@ -24,7 +24,7 @@ public class PainfulNeedles extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            drawDepth(colour.rand(), 0.18f, Direction.TOP, CUBIC, EASE_IN);
+            drawTexture(colour.rand(), 0.18f, Direction.TOP, CUBIC, EASE_IN);
             float section = TAU / 52;
             PGraphics source = createGraphics((int) _width, (int) _height);
             PGraphics mask = createGraphics((int) _width, (int) _height);
@@ -56,7 +56,7 @@ public class PainfulNeedles extends Sketch {
                 source.fill(colour.rand());
                 source.triangle(x1, y1, x2, y2, x3, y3);
                 mask.triangle(x1, y1, x2, y2, x3, y3);
-                drawDepthToSource(source, colour.black(), 0.3f, 0.03f);
+                drawTextureToSource(source, colour.black(), 0.3f, 0.03f);
                 source.popMatrix();
                 mask.popMatrix();
 

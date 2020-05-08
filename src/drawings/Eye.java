@@ -24,8 +24,8 @@ public class Eye extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            drawDepth(colour.rand(), 0.8f, 0.2f);
-            drawDepth(colour.rand(), 0.6f, 0.4f, 580f);
+            drawTexture(colour.rand(), 0.8f, 0.2f);
+            drawTexture(colour.rand(), 0.6f, 0.4f, 580f);
             pushMatrix();
             translate(_width / 2, _height / 2);
             fill(colour.black());
@@ -55,7 +55,7 @@ public class Eye extends Sketch {
             source.beginDraw();
             source.fill(0xffE8E7C1);
             source.rect(0, 0, _width, _height);
-            drawRadialDepthToSource(source, 0xffFFFAD4, 0.4f, 0.9f, 465f, QUINTIC, EASE_IN);
+            drawRadialTextureToSource(source, 0xffFFFAD4, 0.4f, 0.9f, 465f, QUINTIC, EASE_IN);
             source.endDraw();
             source.mask(mask);
             image(source, 0, 0);

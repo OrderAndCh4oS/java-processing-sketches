@@ -41,8 +41,8 @@ public class BoidsFrames extends Sketch {
             }
             for (int i = 0; i < 900; i++) {
                 background(colour.black());
-                drawDepth(c1, 0.9f, 0.1f);
-                drawDepth(c2, 1f, Direction.TOP, CUBIC, EASE_OUT);
+                drawTexture(c1, 0.9f, 0.1f);
+                drawTexture(c2, 1f, Direction.TOP, CUBIC, EASE_OUT);
                 for (Boid b : _boids) {
                     Vector v1 = moveTowardCentreOfMass(b);
                     Vector v2 = moveAwayFromOtherBoids(b);

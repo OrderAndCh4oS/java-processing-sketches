@@ -29,7 +29,7 @@ public class Boids extends Sketch {
     public void sketch() {
         _colours.getColours("blizzard").forEach((name, colour) -> {
             background(colour.black());
-            drawDepth(colour.rand(), 0.9f, 0.1f);
+            drawTexture(colour.rand(), 0.9f, 0.1f);
             _boids = new ArrayList<>();
             for (int i = 0; i < 5; i++) {
                 _boids.add(new Boid(random(_width), _height + random(25) + 50));

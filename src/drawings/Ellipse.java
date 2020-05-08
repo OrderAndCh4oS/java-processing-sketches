@@ -25,7 +25,7 @@ public class Ellipse extends Sketch {
             fill(colour.black());
             for (int i = 0; i < 15; i++) {
                 drawLayer(colour, scale);
-                drawDepth(colour.black(), 0.4f, 0.3f);
+                drawTexture(colour.black(), 0.4f, 0.3f);
                 scale *= 0.90f;
             }
             save("ellipse", name);

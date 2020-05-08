@@ -73,49 +73,76 @@ abstract public class Sketch extends PApplet {
         saveFrame("/Users/seancooper/Processing Stills/images/" + dir + "/" + prefix + "-" + filename);
     }
 
-    public void drawDepth(int colour, float density, float alpha) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+    public void drawTexture(int colour, float density, float alpha) {
         strokeCap(ROUND);
         strokeWeight(1);
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
-                if (random(1) > density) {
+                if (random(1) < density) {
+                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     point(x, y);
                 }
             }
         }
     }
 
-    public void drawDepth(int colour, float density, float alpha, float radius) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+    public void drawPerlinTexture(int colour, float density, float alpha, float scale, float roughness) {
+        strokeCap(ROUND);
+        strokeWeight(1);
+        noiseSeed((long) random(100));
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                if (noise(x * scale, y * scale) < density) {
+                    stroke(colour, 255 * random(alpha - roughness, alpha + roughness));
+                    point(x, y);
+                }
+            }
+        }
+    }
+
+    public void drawPerlinAlpha(int colour, float density, float scale) {
+        strokeCap(ROUND);
+        strokeWeight(1);
+        noiseSeed((long) random(100));
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                if (random(1) < density) {
+                    stroke(colour, 255 * noise(x * scale, y * scale));
+                    point(x, y);
+                }
+            }
+        }
+    }
+
+    public void drawTexture(int colour, float density, float alpha, float radius) {
         strokeCap(ROUND);
         strokeWeight(1);
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 float distance = getDistance(_midPoint, new Point(x, y));
-                if (random(1) > map2(distance, 0, radius, 0, density, QUADRATIC, EASE_IN)) {
+                if (random(1) < map2(distance, 0, radius, 0, density, QUADRATIC, EASE_IN)) {
+                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     point(x, y);
                 }
             }
         }
     }
 
-    public void drawDepth(int colour, float density, float alpha, float radius, int type, int ease) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+    public void drawTexture(int colour, float density, float alpha, float radius, int type, int ease) {
         strokeCap(ROUND);
         strokeWeight(1);
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 float distance = getDistance(_midPoint, new Point(x, y));
-                if (random(1) > map2(distance, 0, radius, 0, density, type, ease)) {
+                if (random(1) < map2(distance, 0, radius, 0, density, type, ease)) {
+                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     point(x, y);
                 }
             }
         }
     }
 
-    public void drawDepth(int colour, float alpha, Direction direction, int type, int ease) {
-        stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+    public void drawTexture(int colour, float alpha, Direction direction, int type, int ease) {
         strokeCap(ROUND);
         strokeWeight(1);
         float density;
@@ -137,21 +164,22 @@ abstract public class Sketch extends PApplet {
                     default:
                         throw new IllegalStateException("Unexpected value: " + direction);
                 }
-                if (random(1) > density) {
+                if (random(1) < density) {
+                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     point(x, y);
                 }
             }
         }
     }
 
-    public void drawDepthToSource(PGraphics source, int colour, float density, float alpha) {
+    public void drawTextureToSource(PGraphics source, int colour, float density, float alpha) {
         source.blendMode(MULTIPLY);
-        source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
         source.strokeCap(ROUND);
         source.strokeWeight(1);
         for (int i = 0; i < _width; i++) {
             for (int j = 0; j < _height; j++) {
-                if (random(1) > density) {
+                if (random(1) < density) {
+                    source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     source.point(i, j);
                 }
             }
@@ -159,14 +187,14 @@ abstract public class Sketch extends PApplet {
         source.blendMode(NORMAL);
     }
 
-    public void drawDepthToSourceArea(Point p, Point q, PGraphics source, int colour, float density, float alpha) {
+    public void drawTextureToSourceArea(Point p, Point q, PGraphics source, int colour, float density, float alpha) {
         source.blendMode(MULTIPLY);
-        source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
         source.strokeCap(ROUND);
         source.strokeWeight(1);
         for (int x = (int) p.x(); x <= (int) q.x(); x++) {
             for (int y = (int) p.y(); y <= (int) q.y(); y++) {
-                if (random(1) > density) {
+                if (random(1) < density) {
+                    source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     source.point(x, y);
                 }
             }
@@ -174,14 +202,14 @@ abstract public class Sketch extends PApplet {
         source.blendMode(NORMAL);
     }
 
-    public void drawRadialDepthToSource(PGraphics source, int colour, float density, float alpha, float radius, int type, int ease) {
-        source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+    public void drawRadialTextureToSource(PGraphics source, int colour, float density, float alpha, float radius, int type, int ease) {
         source.strokeCap(ROUND);
         source.strokeWeight(1);
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 float distance = getDistance(_midPoint, new Point(x, y));
-                if (random(1) > map2(distance, 0, radius, 0, density, type, ease)) {
+                if (random(1) < map2(distance, 0, radius, 0, density, type, ease)) {
+                    source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     source.point(x, y);
                 }
             }

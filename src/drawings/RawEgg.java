@@ -26,7 +26,7 @@ public class RawEgg extends Sketch {
             int bg2 = colour.rand();
             while (bg1 == bg2) bg2 = colour.rand();
             background(bg1);
-            drawDepth(bg2, 0.75f, Direction.TOP, SINUSOIDAL, EASE_IN_OUT);
+            drawTexture(bg2, 0.75f, Direction.TOP, SINUSOIDAL, EASE_IN_OUT);
             noFill();
             strokeWeight(3);
             strokeCap(ROUND);

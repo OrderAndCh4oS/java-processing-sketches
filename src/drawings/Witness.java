@@ -25,7 +25,7 @@ public class Witness extends Sketch {
                 c2 = colour.rand();
             } while (c1 == c2);
             background(c1);
-            drawDepth(colour.black(), 0.1f, 0.8f);
+            drawTexture(colour.black(), 0.1f, 0.8f);
             noFill();
             stroke(c2);
             strokeWeight(12);

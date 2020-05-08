@@ -24,10 +24,10 @@ public class Painful extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             blendMode(NORMAL);
             background(colour.rand());
-            drawDepth(colour.black(), 0, 0.9f);
+            drawTexture(colour.black(), 0, 0.9f);
             fill(colour.black());
             drawLayer(colour, randomInt(100, 125));
-            drawDepth(colour.black(), 0.4f, 0.2f);
+            drawTexture(colour.black(), 0.4f, 0.2f);
             save("painful", name);
         });
     }

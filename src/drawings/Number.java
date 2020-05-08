@@ -35,7 +35,7 @@ public class Number extends Sketch {
                 PImage img = get(0, 0, (int) _width, (int) _height);
                 int dotSize = 18;
                 background(colour.rand());
-                drawDepth(colour.black(), 0.75f, 0.25f);
+                drawTexture(colour.black(), 0.75f, 0.25f);
                 strokeWeight(1);
                 strokeCap(ROUND);
                 for (int x = 0; x < _width; x += dotSize) {

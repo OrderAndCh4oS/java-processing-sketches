@@ -31,7 +31,7 @@ public class WildCard extends Sketch {
             lines = new ArrayList<>();
             Vector midV = new Vector(_midPoint);
             background(colour.black());
-            drawDepth(colour.rand(), 0.18f, Direction.TOP, CUBIC, EASE_IN);
+            drawTexture(colour.rand(), 0.18f, Direction.TOP, CUBIC, EASE_IN);
             strokeCap(ROUND);
             for (int i = 0; i < random(800, 100000); i++) {
                 strokeWeight(random(1, 3));

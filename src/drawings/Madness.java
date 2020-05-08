@@ -29,7 +29,7 @@ public class Madness extends Sketch {
             for (int i = 0; i < 10; i++) {
                 int count = randomInt(5, 10);
                 drawLayer(colour, count);
-                drawDepth(colour.white(), 0.4f, 0.3f);
+                drawTexture(colour.white(), 0.4f, 0.3f);
             }
             save("madness", name);
         });

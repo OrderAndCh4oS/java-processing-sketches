@@ -38,7 +38,7 @@ public class NumberWaveLine extends Sketch {
                 float padding = random(15, 20);
                 float wave = 0.12f;
                 background(colour.rand());
-                drawDepth(colour.black(), 0.8f, 0.2f);
+                drawTexture(colour.black(), 0.8f, 0.2f);
                 strokeWeight(1);
                 strokeCap(ROUND);
                 stroke(colour.black());

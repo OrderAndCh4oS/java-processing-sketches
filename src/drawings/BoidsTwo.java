@@ -29,8 +29,8 @@ public class BoidsTwo extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            drawDepth(colour.rand(), 0.9f, 0.1f);
-            drawDepth(colour.rand(), 0.8f, 0.05f, 480f);
+            drawTexture(colour.rand(), 0.9f, 0.1f);
+            drawTexture(colour.rand(), 0.8f, 0.05f, 480f);
             _boids = new ArrayList<>();
             for (int i = 0; i < 16; i++) {
                 _boids.add(new Boid(random(_width), _height + random(25) + 50));

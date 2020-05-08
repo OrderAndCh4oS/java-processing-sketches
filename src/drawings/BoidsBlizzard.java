@@ -33,7 +33,7 @@ public class BoidsBlizzard extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.white());
-            drawDepth(colour.rand(), 0.3f, Direction.TOP, CUBIC, EASE_IN);
+            drawTexture(colour.rand(), 0.3f, Direction.TOP, CUBIC, EASE_IN);
             _boids = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 _boids.add(new Boid(random(_width / 2), -random(100)));

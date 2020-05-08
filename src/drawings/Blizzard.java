@@ -27,7 +27,7 @@ public class Blizzard extends Sketch {
         _colours.getColours("blizzard").forEach((name, colour) -> {
             for (int i = 0; i < 10; i++) {
                 background(0xffffffff);
-                drawDepth(colour.black(), 0.8f, Direction.LEFT, CUBIC, EASE_IN);
+                drawTexture(colour.black(), 0.8f, Direction.LEFT, CUBIC, EASE_IN);
                 for (int j = 0; j < 1000; j++) {
                     Point a = new Point(random(_width), random(_height));
                     Point b = new Point(random(_width), random(_height));

@@ -19,8 +19,8 @@ public class EllipseMath extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            drawDepth(colour.rand(), 0.9f, 0.1f);
-            drawDepth(colour.rand(), 0.8f, 0.2f, 512f);
+            drawTexture(colour.rand(), 0.9f, 0.1f);
+            drawTexture(colour.rand(), 0.8f, 0.2f, 512f);
             noFill();
             strokeWeight(3);
             strokeCap(ROUND);

@@ -28,7 +28,7 @@ public class YamataNoOrochi extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            drawDepth(colour.rand(), 0.8f, Direction.TOP, CUBIC, EASE_IN);
+            drawTexture(colour.rand(), 0.8f, Direction.TOP, CUBIC, EASE_IN);
             float x1 = random(_width);
             for (int i = 0; i < 8; i++) {
                 float y1 = _height;
