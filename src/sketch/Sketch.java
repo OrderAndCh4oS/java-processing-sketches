@@ -8,6 +8,7 @@ import utilities.Point;
 import utilities.colour.Colours;
 
 import static utilities.Map.*;
+import static utilities.Random.randomInt;
 import static utilities.RandomString.uuid;
 import static utilities.Trigonometry.getDistance;
 
@@ -148,6 +149,38 @@ abstract public class Sketch extends PApplet {
                 for (int i = 0; i < _width; i++) {
                     float x = i * step;
                     line(x, 0, x, _height);
+                }
+                break;
+        }
+    }
+
+    public void drawLineTextureWithGaps(int colour, float step, float strokeWidth, Direction direction) {
+        stroke(colour);
+        strokeWeight(strokeWidth);
+        strokeCap(ROUND);
+        boolean on = true;
+        switch (direction) {
+            case TOP:
+            case BOTTOM:
+                for (int i = -12; i < _height + 12; i++) {
+                    float lastX = 0;
+                    for (int x = 0; x < _width; x += on ? randomInt(4, 12) : randomInt(3, 6)) {
+                        float y = i * step;
+                        if(on) line(lastX, y, x, y);
+                        on = !on;
+                        lastX = x;
+                    }
+                }
+                break;
+            case LEFT:
+            case RIGHT:
+                for (int i = 0; i < _width; i++) {
+                    float lastY = 0;
+                    for (int y = 0; y < _height; y += on ? randomInt(4, 12) : randomInt(3, 6)) {
+                        float x = i * step;
+                        if(on) line(x, lastY, x, y);
+                        on = !on;
+                    }
                 }
                 break;
         }
