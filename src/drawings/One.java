@@ -12,7 +12,7 @@ public class One extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024, P3D);
+        super.settings(1024, 1024, P2D);
         smooth(8);
     }
 
