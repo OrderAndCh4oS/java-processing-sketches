@@ -166,7 +166,7 @@ abstract public class Sketch extends PApplet {
                     float lastX = 0;
                     for (int x = 0; x < _width; x += on ? randomInt(4, 12) : randomInt(3, 6)) {
                         float y = i * step;
-                        if(on) line(lastX, y, x, y);
+                        if (on) line(lastX, y, x, y);
                         on = !on;
                         lastX = x;
                     }
@@ -178,7 +178,7 @@ abstract public class Sketch extends PApplet {
                     float lastY = 0;
                     for (int y = 0; y < _height; y += on ? randomInt(4, 12) : randomInt(3, 6)) {
                         float x = i * step;
-                        if(on) line(x, lastY, x, y);
+                        if (on) line(x, lastY, x, y);
                         on = !on;
                     }
                 }
@@ -197,6 +197,32 @@ abstract public class Sketch extends PApplet {
                     point(x, y);
                 }
             }
+        }
+    }
+
+    public void drawFibreTexture(int colour, int strands, float weight, float alpha) {
+        strokeCap(PROJECT);
+        strokeWeight(weight);
+        for (int i = 0; i < strands; i++) {
+            float x = randomGaussian() > 0.5 ? randomGaussian() * _width : _width - (randomGaussian() * _width);
+            float y = randomGaussian() > 0.5 ? randomGaussian() * _height : _height - (randomGaussian() * _height);
+            pushMatrix();
+            noFill();
+            stroke(colour, 255 * (((randomGaussian() * 0.2f) - 0.1f) * alpha));
+            rotate(randomGaussian() * (TAU - 0.0000001f));
+            beginShape();
+            for (int steps = randomInt(12, 18); steps > 0; steps--) {
+                curveVertex(x, y);
+                float xRand = randomGaussian();
+                x += xRand > 0.1f ? random(1, 3) : 0;
+                y += randomGaussian() < 0.33333f
+                        ? 0
+                        : randomGaussian() < 0.5f
+                        ? random(0.1f, 2)
+                        : -random(0.1f, 2);
+            }
+            endShape();
+            popMatrix();
         }
     }
 
