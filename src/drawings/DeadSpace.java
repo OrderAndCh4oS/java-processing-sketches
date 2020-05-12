@@ -87,11 +87,4 @@ public class DeadSpace extends Sketch {
             save("deadspace", name);
         });
     }
-
-    private float distanceToMidpoint(float x, float y) {
-        float dX = _midPoint.x() - x;
-        float dY = _midPoint.y() - y;
-
-        return sqrt((dX * dX) + (dY * dY));
-    }
 }

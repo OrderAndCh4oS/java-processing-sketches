@@ -63,11 +63,4 @@ public class TwoYearsAgo extends Sketch {
             save("two-years-ago", name);
         });
     }
-
-    private float distanceToMidpoint(float x, float y) {
-        float dX = _midPoint.x() - x;
-        float dY = _midPoint.y() - y;
-
-        return sqrt((dX * dX) + (dY * dY));
-    }
 }

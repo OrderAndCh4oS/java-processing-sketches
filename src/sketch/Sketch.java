@@ -201,7 +201,7 @@ abstract public class Sketch extends PApplet {
     }
 
     public void drawFibreTexture(int colour, int strands, float weight, float alpha) {
-        strokeCap(PROJECT);
+        strokeCap(ROUND);
         strokeWeight(weight);
         for (int i = 0; i < strands; i++) {
             float x = randomGaussian() > 0.5 ? randomGaussian() * _width : _width - (randomGaussian() * _width);
@@ -312,5 +312,26 @@ abstract public class Sketch extends PApplet {
                 }
             }
         }
+    }
+
+    public float distanceToMidpoint(float x, float y) {
+        float dX = _midPoint.x() - x;
+        float dY = _midPoint.y() - y;
+
+        return sqrt((dX * dX) + (dY * dY));
+    }
+
+    public float distanceTo(float aX, float aY, float bX, float bY) {
+        float dX = aX - bX;
+        float dY = aY - bY;
+
+        return sqrt((dX * dX) + (dY * dY));
+    }
+
+    public float distanceTo(Point a, Point b) {
+        float dX = a.x() - b.x();
+        float dY = b.y() - b.y();
+
+        return sqrt((dX * dX) + (dY * dY));
     }
 }

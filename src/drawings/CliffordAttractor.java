@@ -104,8 +104,8 @@ public class CliffordAttractor extends Sketch {
         void draw() {
             fill(_colour);
             float value = getValue();
-            _vx += Math.cos(value) * 0.8;
-            _vy += Math.sin(value) * 0.8;
+            _vx += cos(value) * 0.8;
+            _vy += sin(value) * 0.8;
             _x += _vx;
             _y += _vy;
             ellipse(_x, _y, 8 * _scale, 8 * _scale);

@@ -23,7 +23,7 @@ public class Inferior extends Sketch {
             background(colour.white());
             drawFibreTexture(colour.black(), 250000, 0.2f, 0.5f);
             float a = random(750, 900);
-            float a2 = random(250, 300);`
+            float a2 = random(250, 300);
             PGraphics mask = createGraphics((int) _width, (int) _height);
             PGraphics source = createGraphics((int) _width, (int) _height);
             source.beginDraw();
@@ -36,6 +36,7 @@ public class Inferior extends Sketch {
             drawTriangle(source,_width / 10 * 6, _height / 12 * 10, a2);
             source.endDraw();
             mask.beginDraw();
+            source.noStroke();
             mask.fill(0xff000000);
             mask.rect(0, 0, _width, _height);
             mask.fill(0xffffffff);
@@ -54,16 +55,10 @@ public class Inferior extends Sketch {
     public void drawTriangle(float x, float y, float a) {
         pushMatrix();
         translate(x, y);
-        float aX = 0;
-        float aY = -(a / sqrt(3));
-        float bX = -(a / 2);
-        float bY = (a / (2 * sqrt(3)));
-        float cX = (a / 2);
-        float cY = (a / (2 * sqrt(3)));
         beginShape();
-        vertex(aX, aY);
-        vertex(bX, bY);
-        vertex(cX, cY);
+        vertex(0, -(a / sqrt(3)));
+        vertex(-(a / 2), (a / (2 * sqrt(3))));
+        vertex((a / 2), (a / (2 * sqrt(3))));
         endShape(CLOSE);
         popMatrix();
     }
@@ -71,16 +66,10 @@ public class Inferior extends Sketch {
     public void drawTriangle(PGraphics source, float x, float y, float a) {
         source.pushMatrix();
         source.translate(x, y);
-        float aX = 0;
-        float aY = -(a / sqrt(3));
-        float bX = -(a / 2);
-        float bY = (a / (2 * sqrt(3)));
-        float cX = (a / 2);
-        float cY = (a / (2 * sqrt(3)));
         source.beginShape();
-        source.vertex(aX, aY);
-        source.vertex(bX, bY);
-        source.vertex(cX, cY);
+        source.vertex(0, -(a / sqrt(3)));
+        source.vertex(-(a / 2), (a / (2 * sqrt(3))));
+        source.vertex((a / 2), (a / (2 * sqrt(3))));
         source.endShape(CLOSE);
         source.popMatrix();
     }
