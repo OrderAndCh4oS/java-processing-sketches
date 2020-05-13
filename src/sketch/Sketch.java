@@ -200,6 +200,18 @@ abstract public class Sketch extends PApplet {
         }
     }
 
+    public void drawBenDayTexture(int colour, float diameter, float scale) {
+        fill(colour);
+        noStroke();
+        int rowIndex = 0;
+        for (float x = -diameter; x < _width + diameter; x += diameter) {
+            for (float y = rowIndex % 2 == 0 ? 0 : -(diameter / 2f); y < _height+ diameter; y += diameter) {
+                ellipse(x, y, diameter * scale, diameter * scale);
+            }
+            rowIndex++;
+        }
+    }
+
     public void drawFibreTexture(int colour, int strands, float weight, float alpha) {
         strokeCap(ROUND);
         strokeWeight(weight);
