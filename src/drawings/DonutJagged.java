@@ -7,6 +7,7 @@ import utilities.Point;
 import java.util.ArrayList;
 
 import static utilities.Bezier.cubicBezier;
+import static utilities.Ellipse.getEllipsePoint;
 
 public class DonutJagged extends Sketch {
     public static void main(String... args) {
@@ -46,19 +47,19 @@ public class DonutJagged extends Sketch {
         float mag1 = random(80, 150);
         Point p, p1, p2, p3;
         for (float t = step; t <= TAU + step / 2; t += step) {
-            p = ellipsePoint(x, y, r, r, t);
-            p1 = ellipsePoint(x, y, r1, r1, t + (step * mag));
-            p2 = ellipsePoint(x, y, r2, r2, t + (step * mag1));
-            p3 = ellipsePoint(x, y, r2, r2, t + step);
+            p = getEllipsePoint(x, y, r, r, t);
+            p1 = getEllipsePoint(x, y, r1, r1, t + (step * mag));
+            p2 = getEllipsePoint(x, y, r2, r2, t + (step * mag1));
+            p3 = getEllipsePoint(x, y, r2, r2, t + step);
             ArrayList<Point> points = new ArrayList<>();
             for (float t2 = 0; t2 < 1; t2 += 0.33) {
                 points.add(cubicBezier(p, p1, p2, p3, t2));
             }
             t += step;
-            p = ellipsePoint(x, y, r, r, t);
-            p1 = ellipsePoint(x, y, r1, r1, t + (step * mag));
-            p2 = ellipsePoint(x, y, r2, r2, t + (step * mag1));
-            p3 = ellipsePoint(x, y, r2, r2, t + step);
+            p = getEllipsePoint(x, y, r, r, t);
+            p1 = getEllipsePoint(x, y, r1, r1, t + (step * mag));
+            p2 = getEllipsePoint(x, y, r2, r2, t + (step * mag1));
+            p3 = getEllipsePoint(x, y, r2, r2, t + step);
             for (float t2 = 1; t2 > 0; t2 -= 0.33) {
                 points.add(cubicBezier(p, p1, p2, p3, t2));
             }
@@ -69,10 +70,6 @@ public class DonutJagged extends Sketch {
             endShape(CLOSE);
         }
         popMatrix();
-    }
-
-    Point ellipsePoint(float x, float y, float a, float b, float t) {
-        return new Point(x + a * cos(t), y + b * sin(t));
     }
 }
 

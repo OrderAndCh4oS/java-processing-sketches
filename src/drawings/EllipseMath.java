@@ -4,6 +4,8 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Point;
 
+import static utilities.Ellipse.getEllipsePoint;
+
 public class EllipseMath extends Sketch {
     public static void main(String... args) {
         PApplet.main("drawings.EllipseMath");
@@ -33,7 +35,7 @@ public class EllipseMath extends Sketch {
                 float a = random(35, 65);
                 float b = a - random(10, 25);
                 for (float t = TAU / 60; t <= TAU + TAU / 60; t += TAU / 60) {
-                    Point p = ellipsePoint(x, y, a, b, t);
+                    Point p = getEllipsePoint(x, y, a, b, t);
                     stroke(colour.rand());
                     line(x, y, p.x(), p.y());
                 }
@@ -41,10 +43,6 @@ public class EllipseMath extends Sketch {
             }
             save("ellipse-math", name);
         });
-    }
-
-    Point ellipsePoint(float x, float y, float a, float b, float t) {
-        return new Point(x + a * cos(t), y + b * sin(t));
     }
 }
 

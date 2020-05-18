@@ -5,6 +5,7 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Point;
 
+import static utilities.Ellipse.getEllipsePoint;
 import static utilities.Map.EASE_IN_OUT;
 import static utilities.Map.SINUSOIDAL;
 
@@ -45,7 +46,7 @@ public class RawEgg extends Sketch {
                         c2 = colour.rand();
                     }
                     stroke(c2);
-                    Point p = ellipsePoint(x, y, a, b, t);
+                    Point p = getEllipsePoint(x, y, a, b, t);
                     line(x, y, p.x(), p.y());
                 }
                 noStroke();
@@ -55,10 +56,6 @@ public class RawEgg extends Sketch {
             }
             save("raw-egg", name);
         });
-    }
-
-    Point ellipsePoint(float x, float y, float a, float b, float t) {
-        return new Point(x + a * cos(t), y + b * sin(t));
     }
 }
 

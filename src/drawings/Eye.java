@@ -6,6 +6,7 @@ import sketch.Sketch;
 import utilities.Point;
 
 import static utilities.Bezier.quadraticBezier;
+import static utilities.Ellipse.getEllipsePoint;
 import static utilities.Map.EASE_IN;
 import static utilities.Map.QUINTIC;
 
@@ -67,12 +68,12 @@ public class Eye extends Sketch {
         source.noStroke();
         source.beginShape();
         for (float t = step; t <= TAU + step; t += step) {
-            Point p1 = ellipsePoint(x, y, r1, r1, t);
+            Point p1 = getEllipsePoint(x, y, r1, r1, t);
             source.vertex(p1.x(), p1.y());
         }
         source.beginContour();
         for (float t = TAU + step; t >= 0; t -= step) {
-            Point p = ellipsePoint(x, y, r, r, t);
+            Point p = getEllipsePoint(x, y, r, r, t);
             source.vertex(p.x(), p.y());
         }
         source.endContour();
@@ -90,9 +91,9 @@ public class Eye extends Sketch {
         float mag = random(-3, 3);
         float mag1 = random(4, 12);
         for (float t = step; t <= TAU + step; t += step) {
-            Point p = ellipsePoint(x, y, r, r, t);
-            Point p1 = ellipsePoint(x, y, r1, r1, t + (step * mag));
-            Point p2 = ellipsePoint(x, y, r2, r2, t + (step * mag1));
+            Point p = getEllipsePoint(x, y, r, r, t);
+            Point p1 = getEllipsePoint(x, y, r1, r1, t + (step * mag));
+            Point p2 = getEllipsePoint(x, y, r2, r2, t + (step * mag1));
             beginShape();
             for (float t2 = 0; t2 < 1; t2 += 0.01) {
                 Point p3 = quadraticBezier(p, p1, p2, t2);
@@ -100,10 +101,6 @@ public class Eye extends Sketch {
             }
             endShape();
         }
-    }
-
-    Point ellipsePoint(float x, float y, float a, float b, float t) {
-        return new Point(x + a * cos(t), y + b * sin(t));
     }
 }
 

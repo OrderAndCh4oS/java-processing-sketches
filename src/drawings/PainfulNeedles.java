@@ -68,9 +68,5 @@ public class PainfulNeedles extends Sketch {
             save("painful-needles", name);
         });
     }
-
-    Point ellipsePoint(float x, float y, float a, float b, float t) {
-        return new Point(x + a * cos(t), y + b * sin(t));
-    }
 }
 
