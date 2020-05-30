@@ -205,8 +205,22 @@ abstract public class Sketch extends PApplet {
         noStroke();
         int rowIndex = 0;
         for (float x = -diameter; x < _width + diameter; x += diameter) {
-            for (float y = rowIndex % 2 == 0 ? 0 : -(diameter / 2f); y < _height+ diameter; y += diameter) {
+            for (float y = rowIndex % 2 == 0 ? 0 : -(diameter / 2f); y < _height + diameter; y += diameter) {
                 ellipse(x, y, diameter * scale, diameter * scale);
+            }
+            rowIndex++;
+        }
+    }
+
+    public void drawBenDayTexture(float x, float y, float w, float h, int colour, float diameter, float scale) {
+        fill(colour);
+        noStroke();
+        int rowIndex = 0;
+        float xEnd = x + w + diameter;
+        for (float i = x - diameter; i < xEnd; i += diameter) {
+            float yEnd = y + h + diameter + (diameter / 2f);
+            for (float j = y + (rowIndex % 2 == 0 ? 0 : -(diameter / 2f)); j < yEnd; j += diameter) {
+                ellipse(i, j, diameter * scale, diameter * scale);
             }
             rowIndex++;
         }
