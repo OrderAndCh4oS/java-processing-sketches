@@ -107,19 +107,19 @@ public class Hsl {
     }
 
     public void setH(int value) {
-        if (_h > 360) {
-            _h = 360;
-        } else if (_h < 0) {
-            _h = 0;
+        if (value > 360) {
+            _h = value - 360;
+        } else if (value < 0) {
+            _h = 360 + value;
         } else {
             _h = value;
         }
     }
 
     public void setS(int value) {
-        if (_s > 100) {
+        if (value > 100) {
             _s = 100;
-        } else if (_s < 0) {
+        } else if (value < 0) {
             _s = 0;
         } else {
             _s = value;
