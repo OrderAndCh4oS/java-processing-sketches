@@ -33,18 +33,17 @@ public class BenDayDotAbstractImageRender extends Sketch {
             blendMode(BLEND);
             background(colour.white());
             drawFibreTexture(colour.black(), 250000, 0.2f, 0.6f);
-            drawAbstract(colour);
+            drawAbstract(_colours.rand());
             PImage img = get(0, 0, (int) _width, (int) _height);
             img.filter(BLUR, 24);
             save("ben-day-dot-abstract-image-render", name);
             background(colour.white());
             noStroke();
-            Colours c1 = _colours.get("sunset-beach");
             blendMode(MULTIPLY);
-            bendayGrid(img, c1.get(0), 90 * (TAU / 360), y);
-            bendayGrid(img, c1.get(1), 105 * (TAU / 360), m);
-            bendayGrid(img, c1.get(2), 75 * (TAU / 360), c);
-            bendayGrid(img, c1.black(), 15 * (TAU / 360), k);
+            bendayGrid(img, colour.get(0), 90 * (TAU / 360), y);
+            bendayGrid(img, colour.get(1), 105 * (TAU / 360), m);
+            bendayGrid(img, colour.get(2), 75 * (TAU / 360), c);
+            bendayGrid(img, colour.black(), 15 * (TAU / 360), k);
             save("ben-day-dot-abstract-image-render", name);
         });
     }
@@ -107,7 +106,7 @@ public class BenDayDotAbstractImageRender extends Sketch {
                         scale = 1 - (g / 255f);
                         break;
                     case k:
-                        scale = (1 - k) / 4;
+                        scale = (1 - k) / 3;
                         break;
                 }
                 pushMatrix();
