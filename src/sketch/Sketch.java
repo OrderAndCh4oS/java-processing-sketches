@@ -266,6 +266,21 @@ abstract public class Sketch extends PApplet {
         }
     }
 
+
+    public void drawGrainTexture(int colour, float density, float radius, int type, int ease) {
+        strokeCap(ROUND);
+        strokeWeight(2);
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                float distance = getDistance(_midPoint, new Point(x, y));
+                if (random(1) > map2(distance, 0, radius, 0, density, type, ease)) {
+                    stroke(colour, 255);
+                    point(x, y);
+                }
+            }
+        }
+    }
+
     public void drawTexture(int colour, float alpha, Direction direction, int type, int ease) {
         strokeCap(ROUND);
         strokeWeight(1);

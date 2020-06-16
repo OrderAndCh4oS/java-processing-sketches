@@ -77,3 +77,4 @@ public class BenDayDotImageRender extends Sketch {
         }
     }
 }
+
