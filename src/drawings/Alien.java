@@ -1,5 +1,6 @@
 package drawings;
 
+import enums.Direction;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.colour.Colours;
@@ -12,7 +13,7 @@ public class Alien extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024);
+        super.settings(1910, 1080);
     }
 
     @Override
@@ -26,7 +27,18 @@ public class Alien extends Sketch {
             }
             fill(colour.white());
             for (int i = 0; i < 50; i++) {
-                Wave w = new Wave(_width, random(_height), PI, 4, 50f, random(20, 48), random(0.0002f, 0.001f));
+                Wave w = new Wave(_width, random(_height), PI, 4, 50f, random(20, 48), random(0.0002f, 0.001f), Direction.RIGHT);
+                Colours c = colour;
+                if (random(1) > 0.5f) c = otherColour;
+                fill(c.rand());
+                stroke(c.black());
+                for (int j = 0; j < random(180, 260); j++) {
+                    w.update();
+                    w.draw();
+                }
+            }
+            for (int i = 0; i < 50; i++) {
+                Wave w = new Wave(0, random(_height), PI, 4, 50f, random(20, 48), random(0.0002f, 0.001f), Direction.LEFT);
                 Colours c = colour;
                 if (random(1) > 0.5f) c = otherColour;
                 fill(c.rand());
@@ -50,8 +62,9 @@ public class Alien extends Sketch {
         float _waveHeight;
         float _modV;
         float _radius;
+        Direction _direction;
 
-        Wave(float x, float y, float a, float speed, float radius, float waveHeight, float modV) {
+        Wave(float x, float y, float a, float speed, float radius, float waveHeight, float modV, Direction direction) {
             _x = x;
             _y = y;
             _a = a;
@@ -60,12 +73,13 @@ public class Alien extends Sketch {
             _radius = radius;
             _waveHeight = waveHeight;
             _modV = modV;
+            _direction = direction;
         }
 
         public void update() {
             _a += _v;
             float dY = sin(_a) * _waveHeight;
-            _x = _x - _s;
+            _x = _direction == Direction.LEFT ? _x + _s : _x - _s;
             _y = _startY + dY;
             _radius *= 0.985;
             _v += _modV;
