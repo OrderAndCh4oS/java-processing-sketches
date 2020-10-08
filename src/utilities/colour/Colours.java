@@ -6,7 +6,7 @@ import java.util.Random;
 import static utilities.Random.random;
 
 public class Colours {
-    ArrayList<Integer> _colours = new ArrayList<Integer>();
+    ArrayList<Integer> _colours = new ArrayList<>();
     int _black;
     int _white;
 
@@ -28,6 +28,25 @@ public class Colours {
 
     public int rand() {
         return _colours.get(new Random().nextInt(_colours.size()));
+    }
+
+    public int randWithBlack() {
+        ArrayList<Integer> coloursWithBlack = new ArrayList<>(_colours);
+        coloursWithBlack.add(_black);
+        return coloursWithBlack.get(new Random().nextInt(coloursWithBlack.size()));
+    }
+
+    public int randWithWhite() {
+        ArrayList<Integer> coloursWithWhite = new ArrayList<>(_colours);
+        coloursWithWhite.add(_white);
+        return coloursWithWhite.get(new Random().nextInt(coloursWithWhite.size()));
+    }
+
+    public int randAll() {
+        ArrayList<Integer> coloursAll = new ArrayList<>(_colours);
+        coloursAll.add(_black);
+        coloursAll.add(_white);
+        return coloursAll.get(new Random().nextInt(coloursAll.size()));
     }
 
     public int black() {

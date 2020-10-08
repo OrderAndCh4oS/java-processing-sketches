@@ -14,22 +14,22 @@ public class Madness extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024);
+        super.settings(1200, 480);
     }
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
+        _colours.getColours("order-and-chaos").forEach((name, colour) -> {
             blendMode(NORMAL);
-            background(colour.white());
+            background(colour.black());
             for (int i = 0; i < random(20000, 30000); i++) {
                 point(random(_width), random(_height));
             }
-            fill(colour.white());
+            fill(colour.black());
             for (int i = 0; i < 10; i++) {
                 int count = randomInt(5, 10);
                 drawLayer(colour, count);
-                drawTexture(colour.white(), 0.6f, 0.3f);
+                drawTexture(colour.black(), 0.6f, 0.3f);
             }
             save("madness", name);
         });
