@@ -18,14 +18,14 @@ public class Alien extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
-            background(colour.white());
-            Colours otherColour = _colours.rand();
+        _colours.getColours("order-and-chaos").forEach((name, colour) -> {
+            background(colour.black());
+            Colours otherColour = _colours.get("order-and-chaos");
             for (int i = 0; i < random(20000, 30000); i++) {
                 stroke(otherColour.rand(), 255 * 0.45f);
                 point(random(_width), random(_height));
             }
-            fill(colour.white());
+            fill(colour.black());
             for (int i = 0; i < 50; i++) {
                 Wave w = new Wave(_width, random(_height), PI, 4, 50f, random(20, 48), random(0.0002f, 0.001f), Direction.RIGHT);
                 Colours c = colour;

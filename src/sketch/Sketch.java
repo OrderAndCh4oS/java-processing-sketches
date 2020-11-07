@@ -54,7 +54,7 @@ abstract public class Sketch extends PApplet {
 
     public void saveImage() {
         String filename = uuid() + ".png";
-        saveFrame("/home/sarcoma/processing-sketches/" + filename);
+        saveFrame("/Users/seancooper/Processing Stills/images/" + filename);
     }
 
     public void save(String prefix) {
@@ -67,12 +67,12 @@ abstract public class Sketch extends PApplet {
 
     public void saveImage(String prefix) {
         String filename = uuid() + ".png";
-        saveFrame("/home/sarcoma/processing-sketches/" + prefix + "-" + filename);
+        saveFrame("/Users/seancooper/Processing Stills/images/" + prefix + "-" + filename);
     }
 
     public void saveImage(String dir, String prefix) {
         String filename = uuid() + ".png";
-        saveFrame("/home/sarcoma/processing-sketches/" + dir + "/" + prefix + "-" + filename);
+        saveFrame("/Users/seancooper/Processing Stills/images/" + dir + "/" + prefix + "-" + filename);
     }
 
     public void drawTexture(int colour, float density, float alpha) {

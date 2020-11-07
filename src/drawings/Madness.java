@@ -14,7 +14,7 @@ public class Madness extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1200, 480);
+        super.settings(1024, 1024);
     }
 
     @Override
