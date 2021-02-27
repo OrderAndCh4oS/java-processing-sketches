@@ -17,6 +17,10 @@ public class Graph {
         nodes.add(new Node(point));
     }
 
+    public void addNode(Node node) {
+        nodes.add(node);
+    }
+
     public ArrayList<Line> getLines() {
         ArrayList<Line> lines = new ArrayList<>();
         for (Node node : nodes) {

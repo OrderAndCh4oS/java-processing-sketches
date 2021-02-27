@@ -65,17 +65,16 @@ public class GraphLoops extends GraphScan {
         ArrayList<Path> foundPaths = new ArrayList<>();
 
         for (Edge edgeDepthOne : startNode.getEdges()) {
-            if (edgeDepthOne.destination().equals(startNode) || visitedNodes.contains(edgeDepthOne.destination()))
+            if (edgeDepthOne.destination().equals(startNode))
                 continue;
             visitedNodes.add(edgeDepthOne.destination());
             for (Edge edgeDepthTwo : edgeDepthOne.destination().getEdges()) {
-                if (edgeDepthTwo.destination().equals(startNode) || visitedNodes.contains(edgeDepthTwo.destination()))
+                if (edgeDepthTwo.destination().equals(startNode))
                     continue;
                 Path path = new Path();
                 path.addEdge(edgeDepthOne);
                 path.addEdge(edgeDepthTwo);
                 paths.add(path);
-                visitedNodes.add(edgeDepthTwo.destination());
             }
         }
 
@@ -91,7 +90,7 @@ public class GraphLoops extends GraphScan {
 
                 Edge edgeLast = path.getLastEdge();
                 for (Edge edgeDepthN : edgeLast.destination().getEdges()) {
-                    if (visitedNodes.contains(edgeDepthN.destination())) continue;
+                    if (path.hasVisitedNode(edgeDepthN.destination()) && !startNode.equals(edgeDepthN.destination())) continue;
                     Path nextPath = new Path(path);
                     nextPath.addEdge(edgeDepthN);
                     newPaths.add(nextPath);
