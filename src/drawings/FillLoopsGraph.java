@@ -4,10 +4,9 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Line;
 import utilities.Point;
-import utilities.colour.Colours;
-import utilities.graph.Edge;
 import utilities.graph.GraphLoops;
 import utilities.graph.Node;
+import utilities.graph.Path;
 
 import java.util.ArrayList;
 
@@ -29,31 +28,31 @@ public class FillLoopsGraph extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.white());
             GraphLoops graph = new GraphLoops();
-            drawFillLoopsGraph(graph,1500, 1);
-            graph.findShortestPathToSelf(graph.getFirstNode());
+            stroke(colour.black());
+            connectGraph(graph,500, 2);
             for(Node node : graph.getNodes()) {
-                ArrayList<Edge> path = graph.findShortestPathToSelf(node);
-                fill(colour.rand());
-                beginShape();
-                for(Edge edge : path) {
-                    Node n = edge.destination();
-                    Point p = n.getPoint();
-                    vertex(p.x(), p.y());
+                ArrayList<Path> paths = graph.findNShortestPathsToSelf(node, node.edgeCount());
+                for(Path path : paths) {
+                    fill(colour.rand());
+                    beginShape();
+                    for(Point p : path.getPoints()) {
+                        vertex(p.x(), p.y());
+                    }
+                    endShape();
                 }
-                endShape();
+            }
+            for (Line line : graph.getLines()) {
+                line(line.p().x(), line.p().y(), line.q().x(), line.q().y());
             }
             save("fill-loops-graph", name);
         });
     }
 
-    public void drawFillLoopsGraph(GraphLoops graph, int nodeCount, float strokeWidth) {
+    public void connectGraph(GraphLoops graph, int nodeCount, float strokeWidth) {
         strokeWeight(strokeWidth);
         for (int i = 0; i < nodeCount; i++) {
             graph.addNode(new Point(-50 + random(_width + 100), -50 + random(_height + 100)));
         }
         graph.joinNodesByHorizontalScan();
-        for (Line line : graph.getLines()) {
-            line(line.p().x(), line.p().y(), line.q().x(), line.q().y());
-        }
     }
 }
