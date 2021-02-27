@@ -17,7 +17,10 @@ public class Node {
     }
 
     public void addEdge(Node toNode) {
-        edges.add(new Edge(this, toNode));
+        Edge newEdge = new Edge(this, toNode);
+        if(edges.contains(newEdge)) return;
+        edges.add(newEdge);
+        toNode.addEdge(this);
     }
 
     public Point getPoint() {
@@ -27,4 +30,6 @@ public class Node {
     public ArrayList<Edge> getEdges() {
         return edges;
     }
+
+    public int edgeCount() {return edges.size();}
 }

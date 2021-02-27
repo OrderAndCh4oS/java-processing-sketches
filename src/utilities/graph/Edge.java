@@ -3,25 +3,37 @@ package utilities.graph;
 import utilities.Line;
 
 public class Edge {
-    private Node _a;
-    private Node _b;
+    private Node _source;
+    private Node _destination;
     private Line _line;
 
-    Edge(Node a, Node b) {
-        _a = a;
-        _b = b;
-        _line = new Line(_a.getPoint(), _b.getPoint());
+    Edge(Node source, Node destination) {
+        _source = source;
+        _destination = destination;
+        _line = new Line(_source.getPoint(), _destination.getPoint());
     }
 
-    public Node a() {
-        return _a;
+    public Node source() {
+        return _source;
     }
 
-    public Node b() {
-        return _b;
+    public Node destination() {
+        return _destination;
     }
 
     public Line line() {
         return _line;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        boolean isEqual = false;
+
+        if (obj instanceof Edge)
+        {
+            isEqual = this._destination == ((Edge) obj)._destination && this._source == ((Edge) obj)._source;
+        }
+
+        return isEqual;
     }
 }
