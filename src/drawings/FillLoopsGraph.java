@@ -20,7 +20,7 @@ public class FillLoopsGraph extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(3072, 1910, P2D);
+        super.settings(500, 500, P2D);
         smooth(8);
     }
 
@@ -41,8 +41,8 @@ public class FillLoopsGraph extends Sketch {
         GraphLoops graph = new GraphLoops();
         stroke(colour.black());
         strokeWeight(2);
-        connectScanGraph(graph, 250);
-//      connectManual(graph);
+//        connectScanGraph(graph, 250);
+        connectManual(graph);
 
         for (Node node : graph.getNodes()) {
             ArrayList<Path> paths = graph.findNShortestPathsToSelf(node, node.edgeCount());
@@ -55,6 +55,7 @@ public class FillLoopsGraph extends Sketch {
                 endShape();
             }
         }
+        strokeJoin(ROUND);
         for (Line line : graph.getLines()) {
             line(line.p().x(), line.p().y(), line.q().x(), line.q().y());
         }
@@ -70,10 +71,67 @@ public class FillLoopsGraph extends Sketch {
         Node n4 = new Node(new Point(60, 10));
         graph.addNode(n4);
 
+        Node n5 = new Node(new Point(60, 100));
+        graph.addNode(n5);
+        Node n6 = new Node(new Point(100, 100));
+        graph.addNode(n6);
+        Node n7 = new Node(new Point(80, 10));
+        graph.addNode(n7);
+
+        Node n8 = new Node(new Point(60, 150));
+        graph.addNode(n8);
+        Node n9 = new Node(new Point(200, 150));
+        graph.addNode(n9);
+        Node n10 = new Node(new Point(100, 10));
+        graph.addNode(n10);
+
+        Node n11 = new Node(new Point(10, 120));
+        graph.addNode(n11);
+        Node n12 = new Node(new Point(40, 120));
+        graph.addNode(n12);
+        Node n13 = new Node(new Point(40, 100));
+        graph.addNode(n13);
+
+        Node n14 = new Node(new Point(490, 10));
+        graph.addNode(n14);
+
+        Node n15 = new Node(new Point(10, 490));
+        graph.addNode(n15);
+
+        Node n16 = new Node(new Point(490, 490));
+        graph.addNode(n16);
+
+
         n1.addEdge(n2);
         n2.addEdge(n3);
         n3.addEdge(n4);
         n4.addEdge(n1);
+
+        n3.addEdge(n5);
+        n5.addEdge(n6);
+        n6.addEdge(n7);
+        n7.addEdge(n4);
+
+        n5.addEdge(n8);
+        n8.addEdge(n9);
+        n9.addEdge(n10);
+        n10.addEdge(n7);
+
+        n2.addEdge(n11);
+        n11.addEdge(n12);
+        n12.addEdge(n13);
+        n13.addEdge(n5);
+
+        n9.addEdge(n14);
+        n14.addEdge(n10);
+
+        n11.addEdge(n15);
+        n15.addEdge(n9);
+
+        n14.addEdge(n15);
+
+        n16.addEdge(n15);
+        n16.addEdge(n14);
     }
 
     public void connectScanGraph(GraphLoops graph, int nodeCount) {
