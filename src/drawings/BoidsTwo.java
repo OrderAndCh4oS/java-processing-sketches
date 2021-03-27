@@ -21,7 +21,7 @@ public class BoidsTwo extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024, P2D);
+        super.settings(3600, 3600, P2D);
         smooth(8);
     }
 

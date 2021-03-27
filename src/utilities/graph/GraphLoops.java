@@ -2,6 +2,8 @@ package utilities.graph;
 
 import java.util.ArrayList;
 
+import static processing.core.PApplet.println;
+
 public class GraphLoops extends GraphScan {
 
     public GraphLoops() {
@@ -60,14 +62,12 @@ public class GraphLoops extends GraphScan {
     }
 
     public ArrayList<Path> findNShortestPathsToSelf(Node startNode, int n) {
-        ArrayList<Node> visitedNodes = new ArrayList<>();
         ArrayList<Path> paths = new ArrayList<>();
         ArrayList<Path> foundPaths = new ArrayList<>();
 
         for (Edge edgeDepthOne : startNode.getEdges()) {
             if (edgeDepthOne.destination().equals(startNode))
                 continue;
-            visitedNodes.add(edgeDepthOne.destination());
             for (Edge edgeDepthTwo : edgeDepthOne.destination().getEdges()) {
                 if (edgeDepthTwo.destination().equals(startNode))
                     continue;
@@ -80,8 +80,8 @@ public class GraphLoops extends GraphScan {
 
         int found = 0;
         boolean pathsToExplore = true;
-
-        while (pathsToExplore) {
+        int i = 0;
+        while (pathsToExplore && i < n*n) {
             if (found >= n) break;
             ArrayList<Path> newPaths = new ArrayList<>();
             int newPathCount = 0;
@@ -90,7 +90,9 @@ public class GraphLoops extends GraphScan {
 
                 Edge edgeLast = path.getLastEdge();
                 for (Edge edgeDepthN : edgeLast.destination().getEdges()) {
-                    if (path.hasVisitedNode(edgeDepthN.destination()) && !startNode.equals(edgeDepthN.destination())) continue;
+                    if (path.hasVisitedNode(edgeDepthN.destination()) && !startNode.equals(edgeDepthN.destination())) {
+                        continue;
+                    }
                     Path nextPath = new Path(path);
                     nextPath.addEdge(edgeDepthN);
                     newPaths.add(nextPath);
@@ -99,12 +101,12 @@ public class GraphLoops extends GraphScan {
                         found++;
                         break;
                     }
-                    visitedNodes.add(edgeDepthN.destination());
                     newPathCount++;
                 }
             }
             if (newPathCount == 0) pathsToExplore = false;
             paths = newPaths;
+            i++;
         }
 
         return foundPaths;
