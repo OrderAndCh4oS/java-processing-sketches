@@ -135,6 +135,23 @@ abstract public class Sketch extends PApplet {
         }
     }
 
+    public void drawWaveTexture(Colours colour, float wave, float waveHeight, float stepY, float stepX, float alpha) {
+        stroke(colour.black(), alpha);
+        strokeWeight(0.75f);
+        noFill();
+        for (int y = -10; y < _height + 10; y += stepY) {
+            float a = 0;
+            beginShape();
+            for (int x = 0; x < _width; x += stepX) {
+                float dY = sin(a) * waveHeight;
+                float newY = dY - dY / 2;
+                curveVertex(x, y + newY);
+                a += wave;
+            }
+            endShape();
+        }
+    }
+
     public void drawLineTexture(int colour, float step, float strokeWidth, Direction direction) {
         stroke(colour);
         strokeWeight(strokeWidth);
@@ -318,7 +335,6 @@ abstract public class Sketch extends PApplet {
 
     public void drawGrainTexture(int colour, float density, float radius, int type, int ease) {
         strokeCap(ROUND);
-        strokeWeight(2);
         for (int x = 0; x < _width; x++) {
             for (int y = 0; y < _height; y++) {
                 float distance = getDistance(_midPoint, new Point(x, y));

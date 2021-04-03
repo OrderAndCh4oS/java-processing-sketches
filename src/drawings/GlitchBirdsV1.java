@@ -8,7 +8,7 @@ import utilities.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class CliffordAttractorChunkyLinesV1 extends Sketch {
+public class GlitchBirdsV1 extends Sketch {
 
     float a;
     float b;
@@ -16,7 +16,7 @@ public class CliffordAttractorChunkyLinesV1 extends Sketch {
     float d;
 
     public static void main(String... args) {
-        PApplet.main("drawings.CliffordAttractorChunkyLinesV1");
+        PApplet.main("drawings.GlitchBirds");
     }
 
     @Override
@@ -35,9 +35,7 @@ public class CliffordAttractorChunkyLinesV1 extends Sketch {
             d = random(1) * 4 - 2;
             blendMode(NORMAL);
             background(colour.white());
-            ArrayList<Integer> meshColours = new ArrayList<>();
-            meshColours.add(colour.black());
-            drawRaggedMeshBackground(meshColours, 1, 5, 255, 1);
+            drawWaveTexture(colour, 0.25f, 6, 4, 1, 255 * 0.7f);
             fill(colour.white());
             stroke(colour.black());
             strokeCap(MITER);
@@ -86,7 +84,7 @@ public class CliffordAttractorChunkyLinesV1 extends Sketch {
             drawAttractorPaths(attractorPointsBottom, lines, lastPoint);
             fill(c4);
             drawAttractorPaths(attractorPointsRight, lines, lastPoint);
-            save("clifford-attractor-chunky-lines-v1", name);
+            save("glitch-birds", name);
         });
     }
 
@@ -103,7 +101,7 @@ public class CliffordAttractorChunkyLinesV1 extends Sketch {
             pointsCombined.addAll(pointsA);
             pointsCombined.addAll(pointsB);
             lastPoint.setIsNull(true);
-//            boolean isIntersect = false;
+            boolean isIntersect = false;
             beginShape();
             for (Point p : pointsCombined) {
                 if (!lastPoint.isNull()) {
@@ -113,14 +111,14 @@ public class CliffordAttractorChunkyLinesV1 extends Sketch {
                         for (Line otherLine : lines) {
                             if (otherLine.p() == line.p() || otherLine.p() == line.q()) break;
                             if (otherLine.q() == line.p() || otherLine.q() == line.q()) break;
-//                            isIntersect = line.isIntersect(otherLine);
+                            isIntersect = line.isIntersect(otherLine);
                             lastPoint.setIsNull(true);
-//                            if (isIntersect) break;
+                            if (isIntersect) break;
                         }
                     } catch (CloneNotSupportedException e) {
                         e.printStackTrace();
                     }
-//                    if (isIntersect) break;
+                    if (isIntersect) break;
                     lines.add(line);
                 }
 
