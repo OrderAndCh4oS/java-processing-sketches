@@ -16,7 +16,7 @@ public class Salamander extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024, P3D);
+        super.settings(2048, 2048, P3D);
         smooth(8);
     }
 
@@ -26,14 +26,14 @@ public class Salamander extends Sketch {
             background(colour.black());
             float left = -100;
             for (int j = 0; j < 30; j++) {
-                float strokeWidth = 25 + random(30);
+                float strokeWidth = 45 + random(60);
                 ThickWave wave = new ThickWave(
                         new Point(left, 0),
                         PI / 110,
                         2,
                         strokeWidth
                 );
-                for (int i = 0; i < 512; i++) {
+                for (int i = 0; i < 1024; i++) {
                     wave.update();
                 }
                 PGraphics mask = wave.getMask();

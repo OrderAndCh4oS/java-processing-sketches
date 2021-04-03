@@ -7,6 +7,8 @@ import processing.core.PGraphics;
 import utilities.Point;
 import utilities.colour.Colours;
 
+import java.util.ArrayList;
+
 import static utilities.Map.*;
 import static utilities.Random.randomInt;
 import static utilities.RandomString.uuid;
@@ -162,9 +164,9 @@ abstract public class Sketch extends PApplet {
         switch (direction) {
             case TOP:
             case BOTTOM:
-                for (int i = -12; i < _height + 12; i++) {
+                for (int i = -50; i < _height + 50; i++) {
                     float lastX = 0;
-                    for (int x = 0; x < _width; x += on ? randomInt(4, 12) : randomInt(3, 6)) {
+                    for (int x = 0; x < _width + 50; x += on ? randomInt(4, 12) : randomInt(3, 6)) {
                         float y = i * step;
                         if (on) line(lastX, y, x, y);
                         on = !on;
@@ -184,6 +186,53 @@ abstract public class Sketch extends PApplet {
                 }
                 break;
         }
+    }
+
+    public void drawRaggedMeshBackground(ArrayList<Integer> colour, float strokeWidth, float gap, float alpha, float wobbleMagnitude) {
+        strokeWeight(strokeWidth);
+        noFill();
+        float offsetX = 0;
+        float offsetY = 0;
+        ArrayList<ArrayList<Point>> verticalThreads = new ArrayList<>();
+        ArrayList<ArrayList<Point>> horizontalThreads = new ArrayList<>();
+        for (int y = 0; y < (_height / gap); y++) {
+            ArrayList<Point> verticalThread = new ArrayList<>();
+            for (int x = -40; x < (_width / gap) + 10; x++) {
+                verticalThread.add(new Point(x * gap, y * gap));
+            }
+            verticalThreads.add(verticalThread);
+        }
+        for (int x = 0; x < (_width / gap); x++) {
+            ArrayList<Point> horizontalThread = new ArrayList<>();
+            for (int y = -20; y < (_height / gap) + gap; y++) {
+                horizontalThread.add(new Point(x * gap, y * gap));
+            }
+            horizontalThreads.add(horizontalThread);
+        }
+        int i = 0;
+        for (ArrayList<Point> t : verticalThreads) {
+            stroke(colour.get(i % colour.size()), alpha);
+            beginShape();
+            for (Point p : t) {
+                curveVertex(offsetX + p.x(), offsetY + p.y() + wobble() * wobbleMagnitude * random(1));
+            }
+            endShape();
+            i++;
+        }
+        i = 0;
+        for (ArrayList<Point> t : horizontalThreads) {
+            stroke(colour.get(i % colour.size()), alpha);
+            beginShape();
+            for (Point p : t) {
+                curveVertex(offsetX + p.x() + wobble() * wobbleMagnitude * random(1), offsetY + p.y());
+            }
+            endShape();
+            i++;
+        }
+    }
+
+    float wobble() {
+        return random(1) > 0.75 ? 0 : random(1) > 0.5 ? -random(1) : random(1);
     }
 
     public void drawTexture(int colour, float density, float alpha, float radius) {

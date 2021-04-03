@@ -55,6 +55,10 @@ public class Point implements Cloneable {
         return _isNull;
     }
 
+    public void setIsNull(boolean _isNull) {
+        this._isNull = _isNull;
+    }
+
     public Point clone() throws CloneNotSupportedException {
         return (Point) super.clone();
     }
