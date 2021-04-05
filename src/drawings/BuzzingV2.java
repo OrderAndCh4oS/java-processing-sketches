@@ -6,12 +6,12 @@ import utilities.Point;
 
 import java.util.ArrayList;
 
-public class BuzzingRough extends Sketch {
+public class BuzzingV2 extends Sketch {
     int count = 60;
-    float[] offsets = new float[count];
+    float[] offsets = new float[count + 2];
 
     public static void main(String... args) {
-        PApplet.main("drawings.BuzzingRough");
+        PApplet.main("drawings.BuzzingV2");
     }
 
     @Override
@@ -23,34 +23,32 @@ public class BuzzingRough extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
-            for (int i = 0; i < count; i++) {
-                offsets[i] = random(60) - 30;
-            }
-            background(colour.black());
-            stroke(colour.white());
-            strokeWeight(2);
-            noFill();
-            pushMatrix();
-            translate(_width / 2, _height / 2);
-            int iterations = 75;
-            for (int i = 0; i < iterations; i++) {
-                ArrayList<Point> points = new ArrayList<>();
-                float radius = ((_width * 0.88f) / iterations) * i;
-                float amplitude = map(i, 0, iterations, 2, 16);
-                float frequency = 32;
-                drawWaveLoop(points, radius, amplitude, frequency);
-            }
-            popMatrix();
-            save("buzzing-rough", name);
-        });
+            _colours.getColours().forEach((name, colour) -> {
+                noFill();
+                blendMode(BLEND);
+                background(colour.black());
+                strokeWeight(5);
+                strokeJoin(ROUND);
+                pushMatrix();
+                translate(_width / 2, _height / 2);
+                int iterations = 90; // << last change was 90
+                for (int i = 0; i < iterations; i++) {
+                    ArrayList<Point> points = new ArrayList<>();
+                    float radius = ((_width * 0.98f) / iterations) * i;
+                    float amplitude = map(i, 0, iterations, 0, 12);
+                    float frequency = 48;
+                    stroke(colour.white());
+                    drawWaveLoop(points, radius, amplitude, frequency);
+                }
+                popMatrix();
+                save("buzzing-v2", name);
+            });
     }
 
     private void drawWaveLoop(ArrayList<Point> points, float radius, float amplitude, float frequency) {
-        for (int j = count - 1; j > 0; j--) {
+        for (int j = count + 1; j > 0; j--) {
             float angle = (j / (float) count) * TAU;
             Point p = sineAroundCircle(0, 0, radius, amplitude, angle, frequency, offsets[j]);
-            offsets[j] = offsets[j] * 1.07f;
             points.add(p);
         }
 

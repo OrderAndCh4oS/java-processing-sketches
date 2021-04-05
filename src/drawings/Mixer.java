@@ -14,31 +14,29 @@ public class Mixer extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024);
+        super.settings(3600, 3600);
     }
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
-            background(0xff000000);
-            fill(0xffffffff);
-            int step = randomInt(2, 4);
-            float lineWidth = random(20, 30);
-            float padding = random(15, 20);
-            float wave = 0.12f;
+        _colours.getColours("warm-bw", "candy").forEach((name, colour) -> {
+            int step = randomInt(9, 24);
+            float lineWidth = random(320, 640);
+            float padding = random(60, 90);
+            float wave = 0.28f;
             int c1 = colour.rand();
             int c2 = colour.rand();
             while (c2 == c1) {
                 c2 = colour.rand();
             }
-            background(c1);
-            drawTexture(colour.black(), 0.6f, 0.6f);
+            background(colour.black());
+            strokeCap(SQUARE);
             for (int x = -30; x < _width; x += lineWidth - padding) {
                 float a = 0;
                 int offsetY = (x % step);
-                strokeWeight(random(1, step));
-                stroke(colour.rand());
-                for (int y = -10; y < _height; y += step) {
+                strokeWeight(random(2, step));
+                stroke(colour.randWithWhite());
+                for (int y = -30; y < _height; y += step + 3) {
                     float dX = sin(a) * 40;
                     float newX = dX - dX / 2;
                     line(
@@ -53,7 +51,7 @@ public class Mixer extends Sketch {
                 padding = random(14, 22);
             }
 
-            save("mixer", name);
+            save("mixer-v2", name);
         });
     }
 }
