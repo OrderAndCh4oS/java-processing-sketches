@@ -42,6 +42,7 @@ abstract public class Sketch extends PApplet {
     public void setup() {
         sketch();
         println("~~Fin~~");
+        System.exit(0);
     }
 
     public void draw() {

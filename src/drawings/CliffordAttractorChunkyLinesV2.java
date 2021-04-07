@@ -22,14 +22,14 @@ public class CliffordAttractorChunkyLinesV2 extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(2048, 2048, P2D);
+        super.settings(4800, 4800, P2D);
         smooth(8);
     }
 
     @Override
     public void sketch() {
         for (int iteration = 0; iteration < 5; iteration++) {
-            _colours.getColours("constructivist-real", "order-and-chaos", "candy").forEach((name, colour) -> {
+            _colours.getColours("constructivist-real").forEach((name, colour) -> {
                 a = random(1) * 6 - 3;
                 b = random(1) * 6 - 3;
                 c = random(1) * 4 - 2;
@@ -66,7 +66,7 @@ public class CliffordAttractorChunkyLinesV2 extends Sketch {
                 AttractorPoint attractorPointB = attractorPoints.get(i + 1).clone();
                 ArrayList<Point> pointsA = new ArrayList<>();
                 ArrayList<Point> pointsB = new ArrayList<>();
-                for (int j = 0; j < 420; j++) {
+                for (int j = 0; j < 720; j++) {
                     pointsA.add(attractorPointA.getPoint());
                     pointsB.add(attractorPointB.getPoint());
                 }
@@ -82,17 +82,6 @@ public class CliffordAttractorChunkyLinesV2 extends Sketch {
             }
         } catch (CloneNotSupportedException e) {
             e.printStackTrace();
-        }
-    }
-
-    private void drawAttractorPaths(ArrayList<AttractorPoint> attractorPoints, ArrayList<Line> lines, Point lastPoint) {
-        for (AttractorPoint attractorPoint : attractorPoints) {
-            beginShape();
-            for (int i = 0; i < 250; i++) {
-                Point p = attractorPoint.getPoint();
-                curveVertex(p.x(), p.y());
-            }
-            endShape();
         }
     }
 
@@ -146,8 +135,8 @@ public class CliffordAttractorChunkyLinesV2 extends Sketch {
             _vy += sin(value) * 0.66; // 0.5
             _x += _vx;
             _y += _vy;
-            _vx *= 0.85;
-            _vy *= 0.85;
+            _vx *= 0.88;
+            _vy *= 0.88;
             return new Point(_x, _y);
         }
 
@@ -155,7 +144,7 @@ public class CliffordAttractorChunkyLinesV2 extends Sketch {
             // clifford attractor
             // http://paulbourke.net/fractals/clifford/
 
-            float scale = 0.0035f;
+            float scale = 0.0015f;
             float dx = (_x - width / 2f) * scale;
             float dy = (_y - height / 2f) * scale;
 

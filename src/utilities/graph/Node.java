@@ -3,12 +3,29 @@ package utilities.graph;
 import utilities.Point;
 
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class Node {
+    String _name;
+    String _uuid;
     private Point _point;
-    private ArrayList<Edge> edges = new ArrayList<>();
+    private final ArrayList<Edge> edges = new ArrayList<>();
+
+    public String getUuid() {
+        return _uuid;
+    }
+
+    public String getName() {
+        return _name;
+    }
+
+    public Node(String name, Point point) {
+        this(point);
+        this._name = name;
+    }
 
     public Node(Point point) {
+        this._uuid = UUID.randomUUID().toString();
         try {
             _point = point.clone();
         } catch (CloneNotSupportedException e) {

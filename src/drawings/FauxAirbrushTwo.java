@@ -14,20 +14,22 @@ public class FauxAirbrushTwo extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024);
+        super.settings(2048, 2048);
     }
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
-            background(colour.black());
-            for (int i = 0; i < 12; i++) {
-                for (int j = 0; j < 12; j++) {
-                    square(_width / 12 * i, _height / 12 * j, _width / 12, _height / 12, Direction.rand(), QUARTIC, EASE_IN, colour.rand());
+        for(int iter = 0; iter < 10; iter++) {
+            _colours.getColours("constructivist").forEach((name, colour) -> {
+                background(colour.black());
+                for (int i = 0; i < 12; i++) {
+                    for (int j = 0; j < 12; j++) {
+                        square(_width / 12 * i, _height / 12 * j, _width / 12, _height / 12, Direction.rand(), CUBIC, EASE_IN, colour.rand());
+                    }
                 }
-            }
-            save("faux-airbrush-two", name);
-        });
+                save("faux-airbrush-two-v2", name);
+            });
+        }
     }
 
     void square(float x, float y, float width, float height, Direction direction, int type, int ease, int colour) {

@@ -8,10 +8,9 @@ import java.util.ArrayList;
 import static utilities.Random.randomInt;
 
 public class Graph {
-    protected final ArrayList<Node> nodes = new ArrayList<Node>();
+    protected final ArrayList<Node> nodes = new ArrayList<>();
+    protected final ArrayList<Edge> edges = new ArrayList<>();
 
-    public Graph() {
-    }
 
     public void addNode(Point point) {
         nodes.add(new Node(point));
@@ -41,5 +40,49 @@ public class Graph {
 
     public Node getRandomNode() {
         return nodes.get(randomInt(0, nodes.size() - 1));
+    }
+
+    public void addConnection(String srcNodeName, String destinationNodeName) {
+        try {
+            Node sourceNode = findNode(srcNodeName);
+            Node destinationNode = findNode(destinationNodeName);
+            if (!hasConnection(sourceNode, destinationNode)) {
+                Edge edge = new Edge(sourceNode, destinationNode);
+                edges.add(edge);
+                sourceNode.addEdge(destinationNode);
+            }
+        } catch (NotFoundException e) {
+            System.exit(1);
+        }
+    }
+
+    public boolean hasConnection(Node source, Node destination) {
+        for (Edge e : edges) {
+            if (e.source() == source && e.destination() == destination) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public Node findNode(String nodeName) throws NotFoundException {
+        for (Node n : nodes) {
+            if (n.getName().equals(nodeName)) {
+                return n;
+            }
+        }
+
+        throw new NotFoundException("Node not found");
+    }
+
+    public ArrayList<Edge> getEdges() {
+        return edges;
+    }
+}
+
+class NotFoundException extends Exception {
+    public NotFoundException(String errorMessage) {
+        super(errorMessage);
     }
 }
