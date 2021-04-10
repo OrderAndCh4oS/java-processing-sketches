@@ -1,8 +1,8 @@
 package utilities.graph;
 
-import java.util.ArrayList;
+import utilities.Line;
 
-import static processing.core.PApplet.println;
+import java.util.ArrayList;
 
 public class GraphLoops extends GraphScan {
 
@@ -81,7 +81,7 @@ public class GraphLoops extends GraphScan {
         int found = 0;
         boolean pathsToExplore = true;
         int i = 0;
-        while (pathsToExplore && i < n*n) {
+        while (pathsToExplore && i < n * n) {
             if (found >= n) break;
             ArrayList<Path> newPaths = new ArrayList<>();
             int newPathCount = 0;
@@ -110,5 +110,24 @@ public class GraphLoops extends GraphScan {
         }
 
         return foundPaths;
+    }
+
+    public boolean addConnectionNoIntersects(Node sourceNode, Node destinationNode) {
+        boolean isIntersect = false;
+        Line line = new Line(sourceNode.getPoint(), destinationNode.getPoint());
+        for (Edge edge : edges) {
+            Line otherLine = edge.line();
+            if (line.isIntersect(otherLine) && !line.sharesSamePoint(otherLine)) {
+                isIntersect = true;
+                break;
+            }
+        }
+        if (hasConnection(sourceNode, destinationNode) || isIntersect) {
+            return false;
+        }
+        Edge edge = new Edge(sourceNode, destinationNode);
+        edges.add(edge);
+        sourceNode.addEdge(destinationNode);
+        return true;
     }
 }

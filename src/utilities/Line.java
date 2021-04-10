@@ -91,6 +91,10 @@ public class Line {
         return theta + PI;
     }
 
+    public boolean sharesSamePoint(Line l2) {
+        return _p.equals(l2.p()) || _p.equals(l2.q()) || _q.equals(l2.p()) || _q.equals(l2.q());
+    }
+
     public float maxX() {
         return max(_p.x(), _q.x());
     }

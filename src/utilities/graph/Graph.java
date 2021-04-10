@@ -42,7 +42,7 @@ public class Graph {
         return nodes.get(randomInt(0, nodes.size() - 1));
     }
 
-    public void addConnection(String srcNodeName, String destinationNodeName) {
+    public void addConnectionByNames(String srcNodeName, String destinationNodeName) {
         try {
             Node sourceNode = findNode(srcNodeName);
             Node destinationNode = findNode(destinationNodeName);

@@ -3,7 +3,6 @@ package drawings;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Point;
-import utilities.graph.Edge;
 import utilities.graph.GraphLoops;
 import utilities.graph.Node;
 import utilities.graph.Path;
@@ -44,7 +43,7 @@ public class GraphGrid extends Sketch {
                     while (nameOne == nameTwo) {
                         nameTwo = (int) random(12);
                     }
-                    graph.addConnection(Integer.toString(nameOne), Integer.toString(nameTwo));
+                    graph.addConnectionByNames(Integer.toString(nameOne), Integer.toString(nameTwo));
                 }
             }
             int x = 0;
