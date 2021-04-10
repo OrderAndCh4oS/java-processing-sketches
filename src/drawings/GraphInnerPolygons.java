@@ -1,22 +1,20 @@
 package drawings;
 
-import enums.Direction;
 import processing.core.PApplet;
+import processing.core.PShape;
 import sketch.Sketch;
 import utilities.Point;
+import utilities.Polygon;
 import utilities.graph.GraphLoops;
 import utilities.graph.Node;
 import utilities.graph.Path;
 
 import java.util.ArrayList;
 
-import static utilities.Map.EASE_IN_OUT;
-import static utilities.Map.SINUSOIDAL;
-
 public class GraphInnerPolygons extends Sketch {
 
     public static void main(String... args) {
-        PApplet.main("drawings.GraphNoIntersect");
+        PApplet.main("drawings.GraphInnerPolygons");
     }
 
     @Override
@@ -30,10 +28,8 @@ public class GraphInnerPolygons extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            drawTexture(colour.rand(), 0.75f, Direction.TOP, SINUSOIDAL, EASE_IN_OUT);
-            stroke(colour.black());
-            strokeWeight(2);
-            int noOfLines = 256;
+            int noOfLines = 300;
+            ArrayList<Polygon> polygons = new ArrayList<>();
             GraphLoops graph = new GraphLoops();
             for (int i = 0; i < noOfLines / 3; i++) {
                 Point point = new Point(
@@ -50,7 +46,7 @@ public class GraphInnerPolygons extends Sketch {
                 do {
                     nodeTwo = graph.getRandomNode();
                 } while (nodeOne == nodeTwo);
-                if (graph.addConnectionNoIntersects(nodeOne, nodeTwo)) {
+                if (graph.addConnection(nodeOne, nodeTwo)) {
                     lineCount++;
                 }
                 ;
@@ -58,15 +54,30 @@ public class GraphInnerPolygons extends Sketch {
             for (Node node : graph.getNodes()) {
                 ArrayList<Path> paths = graph.findNShortestPathsToSelf(node, node.edgeCount());
                 for (Path path : paths) {
-                    fill(colour.rand());
-                    beginShape();
-                    for (Point p : path.getPoints()) {
-                        vertex(p.x(), p.y());
-                    }
-                    endShape(CLOSE);
+                    polygons.add(new Polygon(path.getPoints().toArray(new Point[0])));
                 }
             }
-            save("graph-no-intersect", name);
+            for (Polygon polygon : polygons) {
+                for (int band = 0; band < 5; band++) {
+                    PShape s = createShape();
+                    polygon.scale(0.85f);
+                    noStroke();
+                    fill(colour.randWithBlack());
+                    s.beginShape();
+                    for (Point p : polygon.getPoints()) {
+                        s.vertex(p.x(), p.y());
+                    }
+                    polygon.scale(0.85f);
+                    s.beginContour();
+                    for (Point p : polygon.getReversedPoints()) {
+                        s.vertex(p.x(), p.y());
+                    }
+                    s.endContour();
+                    s.endShape(CLOSE);
+                    shape(s);
+                }
+            }
+            save("graph-inner-polygons-v2", name);
         });
     }
 }

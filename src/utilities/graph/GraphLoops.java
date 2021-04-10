@@ -130,4 +130,14 @@ public class GraphLoops extends GraphScan {
         sourceNode.addEdge(destinationNode);
         return true;
     }
+
+    public boolean addConnection(Node sourceNode, Node destinationNode) {
+        if (hasConnection(sourceNode, destinationNode)) {
+            return false;
+        }
+        Edge edge = new Edge(sourceNode, destinationNode);
+        edges.add(edge);
+        sourceNode.addEdge(destinationNode);
+        return true;
+    }
 }
