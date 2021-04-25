@@ -53,6 +53,13 @@ public class Colours {
         return _black;
     }
 
+    public int blackOrWhite() {
+        ArrayList<Integer> blackAndWhite = new ArrayList<>();
+        blackAndWhite.add(_black);
+        blackAndWhite.add(_white);
+        return blackAndWhite.get(new Random().nextInt(blackAndWhite.size()));
+    }
+
     public int white() {
         return _white;
     }

@@ -1,7 +1,6 @@
 package drawings;
 
 import processing.core.PApplet;
-import processing.core.PShape;
 import sketch.Sketch;
 import utilities.Point;
 import utilities.Polygon;
@@ -26,10 +25,10 @@ public class GraphInnerPolygonsNoIntersects extends Sketch {
 
     @Override
     public void sketch() {
-        for(int iter = 0; iter < 10; iter++) {
+        for (int iter = 0; iter < 10; iter++) {
             _colours.getColours("salmon-lemon").forEach((name, colour) -> {
                 background(colour.black());
-                int noOfLines = 12g0;
+                int noOfLines = 120;
                 ArrayList<Polygon> polygons = new ArrayList<>();
                 GraphLoops graph = new GraphLoops();
                 for (int i = 0; i < noOfLines / 3; i++) {
@@ -50,7 +49,6 @@ public class GraphInnerPolygonsNoIntersects extends Sketch {
                     if (graph.addConnectionNoIntersects(nodeOne, nodeTwo)) {
                         lineCount++;
                     }
-                    ;
                 }
                 for (Node node : graph.getNodes()) {
                     ArrayList<Path> paths = graph.findNShortestPathsToSelf(node, node.edgeCount());
@@ -59,24 +57,14 @@ public class GraphInnerPolygonsNoIntersects extends Sketch {
                     }
                 }
                 for (Polygon polygon : polygons) {
-                    for (int band = 0; band < 5; band++) {
-                        PShape s = createShape();
-                        polygon.scale(0.85f);
-                        noStroke();
-                        fill(colour.randWithBlack());
-                        s.beginShape();
-                        for (Point p : polygon.getPoints()) {
-                            s.vertex(p.x(), p.y());
-                        }
-                        polygon.scale(0.85f);
-                        s.beginContour();
-                        for (Point p : polygon.getReversedPoints()) {
-                            s.vertex(p.x(), p.y());
-                        }
-                        s.endContour();
-                        s.endShape(CLOSE);
-                        shape(s);
+                    noStroke();
+                    fill(colour.randWithBlack());
+                    beginShape();
+                    for (Point p : polygon.getPoints()) {
+                        vertex(p.x(), p.y());
                     }
+                    polygon.scale(0.85f);
+                    endShape(CLOSE);
                 }
                 save("graph-inner-polygons", name);
             });

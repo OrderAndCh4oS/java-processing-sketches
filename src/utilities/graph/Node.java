@@ -6,18 +6,10 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 public class Node {
+    private final ArrayList<Edge> edges = new ArrayList<>();
     String _name;
     String _uuid;
     private Point _point;
-    private final ArrayList<Edge> edges = new ArrayList<>();
-
-    public String getUuid() {
-        return _uuid;
-    }
-
-    public String getName() {
-        return _name;
-    }
 
     public Node(String name, Point point) {
         this(point);
@@ -33,11 +25,23 @@ public class Node {
         }
     }
 
+    public String getUuid() {
+        return _uuid;
+    }
+
+    public String getName() {
+        return _name;
+    }
+
     public void addEdge(Node toNode) {
         Edge newEdge = new Edge(this, toNode);
-        if(edges.contains(newEdge)) return;
+        if (edges.contains(newEdge)) return;
         edges.add(newEdge);
         toNode.addEdge(this);
+    }
+
+    public void removeEdge(Edge edge) {
+        edges.remove(edge);
     }
 
     public Point getPoint() {
@@ -48,5 +52,7 @@ public class Node {
         return edges;
     }
 
-    public int edgeCount() {return edges.size();}
+    public int edgeCount() {
+        return edges.size();
+    }
 }

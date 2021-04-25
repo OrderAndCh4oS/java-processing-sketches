@@ -41,8 +41,7 @@ abstract public class Sketch extends PApplet {
 
     public void setup() {
         sketch();
-        println("~~Fin~~");
-        System.exit(0);
+        exit();
     }
 
     public void draw() {
@@ -85,7 +84,48 @@ abstract public class Sketch extends PApplet {
             for (int y = 0; y < _height; y++) {
                 if (random(1) < density) {
                     stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+                    point(x, y, -100);
+                }
+            }
+        }
+    }
+
+    public void drawTexture(int colour, float density, float alpha, float radius) {
+        strokeCap(ROUND);
+        strokeWeight(1);
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                float distance = getDistance(_midPoint, new Point(x, y));
+                if (random(1) < map2(distance, 0, radius, 0, density, QUADRATIC, EASE_IN)) {
+                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     point(x, y);
+                }
+            }
+        }
+    }
+
+    public void drawTexture3d(int colour, float density, float alpha) {
+        strokeCap(ROUND);
+        strokeWeight(1);
+        for (int x = -750; x < _width + 750; x++) {
+            for (int y = -750; y < _height + 750; y++) {
+                if (random(1) < density) {
+                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+                    point(x, y, -1000);
+                }
+            }
+        }
+    }
+
+    public void drawTexture3d(int colour, float density, float alpha, float radius) {
+        strokeCap(ROUND);
+        strokeWeight(1);
+        for (int x = -750; x < _width + 750; x++) {
+            for (int y = -750; y < _height + 750; y++) {
+                float distance = getDistance(_midPoint, new Point(x, y));
+                if (random(1) < map2(distance, 0, radius, 0, density, QUADRATIC, EASE_IN)) {
+                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+                    point(x, y, -1000);
                 }
             }
         }
@@ -253,19 +293,6 @@ abstract public class Sketch extends PApplet {
         return random(1) > 0.75 ? 0 : random(1) > 0.5 ? -random(1) : random(1);
     }
 
-    public void drawTexture(int colour, float density, float alpha, float radius) {
-        strokeCap(ROUND);
-        strokeWeight(1);
-        for (int x = 0; x < _width; x++) {
-            for (int y = 0; y < _height; y++) {
-                float distance = getDistance(_midPoint, new Point(x, y));
-                if (random(1) < map2(distance, 0, radius, 0, density, QUADRATIC, EASE_IN)) {
-                    stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-                    point(x, y);
-                }
-            }
-        }
-    }
 
     public void drawBenDayTexture(int colour, float diameter, float scale) {
         fill(colour);
