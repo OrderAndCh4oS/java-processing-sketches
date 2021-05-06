@@ -18,7 +18,6 @@ public class Ellipse extends Sketch {
     @Override
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
-            print('.');
             float scale = 2048;
             blendMode(NORMAL);
             background(colour.black());
