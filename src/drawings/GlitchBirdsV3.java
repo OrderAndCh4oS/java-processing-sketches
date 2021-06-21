@@ -1,5 +1,6 @@
 package drawings;
 
+import enums.Direction;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Line;
@@ -8,7 +9,7 @@ import utilities.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GlitchBirdsV1 extends Sketch {
+public class GlitchBirdsV3 extends Sketch {
 
     float a;
     float b;
@@ -16,7 +17,7 @@ public class GlitchBirdsV1 extends Sketch {
     float d;
 
     public static void main(String... args) {
-        PApplet.main("drawings.GlitchBirdsV1");
+        PApplet.main("drawings.GlitchBirdsV3");
     }
 
     @Override
@@ -28,64 +29,68 @@ public class GlitchBirdsV1 extends Sketch {
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
-            a = random(1) * 6 - 3;
-            b = random(1) * 6 - 3;
-            c = random(1) * 4 - 2;
-            d = random(1) * 4 - 2;
-            blendMode(NORMAL);
-            background(colour.white());
-            drawWaveTexture(colour, 0.25f, 6, 4, 1, 255 * 0.7f);
-            fill(colour.white());
-            stroke(colour.black());
-            strokeCap(MITER);
-            float margin = 100;
-            rect(margin, margin, _width - margin * 2, (_height - margin * 2) + 1);
-            strokeWeight(3);
-            noFill();
-            blendMode(MULTIPLY);
-            ArrayList<AttractorPoint> attractorPointsLeft = new ArrayList<>();
-            ArrayList<AttractorPoint> attractorPointsRight = new ArrayList<>();
-            ArrayList<AttractorPoint> attractorPointsTop = new ArrayList<>();
-            ArrayList<AttractorPoint> attractorPointsBottom = new ArrayList<>();
-            strokeCap(ROUND);
-            int c1 = colour.rand();
-            int c2;
-            do {
-                c2 = colour.rand();
-            } while (c1 == c2);
-            int c3 = colour.rand();
-            int c4 = colour.rand();
-            if (colour.getAll().size() > 2) {
+        for (int iter = 0; iter < 10; iter++) {
+            _colours.getColours().forEach((name, colour) -> {
+                float margin = 100;
+                blendMode(NORMAL);
+                //                drawFibreTexture(colour.black(), 400000, 0.3f, 0.7f);                fill(colour.white());
+                //                stroke(colour.black());
+                //                strokeCap(MITER);
+                //                rect(margin, margin, _width - margin * 2, (_height - margin * 2) + 1);
+                //                strokeWeight(3);
+                //                noFill();
+//                drawWaveTexture(colour, 0.25f, 6, 4, 1, 255 * 0.7f);
+//                drawLineTextureWithGaps(colour.black(), _height / (_height / 5f), 1, Direction.TOP);
+                a = random(1) * 6 - 3;
+                b = random(1) * 6 - 3;
+                c = random(1) * 4 - 2;
+                d = random(1) * 4 - 2;
+                background(colour.white());
+                blendMode(MULTIPLY);
+                ArrayList<AttractorPoint> attractorPointsLeft = new ArrayList<>();
+                ArrayList<AttractorPoint> attractorPointsRight = new ArrayList<>();
+                ArrayList<AttractorPoint> attractorPointsTop = new ArrayList<>();
+                ArrayList<AttractorPoint> attractorPointsBottom = new ArrayList<>();
+                strokeCap(ROUND);
+                int c1 = colour.rand();
+                int c2;
                 do {
-                    c3 = colour.rand();
-                } while (c1 == c3 || c2 == c3);
-            }
-            if (colour.getAll().size() > 3) {
-                do {
-                    c4 = colour.rand();
-                } while (c1 == c4 || c2 == c4 || c3 == c4);
-            }
-            float innerMargin = margin * 1.5f;
-            for (int i = 0; i < 150; i++) {
-                attractorPointsTop.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-                attractorPointsBottom.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-                attractorPointsLeft.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-                attractorPointsRight.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-            }
-            ArrayList<Line> lines = new ArrayList<>();
-            Point lastPoint = new Point();
-            noStroke();
-            fill(c1);
-            drawAttractorPaths(attractorPointsLeft, lines, lastPoint);
-            fill(c2);
-            drawAttractorPaths(attractorPointsTop, lines, lastPoint);
-            fill(c3);
-            drawAttractorPaths(attractorPointsBottom, lines, lastPoint);
-            fill(c4);
-            drawAttractorPaths(attractorPointsRight, lines, lastPoint);
-            save("glitch-birds", name);
-        });
+                    c2 = colour.rand();
+                } while (c1 == c2);
+                int c3 = colour.rand();
+                int c4 = colour.rand();
+                if (colour.getAll().size() > 2) {
+                    do {
+                        c3 = colour.rand();
+                    } while (c1 == c3 || c2 == c3);
+                }
+                if (colour.getAll().size() > 3) {
+                    do {
+                        c4 = colour.rand();
+                    } while (c1 == c4 || c2 == c4 || c3 == c4);
+                }
+                float innerMargin = margin * 1.5f;
+                for (int i = 0; i < 150; i++) {
+                    attractorPointsTop.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+                    attractorPointsBottom.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+                    attractorPointsLeft.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+                    attractorPointsRight.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+                }
+                ArrayList<Line> lines = new ArrayList<>();
+                Point lastPoint = new Point();
+                noStroke();
+                fill(c1);
+                drawAttractorPaths(attractorPointsLeft, lines, lastPoint);
+                fill(c2);
+                drawAttractorPaths(attractorPointsTop, lines, lastPoint);
+                fill(c3);
+                drawAttractorPaths(attractorPointsBottom, lines, lastPoint);
+                fill(c4);
+                drawAttractorPaths(attractorPointsRight, lines, lastPoint);
+                save("glitch-birds-v4", String.format("%s-glitch-birds_%s_%s_%s_%s", name, a, b, c, d));
+//                save("glitch-birds-v4", name);
+            });
+        }
     }
 
     private void drawAttractorPaths(ArrayList<AttractorPoint> attractorPoints, ArrayList<Line> lines, Point lastPoint) {
@@ -95,7 +100,7 @@ public class GlitchBirdsV1 extends Sketch {
             ArrayList<Point> pointsCombined = new ArrayList<>();
             for (int j = 0; j < 100; j++) {
                 pointsA.add(attractorPoints.get(i).getPoint());
-                pointsB.add(attractorPoints.get(i+1).getPoint());
+                pointsB.add(attractorPoints.get(i + 1).getPoint());
             }
             Collections.reverse(pointsB);
             pointsCombined.addAll(pointsA);
