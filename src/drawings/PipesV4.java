@@ -9,70 +9,89 @@ import java.util.ArrayList;
 
 import static utilities.Bezier.cubicBezier;
 
-public class DragonPalaceV5 extends Sketch {
+public class PipesV4 extends Sketch {
 
     public static void main(String... args) {
-        PApplet.main("drawings.DragonPalaceV5");
+        PApplet.main("drawings.PipesV4");
     }
 
     @Override
     public void settings() {
         _save = true;
-        super.settings(4096, 4096, P2D);
+        super.settings(2048, 2048, P2D);
         smooth(8);
     }
 
     @Override
     public void sketch() {
-        for (int iter = 0; iter < 5; iter++) {
-            _colours.getColours().forEach((name, colour) -> {
-                background(colour.white());
-                drawTexture(colour.rand(), 0.2f, 0.1f);
-                drawTexture(colour.rand(), 0.9f, 0.2f, 2048.0f);
+        for (int iter = 0; iter < 10; iter++) {
+            _colours.getColours("orange-v2").forEach((name, colour) -> {
+                boolean colourModeRoll = random(1) > 0.5;
+                int bg = colourModeRoll ? colour.white() : colour.black();
+                background(bg);
+                if(colourModeRoll) {
+                    drawTexture(colour.black(), 0.2f, 0.15f);
+                    drawTexture(colour.black(), 0.9f, 0.2f, 1024f);
+                } else {
+                    drawTexture(colour.rand(), 0.1f, 0.125f);
+                    drawTexture(colour.rand(), 0.1f, 0.125f, 1024f);
+                }
                 strokeCap(ROUND);
-                fill(colour.rand());
-                strokeWeight(2);
-                println(name);
+                strokeWeight(0.66f);
+                stroke(colour.black(), 0.25f * 255);
                 squiggleGroup(colour);
-                save("dragons-palace-v4", name);
+                save("pipes-v4.3", name);
             });
         }
     }
 
     private void squiggleGroup(Colours colour) {
+        float high = _width * 0.185f;
+        float low = _width * 0.165f;
+        println(high);
+        println(low);
         float frequencyXA = random(0.05f, 1);
-        float phaseXA = random(640, 960);
-        float amplitudeXA = random(640, 960);
+        float phaseXA = random(low, high);
+        float amplitudeXA = random(low, high);
         float dampingXA = random(0.0005f, 0.01f);
 
         float frequencyXB = random(0.05f, 1);
-        float phaseXB = random(640, 960);
-        float amplitudeXB = random(640, 960);
+        float phaseXB = random(low, high);
+        float amplitudeXB = random(low, high);
         float dampingXB = random(0.0005f, 0.01f);
 
         float frequencyYA = random(0.05f, 1);
-        float phaseYA = random(640, 960);
-        float amplitudeYA = random(640, 960);
+        float phaseYA = random(low, high);
+        float amplitudeYA = random(low, high);
         float dampingYA = random(0.0005f, 0.01f);
 
         float frequencyYB = random(0.05f, 1);
-        float phaseYB = random(640, 960);
-        float amplitudeYB = random(640, 960);
+        float phaseYB = random(low, high);
+        float amplitudeYB = random(low, high);
         float dampingYB = random(0.0005f, 0.01f);
 
-        float amplitudeXAStep = random(-40, 40);
-        float amplitudeYAStep = random(-40, 40);
-        float amplitudeXBStep = random(-40, 40);
-        float amplitudeYBStep = random(-40, 40);
+        float amplitudeXAStep = random(-18, 18);
+        float amplitudeYAStep = random(-18, 18);
+        float amplitudeXBStep = random(-18, 18);
+        float amplitudeYBStep = random(-18, 18);
 
-        stroke(colour.black());
-        for (int i = 0; i < 12; i++) {
+        while (abs(frequencyXA - frequencyXB) < 0.15) {
+            frequencyXB = random(0.05f, 1);
+        }
+
+        while (abs(frequencyYA - frequencyYB) < 0.15) {
+            frequencyYB = random(0.05f, 1);
+        }
+
+        for (int i = 0; i < random(6, 9); i++) {
             amplitudeXA += amplitudeXAStep;
             amplitudeYA += amplitudeYAStep;
             amplitudeXB += amplitudeXBStep;
             amplitudeYB += amplitudeYBStep;
-            fill(colour.randWithWhite());
+
             squiggle(
+                    i,
+                    colour.getAll(),
                     frequencyXA, phaseXA, amplitudeXA, dampingXA,
                     frequencyXB, phaseXB, amplitudeXB, dampingXB,
                     frequencyYA, phaseYA, amplitudeYA, dampingYA,
@@ -82,6 +101,8 @@ public class DragonPalaceV5 extends Sketch {
     }
 
     private void squiggle(
+            int iteration,
+            ArrayList<Integer> colourArray,
             float _frequencyXA, float _phaseXA, float _amplitudeXA, float _dampingXA,
             float _frequencyXB, float _phaseXB, float _amplitudeXB, float _dampingXB,
             float _frequencyYA, float _phaseYA, float _amplitudeYA, float _dampingYA,
@@ -102,7 +123,7 @@ public class DragonPalaceV5 extends Sketch {
                 lastPoint = new Point(x, y);
                 continue;
             }
-            for (float t = 1; t >= 0; t -= 1 / 110f) {
+            for (float t = 1; t >= 0; t -= 1 / 90f) {
                 points.add(cubicBezier(
                         new Point(x, y),
                         new Point(x, lastPoint.y()),
@@ -113,11 +134,17 @@ public class DragonPalaceV5 extends Sketch {
             }
             lastPoint = new Point(x, y);
         }
+
+        int colourOffset = iteration % 2;
+        int j = 0;
         pushMatrix();
         translate(_width / 2, _height / 2);
         for (Point p : points) {
-            ellipse(p.x(), p.y(), 150 * scale + 1, 150 * scale + 1);
-            scale *= 0.9998;
+            if(j % 45 == 0) colourOffset++;
+            fill(colourArray.get(colourOffset % colourArray.size()));
+            ellipse(p.x(), p.y(), 100 * scale + 1, 100 * scale + 1);
+            scale *= 0.99975;
+            j++;
         }
         popMatrix();
     }

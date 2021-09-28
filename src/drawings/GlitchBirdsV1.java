@@ -35,7 +35,7 @@ public class GlitchBirdsV1 extends Sketch {
             d = random(1) * 4 - 2;
             blendMode(NORMAL);
             background(colour.white());
-            drawWaveTexture(colour, 0.25f, 6, 4, 1, 255 * 0.7f);
+            drawWaveTexture(colour.black(), 0.25f, 6, 4, 1, 255 * 0.7f);
             fill(colour.white());
             stroke(colour.black());
             strokeCap(MITER);

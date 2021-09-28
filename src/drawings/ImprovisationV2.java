@@ -16,43 +16,42 @@ public class ImprovisationV2 extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(4096, 4096, P3D);
+        super.settings(2048, 2048, P3D);
         smooth(8);
     }
 
     @Override
     public void sketch() {
-        _colours.getColours().forEach((name, colour) -> {
-            background(colour.white());
-            noFill();
-            drawTexture(colour.rand(), 0.1f, 0.1f);
-            drawTexture(colour.rand(), 0.9f, 0.2f, 2048);
-            strokeCap(ROUND);
-            int c1 = colour.rand();
-            int c2 = colour.rand();
-            while (c2 == c1) {
-                c2 = colour.rand();
-            }
-            int c3 = colour.rand();
-            while (c3 == c1 || c3 == c2) {
-                c3 = colour.rand();
-            }
-            stroke(c1);
-            squiggle(Direction.LEFT);
-            squiggle(Direction.RIGHT);
-            stroke(c2);
-            squiggle(Direction.TOP);
-            stroke(c3);
-            squiggle(Direction.BOTTOM);
-            save("improvisation-v2", name);
-        });
+        for(int iter = 0; iter < 10; iter++) {
+            _colours.getColours().forEach((name, colour) -> {
+                background(colour.black());
+                noFill();
+                drawTexture(colour.rand(), 0.1f, 0.1f);
+                drawTexture(colour.rand(), 0.9f, 0.2f, 1048);
+                strokeCap(ROUND);
+                int c1 = colour.randWithWhite();
+                int c2 = colour.black();
+                int c3 = colour.randWithWhite();
+                while (c3 == c1) {
+                    c3 = colour.randWithWhite();
+                }
+                stroke(c1);
+                squiggle(Direction.LEFT);
+                squiggle(Direction.RIGHT);
+                stroke(c2);
+                squiggle(Direction.TOP);
+                stroke(c3);
+                squiggle(Direction.BOTTOM);
+                save("improvisation-v2", name);
+            });
+        }
     }
 
     private void squiggle(Direction side) {
-        Harmonograph xA = new Harmonograph(random(0.05f, 1), random(320, 720), random(320, 1440), random(0.0005f, 0.01f));
-        Harmonograph xB = new Harmonograph(random(0.05f, 1), random(320, 720), random(320, 1440), random(0.0005f, 0.01f));
-        Harmonograph yA = new Harmonograph(random(0.05f, 1), random(320, 720), random(320, 1440), random(0.0005f, 0.01f));
-        Harmonograph yB = new Harmonograph(random(0.05f, 1), random(320, 720), random(320, 1440), random(0.0005f, 0.01f));
+        Harmonograph xA = new Harmonograph(random(0.05f, 1), random(320, 480), random(320, 770), random(0.0005f, 0.01f));
+        Harmonograph xB = new Harmonograph(random(0.05f, 1), random(320, 480), random(320, 770), random(0.0005f, 0.01f));
+        Harmonograph yA = new Harmonograph(random(0.05f, 1), random(320, 480), random(320, 770), random(0.0005f, 0.01f));
+        Harmonograph yB = new Harmonograph(random(0.05f, 1), random(320, 480), random(320, 770), random(0.0005f, 0.01f));
         ArrayList<Point> points = new ArrayList<>();
         for (int i = 0; i < 150; i += 10) {
             float x = xA.f(i) + xB.f(i);

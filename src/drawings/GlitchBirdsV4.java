@@ -1,5 +1,6 @@
 package drawings;
 
+import enums.Direction;
 import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.Line;
@@ -8,7 +9,7 @@ import utilities.Point;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class GlitchBirdsV2 extends Sketch {
+public class GlitchBirdsV4 extends Sketch {
 
     float a;
     float b;
@@ -16,35 +17,36 @@ public class GlitchBirdsV2 extends Sketch {
     float d;
 
     public static void main(String... args) {
-        PApplet.main("drawings.GlitchBirdsV2");
+        PApplet.main("drawings.GlitchBirdsV4");
     }
 
     @Override
     public void settings() {
         _save = true;
-        super.settings(4096, 4096, P2D);
+        super.settings(1024, 1024, P2D);
         smooth(8);
     }
 
     @Override
     public void sketch() {
-        for (int iter = 0; iter < 10; iter++) {
+//        for (int iter = 0; iter < 10; iter++) {
             _colours.getColours().forEach((name, colour) -> {
+                float margin = 100;
+                blendMode(NORMAL);
+                background(colour.black());
+                stroke(colour.white());
+                strokeCap(MITER);
+                strokeWeight(3);
+//                drawFibreTexture(colour.black(), 400000, 0.3f, 0.7f);                fill(colour.white());
+                drawWaveTexture(colour.white(), 0.33f, 8, 6, 1, 255 * 0.3f);
+//                drawLineTextureWithGaps(colour.white(), _height / (_height / 5f), 1, Direction.TOP);
+                fill(colour.black());
+                rect(margin, margin, _width - margin * 2, (_height - margin * 2) + 1);
                 a = random(1) * 6 - 3;
                 b = random(1) * 6 - 3;
                 c = random(1) * 4 - 2;
                 d = random(1) * 4 - 2;
-                blendMode(NORMAL);
-                background(colour.white());
-                drawWaveTexture(colour.black(), 1, 8, 16, 4, 255 * 0.7f);
-                fill(colour.white());
-                stroke(colour.black());
-                strokeCap(MITER);
-                float margin = 400;
-                rect(margin, margin, _width - margin * 2, (_height - margin * 2) + 1);
-                strokeWeight(3);
                 noFill();
-                blendMode(MULTIPLY);
                 ArrayList<AttractorPoint> attractorPointsLeft = new ArrayList<>();
                 ArrayList<AttractorPoint> attractorPointsRight = new ArrayList<>();
                 ArrayList<AttractorPoint> attractorPointsTop = new ArrayList<>();
@@ -69,25 +71,30 @@ public class GlitchBirdsV2 extends Sketch {
                 }
                 float innerMargin = margin * 1.5f;
                 for (int i = 0; i < 150; i++) {
-                    attractorPointsTop.add(new AttractorPoint(random(innerMargin / 4, 1024 - innerMargin / 4), random(innerMargin / 4, 1024 - innerMargin / 4)));
-                    attractorPointsBottom.add(new AttractorPoint(random(innerMargin / 4, 1024 - innerMargin / 4), random(innerMargin / 4, 1024 - innerMargin / 4)));
-                    attractorPointsLeft.add(new AttractorPoint(random(innerMargin / 4, 1024 - innerMargin / 4), random(innerMargin / 4, 1024 - innerMargin / 4)));
-                    attractorPointsRight.add(new AttractorPoint(random(innerMargin / 4, 1024 - innerMargin / 4), random(innerMargin / 4, 1024 - innerMargin / 4)));
+                    attractorPointsTop.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+                    attractorPointsBottom.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+                    attractorPointsLeft.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+                    attractorPointsRight.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
                 }
                 ArrayList<Line> lines = new ArrayList<>();
                 Point lastPoint = new Point();
+                blendMode(SCREEN);
                 noStroke();
                 fill(c1);
                 drawAttractorPaths(attractorPointsLeft, lines, lastPoint);
+                blendMode(MULTIPLY);
                 fill(c2);
                 drawAttractorPaths(attractorPointsTop, lines, lastPoint);
+                blendMode(SCREEN);
                 fill(c3);
                 drawAttractorPaths(attractorPointsBottom, lines, lastPoint);
+                blendMode(MULTIPLY);
                 fill(c4);
                 drawAttractorPaths(attractorPointsRight, lines, lastPoint);
-                save("glitch-birds-v2", name);
+                save("glitch-birds-v5", String.format("%s-glitch-birds_%s_%s_%s_%s", name, a, b, c, d));
+//                save("glitch-birds-v4", name);
             });
-        }
+//        }
     }
 
     private void drawAttractorPaths(ArrayList<AttractorPoint> attractorPoints, ArrayList<Line> lines, Point lastPoint) {
@@ -176,7 +183,7 @@ public class GlitchBirdsV2 extends Sketch {
             _y += _vy;
             _vx *= 0.85;
             _vy *= 0.85;
-            return new Point(_x * 4, _y * 4);
+            return new Point(_x, _y);
         }
 
         float getValue() {
@@ -184,8 +191,8 @@ public class GlitchBirdsV2 extends Sketch {
             // http://paulbourke.net/fractals/clifford/
 
             float scale = 0.0035f;
-            float dx = (_x - 1024 / 2f) * scale;
-            float dy = (_y - 1024 / 2f) * scale;
+            float dx = (_x - width / 2f) * scale;
+            float dy = (_y - height / 2f) * scale;
 
             float x1 = sin(a * dy) + c * cos(a * dx);
             float y1 = sin(b * dx) + d * cos(b * dy);

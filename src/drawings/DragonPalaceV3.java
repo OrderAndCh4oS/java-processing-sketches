@@ -4,43 +4,6 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.colour.Colours;
 
-/*
-Lemon
-frequencyXA 0.9637483
-phaseXA 600.2138
-amplitudeXA 929.95374
-dampingXA 8.0978195E-4
-frequencyXB 0.28475916
-phaseXB 506.58966
-amplitudeXB 1253.1698
-dampingXB 0.009248902
-frequencyYA 0.13761048
-phaseYA 606.4281
-amplitudeYA 583.8144
-dampingYA 0.0012528216
-frequencyYB 0.5896416
-phaseYB 503.60498
-amplitudeYB 591.1001
-dampingYB 0.001880873
-Mocha
-frequencyXA 0.3041939
-phaseXA 409.56128
-amplitudeXA 1063.2168
-dampingXA 0.001198192
-frequencyXB 0.98111266
-phaseXB 330.69525
-amplitudeXB 474.39072
-dampingXB 0.0068038525
-frequencyYA 0.64915776
-phaseYA 341.74744
-amplitudeYA 1138.2437
-dampingYA 0.00838641
-frequencyYB 0.67633194
-phaseYB 479.08344
-amplitudeYB 991.11444
-dampingYB 0.008452351
-
- */
 public class DragonPalaceV3 extends Sketch {
 
     public static void main(String... args) {

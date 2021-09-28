@@ -1,6 +1,7 @@
 package utilities.colour;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import static utilities.Random.random;
@@ -22,8 +23,39 @@ public class Colours {
         return _colours;
     }
 
+    public ArrayList<Integer> getAllWithWhite() {
+        ArrayList<Integer> coloursWithWhite = new ArrayList<>(_colours);
+        coloursWithWhite.add(_white);
+        return coloursWithWhite;
+    }
+
+    public ArrayList<Integer> getAllWithBlack() {
+        ArrayList<Integer> coloursWithBlack = new ArrayList<>(_colours);
+        coloursWithBlack.add(_black);
+        return coloursWithBlack;
+    }
+
     public Integer get(int i) {
         return _colours.get(i % this._colours.size());
+    }
+
+    public Integer getWithWhite(int i) {
+        ArrayList<Integer> coloursWithWhite = new ArrayList<>(_colours);
+        coloursWithWhite.add(_white);
+        return coloursWithWhite.get(i % coloursWithWhite.size());
+    }
+
+    public Integer getWithBlack(int i) {
+        ArrayList<Integer> coloursWithBlack = new ArrayList<>(_colours);
+        coloursWithBlack.add(_black);
+        return coloursWithBlack.get(i % coloursWithBlack.size());
+    }
+
+    public Integer getWithAll(int i) {
+        ArrayList<Integer> coloursWithAll = new ArrayList<>(_colours);
+        coloursWithAll.add(_black);
+        coloursWithAll.add(_white);
+        return coloursWithAll.get(i % coloursWithAll.size());
     }
 
     public int rand() {

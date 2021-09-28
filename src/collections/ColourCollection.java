@@ -27,8 +27,6 @@ public class ColourCollection {
         _colours.put("sunset-beach", new Colours(0xff1C1714, 0xff, 0xffFF6E30, 0xff4DBEFF, 0xffD9CA9C, 0xffFFC508));
         _colours.put("toxic", new Colours(0xff1C1B19, 0xffFDFBEC, 0xffFFD15C, 0xffD1FF77, 0xff51DB9A, 0xff33FF9F));
         _colours.put("slate-and-peach", new Colours(0xff082026, 0xffE6F3FA, 0xff1C6277, 0xff103F4C, 0xffFFC3A1, 0xffFFA194));
-        _colours.put("german", new Colours(0xff090B0D, 0xffFFF8E7, 0xff730217, 0xffF2CB05, 0xff55B304, 0xffD94F30));
-        _colours.put("forest", new Colours(0xff001F16, 0xffD9DBD9, 0xff01402E, 0xff038C65, 0xff1AD9A3, 0xffBD2900, 0xff8C2203));
         _colours.put("rust", new Colours(0xff1C0C0B, 0xffF4E5DE, 0xffF2B872, 0xffA67A53, 0xff401714, 0xffA62626, 0xffF25041));
         _colours.put("oz", new Colours(0xff060B26, 0xffDAE8E8, 0xff034C8C, 0xff17A67D, 0xff1BBF62, 0xffF2D06B));
         _colours.put("warm-bw", new Colours(0xff1C1126, 0xffFAF7ED, 0xff262523, 0xffF2E8DF, 0xff0D0000, 0xffBFBFBF));
@@ -37,17 +35,16 @@ public class ColourCollection {
         _colours.put("dragons", new Colours(0xff33012B, 0xffF2F0F5, 0xffD93D66, 0xff8C0375, 0xff03A6A6, 0xffF2E1AC, 0xffF25C5C));
         _colours.put("constructivist", new Colours(0xff010D00, 0xffF2EFE6, 0xffF2E0C9, 0xffF21905, 0xffBF0404, 0xffF2E1AC, 0xff590202));
         _colours.put("lemon", new Colours(0xff010326, 0xffF2F1ED, 0xffF2E205, 0xffD9D6B0, 0xffA6A48A, 0xffF2CB05));
-        _colours.put("plum", new Colours(0xff011C1F, 0xffDECAE6, 0xff8C1C5A, 0xff591541, 0xff260B22, 0xff025E73, 0xff026873));
         _colours.put("spy", new Colours(0xff0F1413, 0xffE6F2F0, 0xff77A69D, 0xff3E4A2D, 0xffD8D9D0, 0xffA67F38, 0xffD99748));
         _colours.put("happy-time", new Colours(0xff1F0F19, 0xffEFF0E4, 0xffD93D76, 0xffD96CB3, 0xff202840, 0xff50BFAB, 0xffF2B544));
         _colours.put("sci-fi", new Colours(0xff1D2426, 0xffE9F0F5, 0xff2C3840, 0xff7794A6, 0xffB4CBD9, 0xffD8E8F2));
         _colours.put("copper", new Colours(0xff1D2426, 0xffF7EBE4, 0xffD7D7D9, 0xffF2DCC2, 0xffBF947A, 0xff8C7264));
         _colours.put("orange", new Colours(0xff000000, 0xffE9EDF7, 0xff2E3138, 0xffFFFFFF, 0xffF5AEAE, 0xffFF6D05));
+        _colours.put("orange-v2", new Colours(0xff000000, 0xffE9EDF7, 0xff2E3138, 0xffFFFFFF, 0xffFF6D05));
         _colours.put("salmon-lemon", new Colours(0xff0D0D0D, 0xffFAFAFC, 0xffF0F0F2, 0xffF2E63D, 0xffF2AB6D, 0xffF26D6D));
         _colours.put("hot-dusk", new Colours(0xff1A0F26, 0xffF2E9EA, 0xffD94883, 0xffF35B6B, 0xffD5469E, 0xff381C4F));
         _colours.put("cool-dusk", new Colours(0xff151329, 0xffF0F1F5, 0xffEC68F0, 0xffA055E9, 0xff9EB0F4, 0xff151329));
-        _colours.put("constructivist-real", new Colours(0xffE8E5D7, 0xffF2EBE4, 0xffFF4100, 0xff16130C));
-        _colours.put("blizzard", new Colours(0xffBBE3F9, 0xffFFFFFF, 0xffB6EEFC, 0xffE9FFFF, 0xffC3F5FF, 0xffEBF6F5));
+        _colours.put("constructivist-real", new Colours(0xffF2EBE4, 0xffE8E5D7, 0xffFF4100, 0xff16130C));
         _colours.put("red-blue", new Colours(0xff210201, 0xffF5F5F5, 0xffD42019, 0xff0B71BF));
         _colours.put("order-and-chaos", new Colours(0xff171D30, 0xfff8f8fd, 0xffFFF73D, 0xff1E2A57, 0xffE3E4E8));
     }

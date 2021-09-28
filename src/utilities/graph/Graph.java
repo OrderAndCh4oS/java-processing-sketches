@@ -11,7 +11,6 @@ public class Graph {
     protected final ArrayList<Node> nodes = new ArrayList<>();
     protected final ArrayList<Edge> edges = new ArrayList<>();
 
-
     public void addNode(Point point) {
         nodes.add(new Node(point));
     }

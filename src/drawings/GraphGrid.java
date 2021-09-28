@@ -26,8 +26,6 @@ public class GraphGrid extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            stroke(colour.black());
-            strokeWeight(2);
             ArrayList<GraphLoops> graphList = new ArrayList<>();
             for (int j = 0; j < 64 * 11; j++) {
                 GraphLoops graph = new GraphLoops();

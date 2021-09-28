@@ -53,7 +53,6 @@ public class GraphNoIntersect extends Sketch {
                 if (graph.addConnectionNoIntersects(nodeOne, nodeTwo)) {
                     lineCount++;
                 }
-                ;
             }
             for (Node node : graph.getNodes()) {
                 ArrayList<Path> paths = graph.findNShortestPathsToSelf(node, node.edgeCount());

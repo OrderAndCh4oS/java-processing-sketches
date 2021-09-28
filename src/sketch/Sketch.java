@@ -193,6 +193,23 @@ abstract public class Sketch extends PApplet {
         }
     }
 
+    public void drawWaveTexture(int colour, float wave, float waveHeight, float stepY, float stepX, float alpha) {
+        stroke(colour, alpha);
+        strokeWeight(0.75f);
+        noFill();
+        for (int y = -10; y < _height + 10; y += stepY) {
+            float a = 0;
+            beginShape();
+            for (int x = -10; x < _width + 10; x += stepX) {
+                float dY = sin(a) * waveHeight;
+                float newY = dY - dY / 2;
+                curveVertex(x, y + newY);
+                a += wave;
+            }
+            endShape();
+        }
+    }
+
     public void drawLineTexture(int colour, float step, float strokeWidth, Direction direction) {
         stroke(colour);
         strokeWeight(strokeWidth);
@@ -314,6 +331,25 @@ abstract public class Sketch extends PApplet {
         for (float i = x - diameter; i < xEnd; i += diameter) {
             float yEnd = y + h + diameter + (diameter / 2f);
             for (float j = y + (rowIndex % 2 == 0 ? 0 : -(diameter / 2f)); j < yEnd; j += diameter) {
+                ellipse(i, j, diameter * scale, diameter * scale);
+            }
+            rowIndex++;
+        }
+    }
+
+    public void drawBenDayTexturePerlin(float x, float y, float w, float h, int colour, float diameter) {
+        fill(colour);
+        noStroke();
+        int rowIndex = 0;
+        float xEnd = x + w + diameter;
+        float min = 0.2f;
+        float noiseScale = 0.02f;
+        float dotSize = 0.8f;
+        noiseSeed((long) random(1, 100000));
+        for (float i = x - diameter; i < xEnd; i += diameter) {
+            float yEnd = y + h + diameter + (diameter / 2f);
+            for (float j = y + (rowIndex % 2 == 0 ? 0 : -(diameter / 2f)); j < yEnd; j += diameter) {
+                float scale = noise(i * noiseScale * dotSize, j * noiseScale * dotSize) + min;
                 ellipse(i, j, diameter * scale, diameter * scale);
             }
             rowIndex++;
