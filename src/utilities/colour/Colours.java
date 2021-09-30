@@ -24,15 +24,29 @@ public class Colours {
     }
 
     public ArrayList<Integer> getAllWithWhite() {
-        ArrayList<Integer> coloursWithWhite = new ArrayList<>(_colours);
-        coloursWithWhite.add(_white);
-        return coloursWithWhite;
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_white);
+        return colours;
     }
 
     public ArrayList<Integer> getAllWithBlack() {
-        ArrayList<Integer> coloursWithBlack = new ArrayList<>(_colours);
-        coloursWithBlack.add(_black);
-        return coloursWithBlack;
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_black);
+        return colours;
+    }
+
+    public ArrayList<Integer> getAllWithBlackAndWhite() {
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_black);
+        colours.add(_white);
+        return colours;
+    }
+
+    public ArrayList<Integer> getBlackAndWhiteOnly() {
+        ArrayList<Integer> colours = new ArrayList<>();
+        colours.add(_black);
+        colours.add(_white);
+        return colours;
     }
 
     public Integer get(int i) {
@@ -40,22 +54,22 @@ public class Colours {
     }
 
     public Integer getWithWhite(int i) {
-        ArrayList<Integer> coloursWithWhite = new ArrayList<>(_colours);
-        coloursWithWhite.add(_white);
-        return coloursWithWhite.get(i % coloursWithWhite.size());
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_white);
+        return colours.get(i % colours.size());
     }
 
     public Integer getWithBlack(int i) {
-        ArrayList<Integer> coloursWithBlack = new ArrayList<>(_colours);
-        coloursWithBlack.add(_black);
-        return coloursWithBlack.get(i % coloursWithBlack.size());
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_black);
+        return colours.get(i % colours.size());
     }
 
     public Integer getWithAll(int i) {
-        ArrayList<Integer> coloursWithAll = new ArrayList<>(_colours);
-        coloursWithAll.add(_black);
-        coloursWithAll.add(_white);
-        return coloursWithAll.get(i % coloursWithAll.size());
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_black);
+        colours.add(_white);
+        return colours.get(i % colours.size());
     }
 
     public int rand() {
@@ -63,22 +77,22 @@ public class Colours {
     }
 
     public int randWithBlack() {
-        ArrayList<Integer> coloursWithBlack = new ArrayList<>(_colours);
-        coloursWithBlack.add(_black);
-        return coloursWithBlack.get(new Random().nextInt(coloursWithBlack.size()));
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_black);
+        return colours.get(new Random().nextInt(colours.size()));
     }
 
     public int randWithWhite() {
-        ArrayList<Integer> coloursWithWhite = new ArrayList<>(_colours);
-        coloursWithWhite.add(_white);
-        return coloursWithWhite.get(new Random().nextInt(coloursWithWhite.size()));
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_white);
+        return colours.get(new Random().nextInt(colours.size()));
     }
 
     public int randAll() {
-        ArrayList<Integer> coloursAll = new ArrayList<>(_colours);
-        coloursAll.add(_black);
-        coloursAll.add(_white);
-        return coloursAll.get(new Random().nextInt(coloursAll.size()));
+        ArrayList<Integer> colours = new ArrayList<>(_colours);
+        colours.add(_black);
+        colours.add(_white);
+        return colours.get(new Random().nextInt(colours.size()));
     }
 
     public int black() {
@@ -86,10 +100,10 @@ public class Colours {
     }
 
     public int blackOrWhite() {
-        ArrayList<Integer> blackAndWhite = new ArrayList<>();
-        blackAndWhite.add(_black);
-        blackAndWhite.add(_white);
-        return blackAndWhite.get(new Random().nextInt(blackAndWhite.size()));
+        ArrayList<Integer> colours = new ArrayList<>();
+        colours.add(_black);
+        colours.add(_white);
+        return colours.get(new Random().nextInt(colours.size()));
     }
 
     public int white() {
