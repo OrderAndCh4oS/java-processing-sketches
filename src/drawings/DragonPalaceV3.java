@@ -4,6 +4,8 @@ import processing.core.PApplet;
 import sketch.Sketch;
 import utilities.colour.Colours;
 
+import java.util.ArrayList;
+
 public class DragonPalaceV3 extends Sketch {
 
     public static void main(String... args) {
@@ -13,7 +15,7 @@ public class DragonPalaceV3 extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(4096, 4096, P3D);
+        super.settings(2048, 2048, P3D);
         smooth(8);
     }
 
@@ -21,37 +23,33 @@ public class DragonPalaceV3 extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.white());
-            noFill();
-            drawTexture(colour.rand(), 0.1f, 0.1f);
-            drawTexture(colour.rand(), 0.9f, 0.2f, 2048.0f);
-            strokeCap(ROUND);
-            strokeWeight(12);
             println(name);
+            noStroke();
             squiggleGroup(colour);
-            save("dragons-palace-v2", name);
+            save("dragons-palace-v3", name);
         });
 
     }
 
     private void squiggleGroup(Colours colour) {
         float frequencyXA = random(0.05f, 1);
-        float phaseXA = random(320, 720);
-        float amplitudeXA = random(320, 1440);
+        float phaseXA = random(160, 580);
+        float amplitudeXA = random(160, 640);
         float dampingXA = random(0.0005f, 0.01f);
 
         float frequencyXB = random(0.05f, 1);
-        float phaseXB = random(320, 720);
-        float amplitudeXB = random(320, 1440);
+        float phaseXB = random(160, 580);
+        float amplitudeXB = random(160, 640);
         float dampingXB = random(0.0005f, 0.01f);
 
         float frequencyYA = random(0.05f, 1);
-        float phaseYA = random(320, 720);
-        float amplitudeYA = random(320, 1440);
+        float phaseYA = random(160, 580);
+        float amplitudeYA = random(160, 640);
         float dampingYA = random(0.0005f, 0.01f);
 
         float frequencyYB = random(0.05f, 1);
-        float phaseYB = random(320, 720);
-        float amplitudeYB = random(320, 1440);
+        float phaseYB = random(160, 580);
+        float amplitudeYB = random(160, 640);
         float dampingYB = random(0.0005f, 0.01f);
 
         println("frequencyXA", frequencyXA);
@@ -74,19 +72,19 @@ public class DragonPalaceV3 extends Sketch {
         println("amplitudeYB", amplitudeYB);
         println("dampingYB", dampingYB);
 
-        float amplitudeXAStep = random(-40, 40);
-        float amplitudeYAStep = random(-40, 40);
-        float amplitudeXBStep = random(-40, 40);
-        float amplitudeYBStep = random(-40, 40);
+        float amplitudeXAStep = random(-20, 20);
+        float amplitudeYAStep = random(-20, 20);
+        float amplitudeXBStep = random(-20, 20);
+        float amplitudeYBStep = random(-20, 20);
 
-        float strands = random(12, 18);
-
+        float strands = random(6, 16);
+        ArrayList<Integer> colours = colour.getAllWithBlack();
         for (int i = 0; i < strands; i++) {
             amplitudeXA += amplitudeXAStep;
             amplitudeYA += amplitudeYAStep;
             amplitudeXB += amplitudeXBStep;
             amplitudeYB += amplitudeYBStep;
-            stroke(colour.randWithBlack());
+            fill(colours.get(i % colours.size()));
             squiggle(
                     frequencyXA, phaseXA, amplitudeXA, dampingXA,
                     frequencyXB, phaseXB, amplitudeXB, dampingXB,
@@ -108,9 +106,10 @@ public class DragonPalaceV3 extends Sketch {
         Harmonograph yB = new Harmonograph(_frequencyYB, _phaseYB, _amplitudeYB, _dampingYB);
         pushMatrix();
         translate(_width / 2, _height / 2);
+        rotate(TAU / 8);
         beginShape();
-        for (int i = 0; i < random(50, 750); i++) {
-            curveVertex(xA.f(i) + xB.f(i), yA.f(i) + yB.f(i));
+        for (float i = 0; i < 150; i += 0.004f) {
+            ellipse(xA.f(i) + xB.f(i), yA.f(i) + yB.f(i), 12, 64);
         }
         endShape();
         popMatrix();

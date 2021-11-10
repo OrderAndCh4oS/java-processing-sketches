@@ -31,74 +31,102 @@ public class BoidsV3 extends Sketch {
 
     @Override
     public void sketch() {
-//        _data = new Data(24, 0, 5000, 0.00005f, 0.00004f, 0.00005f);
-//        _data = new Data(50, 5000,2500, 0.0001f, 0.0002f, 0.00015f);
-//        _data = new Data(36, 50, 1500, 0.0003f, 0.0002f, 0.00015f);
-        _data = new Data(36, 500, 750, 0.0003f, 0.0006f, 0.0004f);
-        _colours.getColours().forEach((name, colour) -> {
-//            _colourData = new ColourData(colour.white(), MULTIPLY, colour.rand(), 0.2f, 0.25f, colour.getAll(), 0.1f);
-//        _colourData = new ColourData(colour.white(), NORMAL, colour.rand(), 0.2f, 0.25f, colour.getAll(), 0.6f);
-//            _colourData = new ColourData(colour.black(), SCREEN, colour.white(), 0.2f, 0.15f, colour.getAllWithBlackAndWhite(), 0.15f);
-//            _colourData = new ColourData(colour.black(), SCREEN, colour.white(), 0.2f, 0.25f, colour.getAll(), 0.15f);
-//            _colourData = new ColourData(colour.rand(), NORMAL, colour.black(), 0.2f, 0.15f, colour.getBlackAndWhiteOnly(), 0.5f);
-            _colourData = new ColourData(colour.white(), MULTIPLY, colour.rand(), 0.4f, 0.15f, colour.getAll(), 0.1f);
-            DrawShape _shape = new DrawDot();
-            switch (Shape.rand()) {
-                case DOT:
-                    _shape = new DrawDot();
-                    break;
-                case RINGS:
-                    _shape = new DrawRings();
-                    break;
-                case CROSS:
-                    _shape = new DrawCross();
-                    break;
-            }
-            background(_colourData.bg);
-            blendMode(NORMAL);
-            drawTexture(_colourData.texture(), _colourData.textureDensity(), _colourData.textureAlpha());
-            int boidsInit = randomInt(0, 2);
-            switch (boidsInit) {
-                case 0:
-                    initBoidsRandomWidth();
-                    break;
-                case 1:
-                    initBoidsRandomQuarter();
-                    break;
-                case 2:
-                    initBoidsRandom();
-                    break;
-            }
-            noStroke();
-            blendMode(_colourData.blend);
-            for (int i = 0; i < _data.preIterations; i++) {
-                for (Boid b : _boids) {
-                    Vector v1 = moveTowardCentreOfMass(b);
-                    Vector v2 = moveAwayFromOtherBoids(b);
-                    Vector v3 = matchVelocityOfNearBoids(b);
-                    Vector v4 = tendTowardCenter(b);
-                    b.update(v1, v2, v3, v4);
+        for (int iter = 0; iter < 10; iter++) {
+            _colours.getColours().forEach((name, colour) -> {
+                int dataInit = randomInt(0, 6);
+                switch (dataInit) {
+                    case 0:
+                        _data = new Data(28, 50, 17500, 7.5E-7f, 5.0E-7f, 4.25E-7f);
+                        break;
+                    case 1:
+                        _data = new Data(32, 50, 5000, 1.5E-05f, 1.0E-05f, 7.5E-6f);
+                        break;
+                    case 2:
+                        _data = new Data(40, 500, 6000, 1.875E-6f, 3.75E-5f, 3.125E-5f);
+                        break;
+                    case 3:
+                        _data = new Data(12, 0, 3500, 0.0004f, 0.000375f, 0.0003f);
+                        break;
+                    case 4:
+                        _data = new Data(32, 50, 1500, 0.0003f, 0.0002f, 0.00015f);
+                        break;
+                    case 5:
+                        _data = new Data(40, 500, 750, 0.0003f, 0.0006f, 0.0004f);
+                        break;
+                    case 6:
+                        _data = new Data(12, 0, 5000, 0.00006f, 0.00008f, 0.00005f);
+                        break;
                 }
-            }
-            for (int i = 0; i < _data.iterations; i++) {
-                for (Boid b : _boids) {
-                    Vector v1 = moveTowardCentreOfMass(b);
-                    Vector v2 = moveAwayFromOtherBoids(b);
-                    Vector v3 = matchVelocityOfNearBoids(b);
-                    Vector v4 = tendTowardCenter(b);
-                    b.update(v1, v2, v3, v4);
-                    _shape.draw(b.getPosition().x(), b.getPosition().y(), b.get_colour());
+                int colourInit = randomInt(0, 3);
+                switch (colourInit) {
+                    case 0:
+                        _colourData = new ColourData(colour.white(), SUBTRACT, colour.rand(), 0.75f, 0.4f, colour.getAll(), 0.5f);
+                        break;
+                    case 1:
+                        _colourData = new ColourData(colour.white(), MULTIPLY, colour.black(), 0.4f, 0.25f, colour.getAllWithBlackAndWhite(), 0.4f);
+                        break;
+                    case 2:
+                        _colourData = new ColourData(colour.white(), MULTIPLY, colour.black(), 0.3f, 0.3f, colour.getAll(), 0.15f);
+                        break;
                 }
-            }
+                DrawShape _shape = new DrawDot();
+                switch (Shape.rand()) {
+                    case DOT:
+                        _shape = new DrawDot();
+                        break;
+                    case RINGS:
+                        _shape = new DrawRings();
+                        break;
+                    case CROSS:
+                        _shape = new DrawCross();
+                        break;
+                }
+                background(_colourData.bg);
+                blendMode(BLEND);
+                drawTexture(_colourData.texture(), _colourData.textureDensity(), _colourData.textureAlpha());
+                int boidsInit = randomInt(0, 2);
+                switch (boidsInit) {
+                    case 0:
+                        initBoidsRandomWidth();
+                        break;
+                    case 1:
+                        initBoidsRandomQuarter();
+                        break;
+                    case 2:
+                        initBoidsRandom();
+                        break;
+                }
+                noStroke();
+                blendMode(_colourData.blend);
+                for (int i = 0; i < _data.preIterations; i++) {
+                    for (Boid b : _boids) {
+                        Vector v1 = moveTowardCentreOfMass(b);
+                        Vector v2 = moveAwayFromOtherBoids(b);
+                        Vector v3 = matchVelocityOfNearBoids(b);
+                        Vector v4 = tendTowardCenter(b);
+                        b.update(v1, v2, v3, v4);
+                    }
+                }
+                for (int i = 0; i < _data.iterations; i++) {
+                    for (Boid b : _boids) {
+                        Vector v1 = moveTowardCentreOfMass(b);
+                        Vector v2 = moveAwayFromOtherBoids(b);
+                        Vector v3 = matchVelocityOfNearBoids(b);
+                        Vector v4 = tendTowardCenter(b);
+                        b.update(v1, v2, v3, v4);
+                        _shape.draw(b.getPosition().x(), b.getPosition().y(), b.get_colour());
+                    }
+                }
 
-            save("boids-v3", name);
-        });
+                save("boids-v3", String.format("%s-d%d-c%d-b%d", name, dataInit, colourInit, boidsInit));
+            });
+        }
     }
 
     private void initBoidsRandomWidth() {
         _boids = new ArrayList<>();
         for (int i = 0; i < _data.boids(); i++) {
-            _boids.add(new Boid(random(_width), _height / 2, _colourData.rand()));
+            _boids.add(new Boid(random(_width), _height / 2 + randomInt(-100, 100), _colourData.rand()));
         }
     }
 
@@ -106,6 +134,13 @@ public class BoidsV3 extends Sketch {
         _boids = new ArrayList<>();
         for (int i = 0; i < _data.boids(); i++) {
             _boids.add(new Boid(random(_width), random(_height), _colourData.rand()));
+        }
+    }
+
+    private void initBoidsZero() {
+        _boids = new ArrayList<>();
+        for (int i = 0; i < _data.boids(); i++) {
+            _boids.add(new Boid(random(-50, 50) + _width, random(-50, 50), _colourData.rand()));
         }
     }
 
@@ -184,6 +219,8 @@ public class BoidsV3 extends Sketch {
 
     interface DrawShape {
         void draw(float x, float y, int colour);
+
+        String getName();
     }
 
     public class Data {
@@ -228,7 +265,7 @@ public class BoidsV3 extends Sketch {
         }
     }
 
-    public class ColourData {
+    public static class ColourData {
         private final int bg;
         private final int blend;
         private final int texture;
@@ -238,13 +275,13 @@ public class BoidsV3 extends Sketch {
         private final float colourAlpha;
 
         ColourData(
-                int bg,
-                int blend,
-                int texture,
-                float textureDensity,
-                float textureAlpha,
-                ArrayList<Integer> colourList,
-                float colourAlpha
+            int bg,
+            int blend,
+            int texture,
+            float textureDensity,
+            float textureAlpha,
+            ArrayList<Integer> colourList,
+            float colourAlpha
         ) {
             this.bg = bg;
             this.blend = blend;
@@ -293,20 +330,28 @@ public class BoidsV3 extends Sketch {
         public void draw(float x, float y, int colour) {
             noStroke();
             fill(colour, _colourData.colourAlpha());
-            float r = random(6, 16);
+            float r = random(6, 18);
             ellipse(x, y, r, r);
+        }
+
+        public String getName() {
+            return "dots";
         }
     }
 
     class DrawCross implements DrawShape {
         public void draw(float x, float y, int colour) {
-            float r = random(3, 20);
+            float r = random(6, 24);
             strokeCap(ROUND);
             strokeWeight(r * 0.4f);
             noFill();
             stroke(colour, _colourData.colourAlpha());
             line(x, y, x + r, y + r);
             line(x + r, y, x, y + r);
+        }
+
+        public String getName() {
+            return "cross";
         }
     }
 
@@ -319,6 +364,10 @@ public class BoidsV3 extends Sketch {
             for (int i = 0; i < r; i++) {
                 ellipse(x, y, i * 5, i * 5);
             }
+        }
+
+        public String getName() {
+            return "rings";
         }
     }
 

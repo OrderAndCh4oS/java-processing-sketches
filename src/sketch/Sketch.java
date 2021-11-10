@@ -500,7 +500,7 @@ abstract public class Sketch extends PApplet {
 
     public float distanceTo(Point a, Point b) {
         float dX = a.x() - b.x();
-        float dY = b.y() - b.y();
+        float dY = a.y() - b.y();
 
         return sqrt((dX * dX) + (dY * dY));
     }
