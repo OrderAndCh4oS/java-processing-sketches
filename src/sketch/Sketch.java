@@ -41,12 +41,10 @@ abstract public class Sketch extends PApplet {
 
     public void setup() {
         sketch();
-        exit();
+//        exit();
     }
 
-    public void draw() {
-
-    }
+    public void draw() {}
 
     abstract public void sketch();
 
@@ -263,6 +261,78 @@ abstract public class Sketch extends PApplet {
         }
     }
 
+    public void drawLineTextureWithGapsThick(int colour, float step, float strokeWidth, Direction direction) {
+        stroke(colour);
+        strokeWeight(strokeWidth);
+        strokeCap(ROUND);
+        boolean on = true;
+        switch (direction) {
+            case TOP:
+            case BOTTOM:
+                for (int i = -50; i < _height + 50; i++) {
+                    float lastX = 0;
+                    for (int x = -50; x < _width + 50; x += on ? randomInt(8, 16) : randomInt(8, 12)) {
+                        float y = i * step;
+                        if (on) line(lastX, y, x, y);
+                        on = !on;
+                        lastX = x;
+                    }
+                }
+                break;
+            case LEFT:
+            case RIGHT:
+                for (int i = -50; i < _width + 50; i++) {
+                    float lastY = 0;
+                    for (int y = -50; y < _height + 50; y += on ? randomInt(4, 12) : randomInt(3, 6)) {
+                        float x = i * step;
+                        if (on) line(x, lastY, x, y);
+                        on = !on;
+                    }
+                }
+                break;
+        }
+    }
+
+    public void drawLineTextureWithGapsAlternate(ArrayList<Integer> colours, float step, float strokeWidth, Direction direction) {
+        strokeWeight(strokeWidth);
+        strokeCap(ROUND);
+        boolean on = true;
+        int index = 0;
+        switch (direction) {
+            case TOP:
+            case BOTTOM:
+                for (int i = -50; i < _height + 50; i++) {
+                    float lastX = 0;
+                    for (int x = -50; x < _width + 50; x += on ? randomInt(8, 16) : randomInt(8, 12)) {
+                        float y = i * step;
+                        if (on) {
+                            stroke(colours.get(index % colours.size()));
+                            line(lastX, y, x, y);
+                            index++;
+                        }
+                        on = !on;
+                        lastX = x;
+                    }
+                }
+                break;
+            case LEFT:
+            case RIGHT:
+                for (int i = -50; i < _width + 50; i++) {
+                    float lastY = 0;
+                    for (int y = -50; y < _height + 50; y += on ? randomInt(4, 12) : randomInt(3, 6)) {
+                        float x = i * step;
+                        if (on) {
+                            stroke(colours.get(index % colours.size()));
+                            line(x, lastY, x, y);
+                            index++;
+                        }
+                        on = !on;
+                    }
+                }
+                break;
+        }
+    }
+
     public void drawRaggedMeshBackground(ArrayList<Integer> colour, float strokeWidth, float gap, float alpha, float wobbleMagnitude) {
         strokeWeight(strokeWidth);
         noFill();
@@ -309,7 +379,6 @@ abstract public class Sketch extends PApplet {
     float wobble() {
         return random(1) > 0.75 ? 0 : random(1) > 0.5 ? -random(1) : random(1);
     }
-
 
     public void drawBenDayTexture(int colour, float diameter, float scale) {
         fill(colour);
@@ -447,7 +516,22 @@ abstract public class Sketch extends PApplet {
         for (int i = 0; i < _width; i++) {
             for (int j = 0; j < _height; j++) {
                 if (random(1) < density) {
-                    source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+                    source.stroke(colour, 255 * random(max(alpha - 0.1f, 0), min(alpha + 0.1f, 1)));
+                    source.point(i, j);
+                }
+            }
+        }
+        source.blendMode(NORMAL);
+    }
+
+    public void drawTextureToSourceTwo(PGraphics source, int colour, float density, float alpha, float variability) {
+        source.blendMode(MULTIPLY);
+        source.strokeCap(ROUND);
+        source.strokeWeight(1);
+        for (int i = 0; i < _width; i++) {
+            for (int j = 0; j < _height; j++) {
+                if (random(1) < density) {
+                    source.stroke(colour, 255 * random(max(alpha - variability, 0), min(alpha + variability, 1)));
                     source.point(i, j);
                 }
             }
@@ -479,6 +563,66 @@ abstract public class Sketch extends PApplet {
                 if (random(1) < map2(distance, 0, radius, 0, density, type, ease)) {
                     source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
                     source.point(x, y);
+                }
+            }
+        }
+    }
+
+    public void square(float x, float y, float width, float height, Direction direction, int type, int ease, int colour) {
+        for (float i = x; i < x + width; i++) {
+            for (float j = y; j < y + height; j++) {
+                float iX = i - x;
+                float jY = j - y;
+                float density;
+                switch (direction) {
+                    case TOP:
+                        density = map2(height - jY, 0, height, 0.05f, 0.9f, type, ease);
+                        break;
+                    case RIGHT:
+                        density = map2(iX, 0, width, 0.05f, 0.9f, type, ease);
+                        break;
+                    case BOTTOM:
+                        density = map2(jY, 0, height, 0.05f, 0.9f, type, ease);
+                        break;
+                    case LEFT:
+                        density = map2(width - iX, 0, width, 0.05f, 0.9f, type, ease);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direction);
+                }
+                stroke(colour, random(0.8f, 1) * 255);
+                if (random(1) > density) {
+                    point(i, j);
+                }
+            }
+        }
+    }
+
+    public void squareToSource(PGraphics source, float x, float y, float width, float height, Direction direction, int type, int ease, int colour) {
+        for (float i = x; i < x + width; i++) {
+            for (float j = y; j < y + height; j++) {
+                float iX = i - x;
+                float jY = j - y;
+                float density;
+                switch (direction) {
+                    case TOP:
+                        density = map2(height - jY, 0, height, 0.05f, 0.9f, type, ease);
+                        break;
+                    case RIGHT:
+                        density = map2(iX, 0, width, 0.05f, 0.9f, type, ease);
+                        break;
+                    case BOTTOM:
+                        density = map2(jY, 0, height, 0.05f, 0.9f, type, ease);
+                        break;
+                    case LEFT:
+                        density = map2(width - iX, 0, width, 0.05f, 0.9f, type, ease);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direction);
+                }
+                source.stroke(colour, random(0.8f, 1) * 255);
+                if (random(1) > density) {
+                    source.point(i, j);
                 }
             }
         }

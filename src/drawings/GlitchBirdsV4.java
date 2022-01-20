@@ -29,18 +29,17 @@ public class GlitchBirdsV4 extends Sketch {
 
     @Override
     public void sketch() {
-//        for (int iter = 0; iter < 10; iter++) {
-            _colours.getColours().forEach((name, colour) -> {
+        for (int iter = 0; iter < 200; iter++) {
+            _colours.getColours("orange-v2", "happy-time", "lemon", "orange-v3").forEach((name, colour) -> {
                 float margin = 100;
                 blendMode(NORMAL);
-                background(colour.black());
-                stroke(colour.white());
+                int s = colour.rand();
+                background(colour.white());
+                stroke(s);
                 strokeCap(MITER);
                 strokeWeight(3);
-//                drawFibreTexture(colour.black(), 400000, 0.3f, 0.7f);                fill(colour.white());
-                drawWaveTexture(colour.white(), 0.33f, 8, 6, 1, 255 * 0.3f);
-//                drawLineTextureWithGaps(colour.white(), _height / (_height / 5f), 1, Direction.TOP);
-                fill(colour.black());
+                drawWaveTexture(s, 0.33f, 8, 6, 1, 255);
+                fill(colour.white());
                 rect(margin, margin, _width - margin * 2, (_height - margin * 2) + 1);
                 a = random(1) * 6 - 3;
                 b = random(1) * 6 - 3;
@@ -78,23 +77,20 @@ public class GlitchBirdsV4 extends Sketch {
                 }
                 ArrayList<Line> lines = new ArrayList<>();
                 Point lastPoint = new Point();
-                blendMode(SCREEN);
+                blendMode(MULTIPLY);
                 noStroke();
                 fill(c1);
                 drawAttractorPaths(attractorPointsLeft, lines, lastPoint);
-                blendMode(MULTIPLY);
                 fill(c2);
                 drawAttractorPaths(attractorPointsTop, lines, lastPoint);
-                blendMode(SCREEN);
                 fill(c3);
                 drawAttractorPaths(attractorPointsBottom, lines, lastPoint);
-                blendMode(MULTIPLY);
                 fill(c4);
                 drawAttractorPaths(attractorPointsRight, lines, lastPoint);
                 save("glitch-birds-v5", String.format("%s-glitch-birds_%s_%s_%s_%s", name, a, b, c, d));
 //                save("glitch-birds-v4", name);
             });
-//        }
+        }
     }
 
     private void drawAttractorPaths(ArrayList<AttractorPoint> attractorPoints, ArrayList<Line> lines, Point lastPoint) {

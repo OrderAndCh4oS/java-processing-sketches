@@ -31,34 +31,4 @@ public class FauxAirbrushTwo extends Sketch {
             });
         }
     }
-
-    void square(float x, float y, float width, float height, Direction direction, int type, int ease, int colour) {
-        for (float i = x; i < x + width; i++) {
-            for (float j = y; j < y + height; j++) {
-                float iX = i - x;
-                float jY = j - y;
-                float density;
-                switch (direction) {
-                    case TOP:
-                        density = map2(height - jY, 0, height, 0.05f, 0.9f, type, ease);
-                        break;
-                    case RIGHT:
-                        density = map2(iX, 0, width, 0.05f, 0.9f, type, ease);
-                        break;
-                    case BOTTOM:
-                        density = map2(jY, 0, height, 0.05f, 0.9f, type, ease);
-                        break;
-                    case LEFT:
-                        density = map2(width - iX, 0, width, 0.05f, 0.9f, type, ease);
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + direction);
-                }
-                stroke(colour, random(0.8f, 1) * 255);
-                if (random(1) > density) {
-                    point(i, j);
-                }
-            }
-        }
-    }
 }

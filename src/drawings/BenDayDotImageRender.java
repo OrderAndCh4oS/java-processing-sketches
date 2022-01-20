@@ -27,7 +27,7 @@ public class BenDayDotImageRender extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.white());
             noStroke();
-            PImage img = loadImage("/Users/seancooper/Processing Stills/sketches/src/images/happy-time-12843181-cdc7-4426-9c9e-bdbedc0fdf5f.png");
+            PImage img = loadImage("/Users/seancooper/IdeaProjects/java-processing-sketches/src/images/happy-time-12843181-cdc7-4426-9c9e-bdbedc0fdf5f.png");
             img.filter(BLUR, 30);
             blendMode(BLEND);
             background(colour.white());
@@ -48,7 +48,7 @@ public class BenDayDotImageRender extends Sketch {
         for (float y = margin; y <= _height - margin - size; y += size + gutter) {
             for (float x = margin; x <= _width - margin - size; x += size + gutter) {
                 float scale = random(1);
-                PImage section = img.get((int) (x * 0.66f), (int) (y * 0.66f), 3, 3);
+                PImage section = img.get((int) (x * 0.33f), (int) (y * 0.33f), 3, 3);
                 int c = extractColorFromImage(section.pixels);
                 float k = extractShadeFromImage(section.pixels);
                 int r = c >> 16 & 0xFF;
