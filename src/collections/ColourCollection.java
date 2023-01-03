@@ -49,6 +49,7 @@ public class ColourCollection {
         _colours.put("constructivist-real", new Colours(0xff16130C, 0xffFF4100, 0xffE8E5D7, 0xffF2EBE4));
         _colours.put("red-blue", new Colours(0xff210201, 0xffF5F5F5, 0xffD42019, 0xff0B71BF));
         _colours.put("order-and-chaos", new Colours(0xff171D30, 0xfff8f8fd, 0xffFFF73D, 0xff1E2A57, 0xffE3E4E8));
+        _colours.put("ukraine", new Colours(0xff171D30, 0xfff8f8fd, 0xff0057B7, 0xffFFDD00));
     }
 
     public Colours get(String name) {

@@ -1,5 +1,6 @@
 package drawings;
 
+import enums.Direction;
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PGraphics;
@@ -7,6 +8,8 @@ import processing.core.PImage;
 import sketch.Sketch;
 
 import static utilities.Image.extractShadeFromImage;
+import static utilities.Map.CUBIC;
+import static utilities.Map.EASE_IN;
 
 public class NumberWaveLineTwo extends Sketch {
 
@@ -22,12 +25,10 @@ public class NumberWaveLineTwo extends Sketch {
 
     @Override
     public void sketch() {
-//        String[] fontList = PFont.list();
-//        printArray(fontList);
         _colours.getColours().forEach((name, colour) -> {
             PFont font = createFont("ModernTwoSxtnITCStd-Bold", 1000);
             textFont(font);
-            String[] numbers = {"1", "2", "3", "4", "5"};
+            String[] numbers = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
             for (String n : numbers) {
                 background(0xff000000);
                 fill(0xffffffff);
@@ -44,7 +45,8 @@ public class NumberWaveLineTwo extends Sketch {
                     c2 = colour.rand();
                 }
                 background(c1);
-                drawTexture(colour.black(), 0.2f, 0.1f);
+                drawTexture(colour.black(), 0.18f, Direction.TOP, CUBIC, EASE_IN);
+                drawBenDayTexture(c2, random(6, 12), random(0.33f, 0.85f));
                 PGraphics source = createGraphics((int) _width, (int) _height);
                 PGraphics mask = createGraphics((int) _width, (int) _height);
                 source.beginDraw();
@@ -54,19 +56,22 @@ public class NumberWaveLineTwo extends Sketch {
                 drawTextureToSource(source, colour.black(), 0.9f, 0.1f);
                 source.strokeWeight(1);
                 source.strokeCap(ROUND);
-                source.stroke(colour.black());
                 for (int x = -30; x < _width; x += lineWidth - padding) {
                     float a = 0;
                     int offsetY = (x % step);
+                    float strokeWeight = random(0.75f, 2);
+                    int c = colour.rand();
                     for (int y = -10; y < _height; y += step) {
                         PImage section = img.get(x, y, step, step);
                         float shade = extractShadeFromImage(section.pixels);
                         float dX = sin(a) * 40;
                         float newX = dX - dX / 2;
                         if (shade > 0.5) {
-                            source.strokeWeight(2);
+                            source.strokeWeight(strokeWeight * 2.5f);
+                            source.stroke(c1);
                         } else {
-                            source.strokeWeight(1);
+                            source.strokeWeight(strokeWeight);
+                            source.stroke(c);
                         }
                         source.line(
                                 x + newX + step / 2f,
@@ -93,5 +98,17 @@ public class NumberWaveLineTwo extends Sketch {
                 save("number-line-wave-two", name + "-" + n);
             }
         });
+    }
+
+    public void drawBenDayTexture(int colour, float diameter, float scale) {
+        fill(colour);
+        noStroke();
+        int rowIndex = 0;
+        for (float x = -diameter; x < _width + diameter; x += diameter) {
+            for (float y = rowIndex % 2 == 0 ? 0 : -(diameter / 2f); y < _height + diameter; y += diameter) {
+                ellipse(x, y, diameter * scale, diameter * scale);
+            }
+            rowIndex++;
+        }
     }
 }

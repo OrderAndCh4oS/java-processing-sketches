@@ -82,7 +82,7 @@ abstract public class Sketch extends PApplet {
             for (int y = 0; y < _height; y++) {
                 if (random(1) < density) {
                     stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
-                    point(x, y, -100);
+                    point(x, y);
                 }
             }
         }
@@ -193,9 +193,26 @@ abstract public class Sketch extends PApplet {
 
     public void drawWaveTexture(int colour, float wave, float waveHeight, float stepY, float stepX, float alpha) {
         stroke(colour, alpha);
-        strokeWeight(0.75f);
+        strokeWeight(1f);
         noFill();
         for (int y = -10; y < _height + 10; y += stepY) {
+            float a = 0;
+            beginShape();
+            for (int x = -10; x < _width + 10; x += stepX) {
+                float dY = sin(a) * waveHeight;
+                float newY = dY - dY / 2;
+                curveVertex(x, y + newY);
+                a += wave;
+            }
+            endShape();
+        }
+    }
+
+    public void drawWaveTexture(int colour, float gap, float strokeWeight, float wave, float waveHeight, float stepY, float stepX, float alpha) {
+        stroke(colour, alpha);
+        strokeWeight(strokeWeight);
+        noFill();
+        for (int y = -10; y < _height + gap; y += stepY) {
             float a = 0;
             beginShape();
             for (int x = -10; x < _width + 10; x += stepX) {
@@ -406,6 +423,20 @@ abstract public class Sketch extends PApplet {
         }
     }
 
+    public void drawBenDayTexture(float x, float y, float w, float h, int colour, float diameter, float scale, float alpha) {
+        fill(colour, alpha);
+        noStroke();
+        int rowIndex = 0;
+        float xEnd = x + w + diameter;
+        for (float i = x - diameter; i < xEnd; i += diameter) {
+            float yEnd = y + h + diameter + (diameter / 2f);
+            for (float j = y + (rowIndex % 2 == 0 ? 0 : -(diameter / 2f)); j < yEnd; j += diameter) {
+                ellipse(i, j, diameter * scale, diameter * scale);
+            }
+            rowIndex++;
+        }
+    }
+
     public void drawBenDayTexturePerlin(float x, float y, float w, float h, int colour, float diameter) {
         fill(colour);
         noStroke();
@@ -524,19 +555,34 @@ abstract public class Sketch extends PApplet {
         source.blendMode(NORMAL);
     }
 
-    public void drawTextureToSourceTwo(PGraphics source, int colour, float density, float alpha, float variability) {
-        source.blendMode(MULTIPLY);
-        source.strokeCap(ROUND);
-        source.strokeWeight(1);
-        for (int i = 0; i < _width; i++) {
-            for (int j = 0; j < _height; j++) {
+    public void drawTexture(PGraphics source, int colour, float alpha, Direction direction, int type, int ease) {
+        strokeCap(ROUND);
+        strokeWeight(1);
+        float density;
+        for (int x = 0; x < _width; x++) {
+            for (int y = 0; y < _height; y++) {
+                switch (direction) {
+                    case TOP:
+                        density = map2(_height - y, 0, _height, 0.05f, 0.9f, type, ease);
+                        break;
+                    case RIGHT:
+                        density = map2(x, 0, _width, 0.05f, 0.9f, type, ease);
+                        break;
+                    case BOTTOM:
+                        density = map2(y, 0, _height, 0.05f, 0.9f, type, ease);
+                        break;
+                    case LEFT:
+                        density = map2(_width - x, 0, _width, 0.05f, 0.9f, type, ease);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + direction);
+                }
                 if (random(1) < density) {
-                    source.stroke(colour, 255 * random(max(alpha - variability, 0), min(alpha + variability, 1)));
-                    source.point(i, j);
+                    source.stroke(colour, 255 * random(alpha - 0.1f, alpha + 0.1f));
+                    source.point(x, y);
                 }
             }
         }
-        source.blendMode(NORMAL);
     }
 
     public void drawTextureToSourceArea(Point p, Point q, PGraphics source, int colour, float density, float alpha) {

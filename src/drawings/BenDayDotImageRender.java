@@ -18,7 +18,7 @@ public class BenDayDotImageRender extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(2360, 2360, P2D);
+        super.settings(2955 / 3, 3694 / 3, P2D);
         smooth(8);
     }
 
@@ -27,15 +27,15 @@ public class BenDayDotImageRender extends Sketch {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.white());
             noStroke();
-            PImage img = loadImage("/Users/seancooper/IdeaProjects/java-processing-sketches/src/images/happy-time-12843181-cdc7-4426-9c9e-bdbedc0fdf5f.png");
-            img.filter(BLUR, 30);
+            PImage img = loadImage("/Users/seancooper/IdeaProjects/java-processing-sketches/src/images/me.jpg");
+//            img.filter(BLUR, 30);
             blendMode(BLEND);
             background(colour.white());
             blendMode(MULTIPLY);
             bendayGrid(img, colour.get(0), 90 * (TAU / 360), y);
             bendayGrid(img, colour.get(1), 105 * (TAU / 360), m);
             bendayGrid(img, colour.get(2), 75 * (TAU / 360), c);
-            bendayGrid(img, colour.black(), 15 * (TAU / 360), k);
+            bendayGrid(img, colour.get(3), 15 * (TAU / 360), k);
             save("ben-day-dot-image-render", name);
         });
     }
@@ -48,7 +48,7 @@ public class BenDayDotImageRender extends Sketch {
         for (float y = margin; y <= _height - margin - size; y += size + gutter) {
             for (float x = margin; x <= _width - margin - size; x += size + gutter) {
                 float scale = random(1);
-                PImage section = img.get((int) (x * 0.33f), (int) (y * 0.33f), 3, 3);
+                PImage section = img.get((int) (x * 3f), (int) (y * 3f), 10, 10);
                 int c = extractColorFromImage(section.pixels);
                 float k = extractShadeFromImage(section.pixels);
                 int r = c >> 16 & 0xFF;
@@ -71,7 +71,7 @@ public class BenDayDotImageRender extends Sketch {
                 pushMatrix();
                 translate(x + size / 2, y + size / 2);
                 rotate(angle);
-                drawBenDayTexture(-size / 2, -size / 2, size, size, colour, 12, scale);
+                drawBenDayTexture(-size / 2, -size / 2, size, size, colour, 6, scale, 0.2f);
                 popMatrix();
             }
         }

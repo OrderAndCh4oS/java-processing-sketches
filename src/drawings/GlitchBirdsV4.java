@@ -29,8 +29,8 @@ public class GlitchBirdsV4 extends Sketch {
 
     @Override
     public void sketch() {
-        for (int iter = 0; iter < 200; iter++) {
-            _colours.getColours("orange-v2", "happy-time", "lemon", "orange-v3").forEach((name, colour) -> {
+        for (int iter = 0; iter < 20; iter++) {
+            _colours.getColours("ukraine").forEach((name, colour) -> {
                 float margin = 100;
                 blendMode(NORMAL);
                 int s = colour.rand();
@@ -38,55 +38,55 @@ public class GlitchBirdsV4 extends Sketch {
                 stroke(s);
                 strokeCap(MITER);
                 strokeWeight(3);
-                drawWaveTexture(s, 0.33f, 8, 6, 1, 255);
+                drawWaveTexture(s, 0.33f, 6, 6, 1, 255);
                 fill(colour.white());
                 rect(margin, margin, _width - margin * 2, (_height - margin * 2) + 1);
-                a = random(1) * 6 - 3;
-                b = random(1) * 6 - 3;
-                c = random(1) * 4 - 2;
-                d = random(1) * 4 - 2;
-                noFill();
-                ArrayList<AttractorPoint> attractorPointsLeft = new ArrayList<>();
-                ArrayList<AttractorPoint> attractorPointsRight = new ArrayList<>();
-                ArrayList<AttractorPoint> attractorPointsTop = new ArrayList<>();
-                ArrayList<AttractorPoint> attractorPointsBottom = new ArrayList<>();
-                strokeCap(ROUND);
-                int c1 = colour.rand();
-                int c2;
-                do {
-                    c2 = colour.rand();
-                } while (c1 == c2);
-                int c3 = colour.rand();
-                int c4 = colour.rand();
-                if (colour.getAll().size() > 2) {
-                    do {
-                        c3 = colour.rand();
-                    } while (c1 == c3 || c2 == c3);
-                }
-                if (colour.getAll().size() > 3) {
-                    do {
-                        c4 = colour.rand();
-                    } while (c1 == c4 || c2 == c4 || c3 == c4);
-                }
-                float innerMargin = margin * 1.5f;
-                for (int i = 0; i < 150; i++) {
-                    attractorPointsTop.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-                    attractorPointsBottom.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-                    attractorPointsLeft.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-                    attractorPointsRight.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
-                }
-                ArrayList<Line> lines = new ArrayList<>();
-                Point lastPoint = new Point();
-                blendMode(MULTIPLY);
-                noStroke();
-                fill(c1);
-                drawAttractorPaths(attractorPointsLeft, lines, lastPoint);
-                fill(c2);
-                drawAttractorPaths(attractorPointsTop, lines, lastPoint);
-                fill(c3);
-                drawAttractorPaths(attractorPointsBottom, lines, lastPoint);
-                fill(c4);
-                drawAttractorPaths(attractorPointsRight, lines, lastPoint);
+//                a = random(1) * 6 - 3;
+//                b = random(1) * 6 - 3;
+//                c = random(1) * 4 - 2;
+//                d = random(1) * 4 - 2;
+//                noFill();
+//                ArrayList<AttractorPoint> attractorPointsLeft = new ArrayList<>();
+//                ArrayList<AttractorPoint> attractorPointsRight = new ArrayList<>();
+//                ArrayList<AttractorPoint> attractorPointsTop = new ArrayList<>();
+//                ArrayList<AttractorPoint> attractorPointsBottom = new ArrayList<>();
+//                strokeCap(ROUND);
+//                int c1 = colour.rand();
+//                int c2;
+//                do {
+//                    c2 = colour.rand();
+//                } while (c1 == c2);
+//                int c3 = colour.get(1);
+//                int c4 = colour.get(1);
+//                if (colour.getAll().size() > 2) {
+//                    do {
+//                        c3 = colour.rand();
+//                    } while (c1 == c3 || c2 == c3);
+//                }
+//                if (colour.getAll().size() > 3) {
+//                    do {
+//                        c4 = colour.rand();
+//                    } while (c1 == c4 || c2 == c4 || c3 == c4);
+//                }
+//                float innerMargin = margin * 1.5f;
+//                for (int i = 0; i < 150; i++) {
+//                    attractorPointsTop.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+//                    attractorPointsBottom.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+//                    attractorPointsLeft.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+//                    attractorPointsRight.add(new AttractorPoint(random(innerMargin, _width - innerMargin), random(innerMargin, _height - innerMargin)));
+//                }
+//                ArrayList<Line> lines = new ArrayList<>();
+//                Point lastPoint = new Point();
+//                blendMode(MULTIPLY);
+//                noStroke();
+//                fill(c1);
+//                drawAttractorPaths(attractorPointsLeft, lines, lastPoint);
+//                fill(c2);
+//                drawAttractorPaths(attractorPointsTop, lines, lastPoint);
+//                fill(c3);
+//                drawAttractorPaths(attractorPointsBottom, lines, lastPoint);
+//                fill(c4);
+//                drawAttractorPaths(attractorPointsRight, lines, lastPoint);
                 save("glitch-birds-v5", String.format("%s-glitch-birds_%s_%s_%s_%s", name, a, b, c, d));
 //                save("glitch-birds-v4", name);
             });

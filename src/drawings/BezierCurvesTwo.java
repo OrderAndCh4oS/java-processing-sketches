@@ -15,7 +15,7 @@ public class BezierCurvesTwo extends Sketch {
     @Override
     public void settings() {
         _save = true;
-        super.settings(1024, 1024, P2D);
+        super.settings(2048, 2048, P2D);
         smooth(8);
     }
 
@@ -23,22 +23,22 @@ public class BezierCurvesTwo extends Sketch {
     public void sketch() {
         _colours.getColours().forEach((name, colour) -> {
             background(colour.black());
-            for (int i = 0; i < 18; i++) {
-                float x1 = -10;
+            for (int i = 0; i < 28; i++) {
+                float x1 = -20;
                 float y1 = random(_height);
-                float x2 = _width + 10;
+                float x2 = _width + 20;
                 float y2 = random(_height);
-                float x1h = x1 + random(250);
-                float y1h = y1 + random(250);
-                float x2h = x2 - random(250);
-                float y2h = y2 - random(250);
+                float x1h = x1 + random(500);
+                float y1h = y1 + random(500);
+                float x2h = x2 - random(500);
+                float y2h = y2 - random(500);
                 Point a = new Point(x1, y1);
                 Point d = new Point(x2, y2);
                 Point c = new Point(x1h, y1h);
                 Point b = new Point(x2h, y2h);
                 noFill();
                 stroke(colour.rand());
-                float step = random(2, 10);
+                float step = random(8, 60);
                 strokeWeight(step);
                 strokeCap(PROJECT);
                 beginShape();
@@ -48,7 +48,7 @@ public class BezierCurvesTwo extends Sketch {
                 }
                 endShape();
             }
-            save("essential", name);
+            save("bezier-curves-two", name);
         });
     }
 }
